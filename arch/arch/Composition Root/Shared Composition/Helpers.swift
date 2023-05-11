@@ -7,7 +7,7 @@
 
 import Foundation
 
-func fallbackParam<A, R>(main: @escaping (A) throws -> R, secondary: @escaping (A) throws -> R) -> (A) throws -> R {
+func fallback<A, R>(main: @escaping (A) throws -> R, secondary: @escaping (A) throws -> R) -> (A) throws -> R {
     {
         do {
             return try main($0)
@@ -18,7 +18,7 @@ func fallbackParam<A, R>(main: @escaping (A) throws -> R, secondary: @escaping (
 }
 
 func fallback<R>(main: @escaping () throws -> R, secondary: @escaping () throws -> R) -> () throws -> R {
-    { try fallbackParam(main: main, secondary: secondary)(()) }
+    { try fallback(main: main, secondary: secondary)(()) }
 }
 
 func handle<A, R>(action: @escaping (A) throws -> R, handler: @escaping (R, A) -> ()) -> (A) throws -> R {

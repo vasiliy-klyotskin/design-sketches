@@ -38,8 +38,8 @@ class SceneDelegate {
             modelLocal: LocalTwoMapper.fromModel
         )
         let savingRemote = handle(action: mappedRemote, handler: cache.save)
-        let remoteToRemoteFallback = fallbackParam(main: savingRemote, secondary: savingRemote)
-        let localFallback = fallbackParam(main: remoteToRemoteFallback, secondary: cache.load)
+        let remoteToRemoteFallback = fallback(main: savingRemote, secondary: savingRemote)
+        let localFallback = fallback(main: remoteToRemoteFallback, secondary: cache.load)
         return FeatureTwoUIComposer.compose(loader: localFallback)
     }
 }
