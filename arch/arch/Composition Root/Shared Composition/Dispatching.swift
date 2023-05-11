@@ -25,12 +25,12 @@ final class DispatchDecorator<T: AnyObject> {
     }
 }
 
-func onBackgroundParam<T>(action: @escaping (T) -> Void) -> (T) -> Void {
+func onBackground<T>(action: @escaping (T) -> Void) -> (T) -> Void {
     { param in DispatchQueue.global().async { action(param) } }
 }
 
 func onBackground(action: @escaping () -> Void) -> () -> Void {
-    { onBackgroundParam(action: action)(()) }
+    { onBackground(action: action)(()) }
 }
 
 extension DispatchDecorator: ResourceLoadingView where T: ResourceLoadingView {

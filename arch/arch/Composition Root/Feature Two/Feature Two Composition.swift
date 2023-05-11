@@ -27,7 +27,7 @@ enum FeatureTwoUIComposer {
             presenter: presenter,
             loader: loader
         )
-        controller.onInput = onBackgroundParam(action: adapter.handle) 
+        controller.onInput = onBackground(action: adapter.handle) 
         return container
     }
 }
