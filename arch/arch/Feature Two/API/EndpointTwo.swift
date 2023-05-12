@@ -9,6 +9,9 @@ import Foundation
 
 enum EndpointTwo {
     static func request(for base: URLRequest, value: String) -> URLRequest {
-        base
+        var request = base
+        request.httpBody = value.data(using: .utf8)
+        request.httpMethod = "PUT"
+        return request
     }
 }

@@ -11,6 +11,6 @@ final class FeatureTwoView: UIViewController, ResourceView {
     var onInput: ((String) -> Void)?
     
     func display(_ viewModel: ViewModelTwo) {
-        // show
+        // Show view model
     }
 }

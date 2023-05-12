@@ -7,6 +7,17 @@
 
 import Foundation
 
+enum RemoteBuilder<Model, DTO: Decodable> {
+    typealias Mapping = (DTO) -> Model
+    
+    static func remote(for request: URLRequest, mapping: @escaping Mapping) -> Box<Model> {
+        let client = URLSessionHTTPClient.shared
+        let remote = RemoteUseCase(client: client, mapping: mapping)
+        let curried = curry(remote.load)
+        return Box(nullCancellable(curried(request)))
+    }
+}
+
 class InMemoryCacheBuilder<Model, Local> {
     typealias CacheLoad = (String) throws -> Model
     typealias CacheValidate = (String) -> ()
@@ -30,8 +41,8 @@ class InMemoryCacheBuilder<Model, Local> {
 }
 
 extension Box {
-    typealias CacheSave = (T, String) -> Void
-    typealias CacheLoad = (String) throws -> T
+    typealias CacheSave = (Output, String) -> Void
+    typealias CacheLoad = (String) throws -> Output
     
     func saving(to cache: @escaping CacheSave, key: String) -> Box {
         self.handleSuccess({ cache($0, key) })
@@ -40,4 +51,12 @@ extension Box {
     static func local(_ load: @escaping CacheLoad, key: String) -> Box {
         self.fromSync({ try load(key) })
     }
+}
+
+func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+    return { a in { b in f(a, b) } }
+}
+
+func nullCancellable<T>(_ f: @escaping (T) -> Void) -> (T) -> Cancellable {
+    return { x in _ = f(x); return {} }
 }

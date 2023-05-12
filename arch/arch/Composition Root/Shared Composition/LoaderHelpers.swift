@@ -9,30 +9,31 @@ import Foundation
 
 typealias Cancellable = () -> Void
 typealias LoaderResult<T> = Result<T, Error>
+typealias LoaderCompletion<T> = (LoaderResult<T>) -> Void
 
-typealias Loader<R> = (@escaping (LoaderResult<R>) -> Void) -> Cancellable
+typealias Loader<Output> = (@escaping LoaderCompletion<Output>) -> Cancellable
 
-class Box<T> {
-    let load: Loader<T>
+class Box<Output> {
+    let load: Loader<Output>
     
-    init(_ load: @escaping Loader<T>) {
+    init(_ load: @escaping Loader<Output>) {
         self.load = load
     }
     
-    static func fromSync(_ syncLoad: @escaping () throws -> T) -> Box<T> {
-        Box({ [syncLoad] completion in
-            let cancellable = AnyCancellable()
-            // TODO: обработка Cancellable
-            completion(Result{ try syncLoad() })
+    static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box<Output> {
+        Box({ completion in
+            let cancellable = LoaderCancellable<Output>()
+            cancellable.loaderCompletion = completion
+            cancellable.complete(with: Result{ try syncLoad() })
             return cancellable.cancel
         })
     }
 }
 
 extension Box {
-    func fallback(to secondary: Box<T>) -> Box<T> {
+    func fallback(to secondary: Box) -> Box {
         Box({ [load] completion in
-            let cancellable = AnyCancellable()
+            let cancellable = ActionCancellable()
             cancellable.onCancel = load { result in
                 switch result {
                 case .success(let response):
@@ -52,15 +53,15 @@ extension Box {
         })
     }
     
-    func map<N>(_ mapping: @escaping (T) -> N) -> Box<N> {
-        Box<N>({ [load] completion in
+    func map<NewOutput>(_ mapping: @escaping (Output) -> NewOutput) -> Box<NewOutput> {
+        Box<NewOutput>({ [load] completion in
             load { result in
                 completion(result.map(mapping))
             }
         })
     }
     
-    func handle(_ action: @escaping (LoaderResult<T>) -> Void) -> Box<T> {
+    func handle(_ action: @escaping (LoaderResult<Output>) -> Void) -> Box {
         Box({ [load] completion in
             load { result in
                 action(result)
@@ -69,7 +70,7 @@ extension Box {
         })
     }
     
-    func handleSuccess(_ action: @escaping (T) -> Void) -> Box<T> {
+    func handleSuccess(_ action: @escaping (Output) -> Void) -> Box {
         handle { result in
             switch result {
             case let .success(value):
@@ -79,7 +80,7 @@ extension Box {
         }
     }
     
-    func assert(_ action: @escaping () throws -> ()) -> Box<T> {
+    func assert(_ action: @escaping () throws -> ()) -> Box {
         Box({ [load] completion in
             do {
                 try action()
@@ -90,20 +91,4 @@ extension Box {
             return {}
         })
     }
-}
-
-private class AnyCancellable {
-    var onCancel: (() -> Void)?
-    
-    func cancel() {
-        onCancel?()
-    }
-}
-
-func nullCancellable<T>(_ f: @escaping (T) -> Void) -> (T) -> Cancellable {
-    return { x in _ = f(x); return {} }
-}
-
-func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
-  return { a in { b in f(a, b) } }
 }

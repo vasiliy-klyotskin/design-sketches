@@ -9,6 +9,9 @@ import Foundation
 
 enum EndpointOne {
     static func request(for base: URLRequest) -> URLRequest {
-        base
+        var request = base
+        request.httpBody = UUID().uuidString.data(using: .utf8)
+        request.httpMethod = "GET"
+        return request
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 enum DefaultCacheValidationPolicy {
     static func validate(date: Date) -> Bool {
-        return true // логика сравнения с текущей датой
+        // Validation logic goes here
+        return true
     }
 }

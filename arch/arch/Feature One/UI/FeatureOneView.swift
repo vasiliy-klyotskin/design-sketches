@@ -9,6 +9,6 @@ import UIKit
 
 final class FeatureOneView: UIViewController, ResourceView {
     func display(_ viewModel: ViewModelOne) {
-        // show
+        // Show view model
     }
 }

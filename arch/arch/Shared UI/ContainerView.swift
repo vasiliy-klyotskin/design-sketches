@@ -25,14 +25,14 @@ final class Container<View: ResourceView>: UIViewController, ResourceView, Resou
     typealias ResourceViewModel = View.ResourceViewModel
     
     func display(_ viewModel: ResourceErrorViewModel) {
-        // show error
+        // Show error
     }
     
     func display(_ viewModel: ResourceLoadingViewModel) {
-        // show loading
+        // Show loading
     }
     
     func display(_ viewModel: ResourceViewModel) {
-        // show vm
+        // Show view model
     }
 }

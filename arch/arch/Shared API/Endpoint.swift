@@ -9,6 +9,9 @@ import Foundation
 
 extension URLRequest {
     static func base() -> URLRequest {
-        .init(url: URL(string: "backend url")!)
+        var request = URLRequest(url: URL(string: "backend shared url")!)
+        request.httpBody = UUID().uuidString.data(using: .utf8)
+        request.httpMethod = "POST"
+        return request
     }
 }
