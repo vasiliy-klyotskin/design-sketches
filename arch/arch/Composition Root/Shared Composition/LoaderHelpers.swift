@@ -19,15 +19,6 @@ class Box<Output> {
     init(_ load: @escaping Loader<Output>) {
         self.load = load
     }
-    
-    static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box<Output> {
-        Box({ completion in
-            let cancellable = LoaderCancellable<Output>()
-            cancellable.loaderCompletion = completion
-            cancellable.complete(with: Result{ try syncLoad() })
-            return cancellable.cancel
-        })
-    }
 }
 
 extension Box {
@@ -89,6 +80,17 @@ extension Box {
                 completion(.failure(error))
             }
             return {}
+        })
+    }
+}
+
+extension Box {
+    static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box<Output> {
+        Box({ completion in
+            let cancellable = LoaderCancellable<Output>()
+            cancellable.loaderCompletion = completion
+            cancellable.complete(with: Result{ try syncLoad() })
+            return cancellable.cancel
         })
     }
 }
