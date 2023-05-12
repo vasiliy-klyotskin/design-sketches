@@ -10,7 +10,7 @@ import UIKit
 enum FeatureTwoUIComposer {
     typealias Adapter = ViewAdapter<ModelTwo, DispatchDecorator<Container<FeatureTwoView>>, String>
     
-    static func compose(loader: @escaping (String) throws -> ModelTwo) -> UIViewController {
+    static func compose(loader: @escaping (String) -> Loader<ModelTwo>) -> UIViewController {
         let controller = FeatureTwoView()
         let container = Container<FeatureTwoView>(
             view: controller,
@@ -27,7 +27,7 @@ enum FeatureTwoUIComposer {
             presenter: presenter,
             loader: loader
         )
-        controller.onInput = onBackground(action: adapter.handle) 
+        controller.onInput = adapter.handle
         return container
     }
 }

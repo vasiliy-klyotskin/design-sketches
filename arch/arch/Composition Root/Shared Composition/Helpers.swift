@@ -7,36 +7,103 @@
 
 import Foundation
 
-func fallback<A, R>(main: @escaping (A) throws -> R, secondary: @escaping (A) throws -> R) -> (A) throws -> R {
-    {
-        do {
-            return try main($0)
-        } catch {
-            return try secondary($0)
+typealias Cancellable = () -> Void
+typealias LoaderResult<T> = Result<T, Error>
+
+typealias Loader<R> = (@escaping (LoaderResult<R>) -> Void) -> Cancellable
+
+class Box<T> {
+    let load: Loader<T>
+    
+    init(_ load: @escaping Loader<T>) {
+        self.load = load
+    }
+    
+    static func fromSync(_ syncLoad: @escaping () throws -> T) -> Box<T> {
+        Box({ [syncLoad] completion in
+            let cancellable = AnyCancellable()
+            // TODO: обработка Cancellable
+            completion(Result{ try syncLoad() })
+            return cancellable.cancel
+        })
+    }
+}
+
+extension Box {
+    func fallback(to secondary: Box<T>) -> Box<T> {
+        Box({ [load] completion in
+            let cancellable = AnyCancellable()
+            cancellable.onCancel = load { result in
+                switch result {
+                case .success(let response):
+                    completion(.success(response))
+                case .failure:
+                    cancellable.onCancel = secondary.load { secondaryResult in
+                        switch result {
+                        case .success(let secondResponse):
+                            completion(.success(secondResponse))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                }
+            }
+            return cancellable.cancel
+        })
+    }
+    
+    func map<N>(_ mapping: @escaping (T) -> N) -> Box<N> {
+        Box<N>({ [load] completion in
+            load { result in
+                completion(result.map(mapping))
+            }
+        })
+    }
+    
+    func handle(_ action: @escaping (LoaderResult<T>) -> Void) -> Box<T> {
+        Box({ [load] completion in
+            load { result in
+                action(result)
+                completion(result)
+            }
+        })
+    }
+    
+    func handleSuccess(_ action: @escaping (T) -> Void) -> Box<T> {
+        handle { result in
+            switch result {
+            case let .success(value):
+                action(value)
+            default: break
+            }
         }
     }
-}
-
-func fallback<R>(main: @escaping () throws -> R, secondary: @escaping () throws -> R) -> () throws -> R {
-    { try fallback(main: main, secondary: secondary)(()) }
-}
-
-func handle<A, R>(action: @escaping (A) throws -> R, handler: @escaping (R, A) -> ()) -> (A) throws -> R {
-    {
-        let result = try action($0)
-        handler(result, $0)
-        return result
+    
+    func assert(_ action: @escaping () throws -> ()) -> Box<T> {
+        Box({ [load] completion in
+            do {
+                try action()
+                return load(completion)
+            } catch {
+                completion(.failure(error))
+            }
+            return {}
+        })
     }
 }
 
-func handle<R>(action: @escaping () throws -> R, handler: @escaping (R) -> ()) -> () throws -> R {
-    { try handle(action: action, handler: { (param, _) in handler(param) })(()) }
+private class AnyCancellable {
+    var onCancel: (() -> Void)?
+    
+    func cancel() {
+        onCancel?()
+    }
 }
 
-func map<A, B, C>(mapped: @escaping (A) throws -> (B), mapping: @escaping (B) throws -> (C)) -> (A) throws -> (C) {
-    { a in
-        let b = try mapped(a)
-        let c = try mapping(b)
-        return c
-    }
+func nullCancellable<T>(_ f: @escaping (T) -> Void) -> (T) -> Cancellable {
+    return { x in _ = f(x); return {} }
+}
+
+func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+  return { a in { b in f(a, b) } }
 }

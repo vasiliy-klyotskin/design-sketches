@@ -8,38 +8,78 @@
 import UIKit
 
 class SceneDelegate {
-    func main() {
-        let _ = featureOne()
-        let _ = featureTwo()
+    static func main() {
+        let feature1 = FeatureOneUIComposer.compose(loader: loaderOne)
+        let feature2 = FeatureTwoUIComposer.compose(loader: loaderTwo)
     }
-    
-    private func featureOne() -> UIViewController {
+
+    static func loaderOne() -> Loader<ModelOne> {
         let remote = RemoteBuilder.remote(
             for: EndpointOne.request(for: .base()),
             mapping: DTOOneMapper.toModel
         )
-        let cache = InMemoryCacheBuilder.curriedCache(
+        let cache = InMemoryCacheBuilder.build(
             localModel: LocalOneMapper.toModel,
             modelLocal: LocalOneMapper.fromModel
         )
-        let fallback = fallback(main: remote, secondary: cache.load)
-        let featureOne = FeatureOneUIComposer.compose(loader: fallback)
-        return featureOne
+        let cacheKey = "FEATURE_ONE_CACHE_KEY"
+        
+        return remote
+            .fallback(to: remote)
+            .logging()
+            .saving(to: cache.save, key: cacheKey)
+            .fallback(to: .local(cache.load, key: cacheKey))
+            .analyse()
+            .checkAuthorization()
+            .load
     }
     
-    private func featureTwo() -> UIViewController {
-        let remote = RemoteBuilder.defaultRemote(mapping: DTOTwoMapper.toModel)
-        let mappedRemote = map(
-            mapped: { EndpointTwo.request(for: .base(), value: $0) },
-            mapping: remote
-        )
-        let cache = InMemoryCacheBuilder.defaultCache(
+    static func loaderTwo(for input: String) -> Loader<ModelTwo> {
+        let request = EndpointTwo.request(for: .base(), value: input)
+        let remote = RemoteBuilder.remote(for: request, mapping: DTOTwoMapper.toModel)
+        let cache = InMemoryCacheBuilder.build(
             localModel: LocalTwoMapper.toModel,
             modelLocal: LocalTwoMapper.fromModel
         )
-        let savingRemote = handle(action: mappedRemote, handler: cache.save)
-        let remoteToRemoteFallback = fallback(main: savingRemote, secondary: savingRemote)
-        let localFallback = fallback(main: remoteToRemoteFallback, secondary: cache.load)
-        return FeatureTwoUIComposer.compose(loader: localFallback)
+        return Box.local(cache.load, key: input)
+            .fallback(to: remote)
+            .logging()
+            .fallback(to: remote)
+            .saving(to: cache.save, key: input)
+            .analyse()
+            .checkAuthorization()
+            .load
     }
+}
+
+enum Analytics {
+    static func analyse() {
+        // Do analytics
+    }
+}
+
+enum Logger {
+    static func log() {
+        // Do logging
+    }
+}
+
+enum AuthorizationChecker {
+    struct UserNotAuthorized: Error {}
+    
+    static func checkAuthorization() throws {
+        throw UserNotAuthorized()
+    }
+}
+
+extension Box {
+    func analyse() -> Box { self.handle({ _ in Analytics.analyse() }) }
+}
+
+extension Box {
+    func logging() -> Box { self.handle({ _ in Logger.log() }) }
+}
+
+extension Box {
+    func checkAuthorization() -> Box { self.assert(AuthorizationChecker.checkAuthorization) }
 }

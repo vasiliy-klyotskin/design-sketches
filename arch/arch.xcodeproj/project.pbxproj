@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7B5528A2A0E822D00542F45 /* LocalLoaderBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B552892A0E822D00542F45 /* LocalLoaderBuilders.swift */; };
+		F7B5528C2A0E823800542F45 /* RemoteLoaderBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5528B2A0E823800542F45 /* RemoteLoaderBuilders.swift */; };
 		F7DA06DC2A0BCA4F00BD13D2 /* InMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06DB2A0BCA4F00BD13D2 /* InMemoryStorage.swift */; };
 		F7DA06DE2A0BCB1000BD13D2 /* CacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06DD2A0BCB1000BD13D2 /* CacheUseCase.swift */; };
-		F7DA06E02A0BCEC400BD13D2 /* CoreDateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06DF2A0BCEC400BD13D2 /* CoreDateStorage.swift */; };
 		F7DA06EC2A0BD58D00BD13D2 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06EB2A0BD58D00BD13D2 /* HTTPClient.swift */; };
 		F7DA06EE2A0BD60E00BD13D2 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06ED2A0BD60E00BD13D2 /* URLSessionHTTPClient.swift */; };
 		F7DA06F42A0BD84E00BD13D2 /* RemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA06F32A0BD84E00BD13D2 /* RemoteUseCase.swift */; };
@@ -37,7 +38,6 @@
 		F7DA07312A0BFE0B00BD13D2 /* DTOTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA07302A0BFE0B00BD13D2 /* DTOTwo.swift */; };
 		F7DA07332A0BFE1400BD13D2 /* DTOTwoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA07322A0BFE1400BD13D2 /* DTOTwoMapper.swift */; };
 		F7DA07352A0BFE2100BD13D2 /* ModelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA07342A0BFE2100BD13D2 /* ModelTwo.swift */; };
-		F7DA07372A0BFED300BD13D2 /* LoaderBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA07362A0BFED300BD13D2 /* LoaderBuilders.swift */; };
 		F7DA073B2A0C02B800BD13D2 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA073A2A0C02B800BD13D2 /* Main.swift */; };
 		F7DA073D2A0C057300BD13D2 /* DefaultCacheValidationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA073C2A0C057300BD13D2 /* DefaultCacheValidationPolicy.swift */; };
 		F7DA073F2A0C159F00BD13D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA073E2A0C159F00BD13D2 /* Helpers.swift */; };
@@ -47,9 +47,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F7B552812A0E0AF800542F45 /* arch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = arch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7B552892A0E822D00542F45 /* LocalLoaderBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLoaderBuilders.swift; sourceTree = "<group>"; };
+		F7B5528B2A0E823800542F45 /* RemoteLoaderBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoaderBuilders.swift; sourceTree = "<group>"; };
 		F7DA06DB2A0BCA4F00BD13D2 /* InMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStorage.swift; sourceTree = "<group>"; };
 		F7DA06DD2A0BCB1000BD13D2 /* CacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUseCase.swift; sourceTree = "<group>"; };
-		F7DA06DF2A0BCEC400BD13D2 /* CoreDateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDateStorage.swift; sourceTree = "<group>"; };
 		F7DA06EB2A0BD58D00BD13D2 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		F7DA06ED2A0BD60E00BD13D2 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		F7DA06F32A0BD84E00BD13D2 /* RemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUseCase.swift; sourceTree = "<group>"; };
@@ -62,7 +64,6 @@
 		F7DA07012A0BDE9C00BD13D2 /* Feature One Composition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feature One Composition.swift"; sourceTree = "<group>"; };
 		F7DA07042A0BE2E800BD13D2 /* LoadingResourcePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingResourcePresenter.swift; sourceTree = "<group>"; };
 		F7DA07062A0BE4A900BD13D2 /* LoadingResourcePresenterViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingResourcePresenterViews.swift; sourceTree = "<group>"; };
-		F7DA070C2A0BE63B00BD13D2 /* arch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = arch.framework; path = "/Users/vasilijkleckin/Desktop/arch/build/Debug-iphoneos/arch.framework"; sourceTree = "<absolute>"; };
 		F7DA070F2A0BE6E800BD13D2 /* ViewModelOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelOne.swift; sourceTree = "<group>"; };
 		F7DA07112A0BE6F200BD13D2 /* ViewModelOneMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelOneMapper.swift; sourceTree = "<group>"; };
 		F7DA07192A0BE87C00BD13D2 /* FeatureOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureOneView.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		F7DA07302A0BFE0B00BD13D2 /* DTOTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOTwo.swift; sourceTree = "<group>"; };
 		F7DA07322A0BFE1400BD13D2 /* DTOTwoMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOTwoMapper.swift; sourceTree = "<group>"; };
 		F7DA07342A0BFE2100BD13D2 /* ModelTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTwo.swift; sourceTree = "<group>"; };
-		F7DA07362A0BFED300BD13D2 /* LoaderBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderBuilders.swift; sourceTree = "<group>"; };
 		F7DA073A2A0C02B800BD13D2 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		F7DA073C2A0C057300BD13D2 /* DefaultCacheValidationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCacheValidationPolicy.swift; sourceTree = "<group>"; };
 		F7DA073E2A0C159F00BD13D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				F7DA06CF2A0BC41C00BD13D2 /* arch */,
+				F7B552812A0E0AF800542F45 /* arch.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				F7DA06DD2A0BCB1000BD13D2 /* CacheUseCase.swift */,
-				F7DA06DF2A0BCEC400BD13D2 /* CoreDateStorage.swift */,
 				F7DA06DB2A0BCA4F00BD13D2 /* InMemoryStorage.swift */,
 				F7DA06F52A0BDCA700BD13D2 /* LocalStorage.swift */,
 				F7DA073C2A0C057300BD13D2 /* DefaultCacheValidationPolicy.swift */,
@@ -302,9 +302,10 @@
 			isa = PBXGroup;
 			children = (
 				F7DA07202A0BF3A700BD13D2 /* ViewAdapter.swift */,
-				F7DA07362A0BFED300BD13D2 /* LoaderBuilders.swift */,
 				F7DA07222A0BF3EA00BD13D2 /* Dispatching.swift */,
 				F7DA073E2A0C159F00BD13D2 /* Helpers.swift */,
+				F7B552892A0E822D00542F45 /* LocalLoaderBuilders.swift */,
+				F7B5528B2A0E823800542F45 /* RemoteLoaderBuilders.swift */,
 			);
 			path = "Shared Composition";
 			sourceTree = "<group>";
@@ -337,7 +338,7 @@
 			);
 			name = arch;
 			productName = arch;
-			productReference = F7DA070C2A0BE63B00BD13D2 /* arch.framework */;
+			productReference = F7B552812A0E0AF800542F45 /* arch.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -390,10 +391,8 @@
 			files = (
 				F7DA06FC2A0BDCFE00BD13D2 /* LocalOne.swift in Sources */,
 				F7DA07122A0BE6F200BD13D2 /* ViewModelOneMapper.swift in Sources */,
-				F7DA07372A0BFED300BD13D2 /* LoaderBuilders.swift in Sources */,
 				F7DA07022A0BDE9C00BD13D2 /* Feature One Composition.swift in Sources */,
 				F7DA07332A0BFE1400BD13D2 /* DTOTwoMapper.swift in Sources */,
-				F7DA06E02A0BCEC400BD13D2 /* CoreDateStorage.swift in Sources */,
 				F7DA071C2A0BE8B400BD13D2 /* ContainerView.swift in Sources */,
 				F7DA072B2A0BFD4C00BD13D2 /* ViewModelTwoMapper.swift in Sources */,
 				F7DA072D2A0BFD7600BD13D2 /* LocalTwo.swift in Sources */,
@@ -403,6 +402,7 @@
 				F7DA06FE2A0BDD7600BD13D2 /* DTOOneMapper.swift in Sources */,
 				F7DA06DE2A0BCB1000BD13D2 /* CacheUseCase.swift in Sources */,
 				F7DA07212A0BF3A700BD13D2 /* ViewAdapter.swift in Sources */,
+				F7B5528C2A0E823800542F45 /* RemoteLoaderBuilders.swift in Sources */,
 				F7DA073D2A0C057300BD13D2 /* DefaultCacheValidationPolicy.swift in Sources */,
 				F7DA07312A0BFE0B00BD13D2 /* DTOTwo.swift in Sources */,
 				F7DA07002A0BDD8700BD13D2 /* LocalOneMapper.swift in Sources */,
@@ -412,6 +412,7 @@
 				F7DA07052A0BE2E800BD13D2 /* LoadingResourcePresenter.swift in Sources */,
 				F7DA071A2A0BE87C00BD13D2 /* FeatureOneView.swift in Sources */,
 				F7DA07232A0BF3EA00BD13D2 /* Dispatching.swift in Sources */,
+				F7B5528A2A0E822D00542F45 /* LocalLoaderBuilders.swift in Sources */,
 				F7DA06FA2A0BDCF500BD13D2 /* DTOOne.swift in Sources */,
 				F7DA073B2A0C02B800BD13D2 /* Main.swift in Sources */,
 				F7DA07102A0BE6E800BD13D2 /* ViewModelOne.swift in Sources */,

@@ -19,10 +19,19 @@ final class RemoteUseCase<DTO: Decodable, Model> {
         self.mapping = mapping
     }
     
-    func load(from request: URLRequest) throws -> Model {
-        let (data, response) = try client.perform(request: request)
-        let dto = try map(data: data, response: response)
-        return mapping(dto)
+    func load(from request: URLRequest, completion: @escaping (Result<Model, Error>) -> ()) {
+        client.perform(request: request) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success((data, response)):
+                completion(Result {
+                    let dto = try self.map(data: data, response: response)
+                    return self.mapping(dto)
+                })
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
     }
     
     private func map(data: Data, response: HTTPURLResponse) throws -> DTO {

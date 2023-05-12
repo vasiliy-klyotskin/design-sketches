@@ -8,5 +8,8 @@
 import Foundation
 
 public protocol HTTPClient {
-    func perform(request: URLRequest) throws -> (Data, HTTPURLResponse)
+    func perform(
+        request: URLRequest,
+        completion: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void
+    )
 }

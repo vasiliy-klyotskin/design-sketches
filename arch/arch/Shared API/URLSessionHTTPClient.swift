@@ -18,31 +18,15 @@ public final class URLSessionHTTPClient: HTTPClient {
         self.urlSession = urlSession
     }
     
-    public func perform(request: URLRequest) throws -> (Data, HTTPURLResponse) {
-        let result = syncDataTask(request)
-        if let data = result.data, let response = result.response as? HTTPURLResponse {
-            return (data, response)
-        } else if let error = result.error {
-            throw error
-        } else {
-            throw Unexpected()
+    public func perform(request: URLRequest, completion: @escaping (Result<(Data, HTTPURLResponse), Error>) -> Void) {
+        urlSession.dataTask(with: request) { data, response, error in
+            if let data = data, let response = response as? HTTPURLResponse {
+                completion(.success((data, response)))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(Unexpected()))
+            }
         }
-    }
-    
-    typealias HTTPResult = (data: Data?, response: URLResponse?, error: Error?)
-    
-    private func syncDataTask(_ request: URLRequest) -> HTTPResult {
-        let semaphore = DispatchSemaphore(value: 0)
-        var data: Data?
-        var error: Error?
-        var response: URLResponse?
-        urlSession.dataTask(with: request) { receivedData, receivedResponse, receivedError in
-            data = receivedData
-            response = receivedResponse
-            error = receivedError
-            semaphore.signal()
-        }.resume()
-        semaphore.wait()
-        return (data, response, error)
     }
 }
