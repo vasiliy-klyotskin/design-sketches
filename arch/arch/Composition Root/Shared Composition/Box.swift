@@ -93,7 +93,7 @@ extension Box {
 }
 
 extension Box {
-    static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box<Output> {
+    static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box {
         Box({ completion in
             let cancellable = LoaderCancellable<Output>()
             cancellable.loaderCompletion = completion
