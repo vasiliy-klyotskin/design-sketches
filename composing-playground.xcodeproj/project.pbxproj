@@ -51,7 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F7B552812A0E0AF800542F45 /* composing_playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = composing_playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7B552812A0E0AF800542F45 /* composing_playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = composing_playground.framework; path = "/Users/vasilijkleckin/Desktop/composing-playground/build/Debug-iphoneos/composing_playground.framework"; sourceTree = "<absolute>"; };
 		F7B552892A0E822D00542F45 /* Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
 		F7B552912A0F3A0500542F45 /* WeakProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakProxy.swift; sourceTree = "<group>"; };
 		F7B552962A0F3D7900542F45 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
@@ -134,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				F7DA06CF2A0BC41C00BD13D2 /* composing-playground */,
-				F7B552812A0E0AF800542F45 /* composing_playground.framework */,
 			);
 			sourceTree = "<group>";
 		};
