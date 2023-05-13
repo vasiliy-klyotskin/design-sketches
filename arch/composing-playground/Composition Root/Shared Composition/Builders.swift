@@ -39,25 +39,17 @@ enum RemoteBuilder<DTO: Decodable> {
 
 extension Box {
     func saving(to cache: @escaping CacheSave<Output>, key: String) -> Box {
-        self.handleSuccess({ cache($0, key) })
+        handleSuccess({ cache($0, key) })
     }
     
-    func analyse() -> Box {
-        self.handle({ _ in Analytics.analyse() })
-    }
-    
-    func logging() -> Box {
-        self.handle({ _ in Logger.log() })
-    }
-    
-    func checkAuth() -> Box {
-        self.ensure(AuthChecker.checkAuth)
-    }
+    func analyse() -> Box { doOnResult(Analytics.analyse) }
+    func logging() -> Box { doOnResult(Logger.log) }
+    func checkAuth() -> Box { ensure(AuthChecker.checkAuth) }
 }
 
 extension Box {
     static func local(_ load: @escaping CacheLoad<Output>, key: String) -> Box {
-        self.fromSync({ try load(key) })
+        fromSync({ try load(key) })
     }
 }
 

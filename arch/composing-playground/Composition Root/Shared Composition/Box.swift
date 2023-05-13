@@ -45,7 +45,7 @@ extension Box {
         tryMap(mapping)
     }
     
-    func handle(_ action: @escaping (LoaderResult<Output>) -> Void) -> Box {
+    func handleResult(_ action: @escaping (LoaderResult<Output>) -> Void) -> Box {
         Box { [load] completion in
             load { result in
                 action(result)
@@ -54,8 +54,12 @@ extension Box {
         }
     }
     
+    func doOnResult(_ resultAction: @escaping () -> Void) -> Box {
+        handleResult { _ in resultAction() }
+    }
+    
     func handleSuccess(_ action: @escaping (Output) -> Void) -> Box {
-        handle { result in
+        handleResult { result in
             if case let .success(value) = result {
                 action(value)
             }
@@ -83,5 +87,30 @@ extension Box {
             cancellable.complete(with: Result{ try syncLoad() })
             return cancellable.cancel
         }
+    }
+}
+
+private final class LoaderCancellable<Output> {
+    var loaderCompletion: LoaderCompletion<Output>?
+    
+    func complete(with result: LoaderResult<Output>) {
+        loaderCompletion?(result)
+    }
+    
+    func cancel() {
+        loaderCompletion = nil
+    }
+}
+
+private final class CompositeCancellable {
+    private var cancellables: [Cancellable] = []
+    
+    func addCancellable(_ cancellable: @escaping Cancellable) {
+        cancellables.append(cancellable)
+    }
+    
+    func cancel() {
+        cancellables.forEach { $0() }
+        cancellables = []
     }
 }
