@@ -10,7 +10,7 @@ import Foundation
 public final class URLSessionHTTPClient {
     struct Unexpected: Error {}
     
-    static let shared: URLSessionHTTPClient = .init()
+    static let shared = URLSessionHTTPClient()
     
     private let urlSession: URLSession
     
