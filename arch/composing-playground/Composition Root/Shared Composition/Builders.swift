@@ -59,7 +59,7 @@ extension Box {
 }
 
 extension Box {
-    func checkAuth() -> Box { self.assert(AuthChecker.checkAuth) }
+    func checkAuth() -> Box { self.ensure(AuthChecker.checkAuth) }
 }
 
 func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {

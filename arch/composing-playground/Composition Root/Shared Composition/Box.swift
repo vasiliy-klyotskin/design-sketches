@@ -16,44 +16,35 @@ class Box<Output> {
 }
 
 extension Box {
+    typealias Cancellable = () -> Void
+    typealias LoaderResult<T> = Result<T, Error>
+    typealias LoaderCompletion<T> = (LoaderResult<T>) -> Void
+
+    typealias Loader<Output> = (@escaping LoaderCompletion<Output>) -> Cancellable
+    
     func fallback(to secondary: Box) -> Box {
-        Box({ [load] completion in
-            let cancellable = ActionCancellable()
-            cancellable.onCancel = load { result in
+        Box { completion in
+            let cancellable = CompositeCancellable()
+            cancellable.addCancellable(self.load { result in
                 switch result {
                 case .success(let response):
                     completion(.success(response))
                 case .failure:
-                    cancellable.onCancel = secondary.load { secondaryResult in
-                        switch result {
-                        case .success(let secondResponse):
-                            completion(.success(secondResponse))
-                        case .failure(let error):
-                            completion(.failure(error))
-                        }
-                    }
+                    cancellable.addCancellable(secondary.load(completion))
                 }
-            }
+            })
             return cancellable.cancel
-        })
+        }
     }
     
     func tryMap<NewOutput>(_ mapping: @escaping (Output) throws -> NewOutput) -> Box<NewOutput> {
-        Box<NewOutput>({ [load] completion in
+        Box<NewOutput> { [load] completion in
             load { result in
-                switch result {
-                case .failure(let error):
-                    completion(.failure(error))
-                case .success(let output):
-                    do {
-                        let newOutput = try mapping(output)
-                        completion(.success(newOutput))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
+                completion(result.flatMap { output -> Result<NewOutput, Error> in
+                    Result { try mapping(output) }
+                })
             }
-        })
+        }
     }
     
     func map<NewOutput>(_ mapping: @escaping (Output) -> NewOutput) -> Box<NewOutput> {
@@ -61,26 +52,24 @@ extension Box {
     }
     
     func handle(_ action: @escaping (LoaderResult<Output>) -> Void) -> Box {
-        Box({ [load] completion in
+        Box { [load] completion in
             load { result in
                 action(result)
                 completion(result)
             }
-        })
+        }
     }
     
     func handleSuccess(_ action: @escaping (Output) -> Void) -> Box {
         handle { result in
-            switch result {
-            case let .success(value):
+            if case let .success(value) = result {
                 action(value)
-            default: break
             }
         }
     }
     
-    func assert(_ action: @escaping () throws -> ()) -> Box {
-        Box({ [load] completion in
+    func ensure(_ action: @escaping () throws -> ()) -> Box {
+        Box { [load] completion in
             do {
                 try action()
                 return load(completion)
@@ -88,17 +77,17 @@ extension Box {
                 completion(.failure(error))
             }
             return {}
-        })
+        }
     }
 }
 
 extension Box {
     static func fromSync(_ syncLoad: @escaping () throws -> Output) -> Box {
-        Box({ completion in
+        Box { completion in
             let cancellable = LoaderCancellable<Output>()
             cancellable.loaderCompletion = completion
             cancellable.complete(with: Result{ try syncLoad() })
             return cancellable.cancel
-        })
+        }
     }
 }

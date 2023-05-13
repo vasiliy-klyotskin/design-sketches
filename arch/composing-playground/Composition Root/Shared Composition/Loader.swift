@@ -25,11 +25,15 @@ final class LoaderCancellable<Output> {
     }
 }
 
-final class ActionCancellable {
-    var onCancel: (() -> Void)?
+final class CompositeCancellable {
+    private var cancellables: [Cancellable] = []
+    
+    func addCancellable(_ cancellable: @escaping Cancellable) {
+        cancellables.append(cancellable)
+    }
     
     func cancel() {
-        onCancel?()
-        onCancel = nil
+        cancellables.forEach { $0() }
+        cancellables = []
     }
 }
