@@ -15,13 +15,7 @@ class Box<Output> {
     }
 }
 
-extension Box {
-    typealias Cancellable = () -> Void
-    typealias LoaderResult<T> = Result<T, Error>
-    typealias LoaderCompletion<T> = (LoaderResult<T>) -> Void
-
-    typealias Loader<Output> = (@escaping LoaderCompletion<Output>) -> Cancellable
-    
+extension Box {    
     func fallback(to secondary: Box) -> Box {
         Box { completion in
             let cancellable = CompositeCancellable()
