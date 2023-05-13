@@ -19,9 +19,9 @@ enum FeatureOneUIComposer {
             loadingView: UIViewController()
         )
         let presenter = LoadResourcePresenter(
-            resourceView: WeakProxy(DispatchDecorator(container)),
-            loadingView: WeakProxy(DispatchDecorator(container)),
-            errorView: WeakProxy(DispatchDecorator(container)),
+            resourceView: container.weakMainView(),
+            loadingView: container.weakMainLoadingView(),
+            errorView: container.weakMainErrorView(),
             mapper: ViewModelOneMapper.from
         )
         let adapter = Adapter(
