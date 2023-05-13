@@ -1,17 +1,11 @@
 //
-//  Helpers.swift
+//  Box.swift
 //  arch
 //
-//  Created by Василий Клецкин on 10.05.2023.
+//  Created by Василий Клецкин on 13.05.2023.
 //
 
 import Foundation
-
-typealias Cancellable = () -> Void
-typealias LoaderResult<T> = Result<T, Error>
-typealias LoaderCompletion<T> = (LoaderResult<T>) -> Void
-
-typealias Loader<Output> = (@escaping LoaderCompletion<Output>) -> Cancellable
 
 class Box<Output> {
     let load: Loader<Output>
