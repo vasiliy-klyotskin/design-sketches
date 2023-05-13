@@ -7,13 +7,16 @@
 
 import UIKit
 
-class Main {
-    static func main() {
-        let feature1 = FeatureOneUIComposer.compose(loader: loaderOne)
-        let feature2 = FeatureTwoUIComposer.compose(loader: loaderTwo)
+enum Main {
+    static func feature1() -> UIViewController {
+        FeatureOneUIComposer.compose(loader: loaderOne)
+    }
+    
+    static func feature2() -> UIViewController {
+        FeatureTwoUIComposer.compose(loader: loaderTwo)
     }
 
-    static func loaderOne() -> Loader<ModelOne> {
+    private static func loaderOne() -> Loader<ModelOne> {
         let cacheKey = "FEATURE_ONE_CACHE_KEY"
         let request = EndpointOne.request(for: .base())
         let cache = InMemoryCacheBuilder.build(
@@ -33,7 +36,7 @@ class Main {
             .load
     }
     
-    static func loaderTwo(for input: String) -> Loader<ModelTwo> {
+    private static func loaderTwo(for input: String) -> Loader<ModelTwo> {
         let request = EndpointTwo.request(for: .base(), value: input)
         let cache = InMemoryCacheBuilder.build(
             localModel: LocalTwoMapper.toModel,
