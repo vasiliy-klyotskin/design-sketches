@@ -7,20 +7,12 @@
 
 import Foundation
 
-enum RemoteBuilder<DTO: Decodable> {
-    static func remote(for request: URLRequest) -> Box<DTO> {
-        let performRequest = curry(URLSessionHTTPClient.shared.perform)(request)
-        return Box(nullCancellable(performRequest))
-            .tryMap(DTOMapper.map)
-    }
-}
+typealias CacheLoad<Model> = (String) throws -> Model
+typealias CacheValidate = (String) -> ()
+typealias CacheSave<Model> = (Model, String) -> ()
 
-class InMemoryCacheBuilder<Model, Local> {
-    typealias CacheLoad = (String) throws -> Model
-    typealias CacheValidate = (String) -> ()
-    typealias CacheSave = (Model, String) -> ()
-    
-    typealias Result = (load: CacheLoad, validate: CacheValidate, save: CacheSave)
+enum InMemoryCacheBuilder<Model, Local> {
+    typealias Result = (load: CacheLoad<Model>, validate: CacheValidate, save: CacheSave<Model>)
     
     static func build(
         localModel: @escaping (Local) -> (Model),
@@ -37,29 +29,36 @@ class InMemoryCacheBuilder<Model, Local> {
     }
 }
 
+enum RemoteBuilder<DTO: Decodable> {
+    static func remote(for request: URLRequest) -> Box<DTO> {
+        let performRequest = curry(URLSessionHTTPClient.shared.perform)(request)
+        return Box(nullCancellable(performRequest))
+            .tryMap(DTOMapper.map)
+    }
+}
+
 extension Box {
-    typealias CacheSave = (Output, String) -> Void
-    typealias CacheLoad = (String) throws -> Output
-    
-    func saving(to cache: @escaping CacheSave, key: String) -> Box {
+    func saving(to cache: @escaping CacheSave<Output>, key: String) -> Box {
         self.handleSuccess({ cache($0, key) })
     }
     
-    static func local(_ load: @escaping CacheLoad, key: String) -> Box {
-        self.fromSync({ try load(key) })
+    func analyse() -> Box {
+        self.handle({ _ in Analytics.analyse() })
+    }
+    
+    func logging() -> Box {
+        self.handle({ _ in Logger.log() })
+    }
+    
+    func checkAuth() -> Box {
+        self.ensure(AuthChecker.checkAuth)
     }
 }
 
 extension Box {
-    func analyse() -> Box { self.handle({ _ in Analytics.analyse() }) }
-}
-
-extension Box {
-    func logging() -> Box { self.handle({ _ in Logger.log() }) }
-}
-
-extension Box {
-    func checkAuth() -> Box { self.ensure(AuthChecker.checkAuth) }
+    static func local(_ load: @escaping CacheLoad<Output>, key: String) -> Box {
+        self.fromSync({ try load(key) })
+    }
 }
 
 func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
