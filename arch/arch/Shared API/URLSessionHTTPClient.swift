@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class URLSessionHTTPClient: HTTPClient {
+public final class URLSessionHTTPClient {
     struct Unexpected: Error {}
     
     static var shared: URLSessionHTTPClient = URLSessionHTTPClient()

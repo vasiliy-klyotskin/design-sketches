@@ -7,14 +7,11 @@
 
 import Foundation
 
-enum RemoteBuilder<Model, DTO: Decodable> {
-    typealias Mapping = (DTO) -> Model
-    
-    static func remote(for request: URLRequest, mapping: @escaping Mapping) -> Box<Model> {
-        let client = URLSessionHTTPClient.shared
-        let remote = RemoteUseCase(client: client, mapping: mapping)
-        let curried = curry(remote.load)
-        return Box(nullCancellable(curried(request)))
+enum RemoteBuilder<DTO: Decodable> {
+    static func remote(for request: URLRequest) -> Box<DTO> {
+        let performRequest = curry(URLSessionHTTPClient.shared.perform)(request)
+        return Box(nullCancellable(performRequest))
+            .tryMap(DTOMapper.map)
     }
 }
 
@@ -51,6 +48,18 @@ extension Box {
     static func local(_ load: @escaping CacheLoad, key: String) -> Box {
         self.fromSync({ try load(key) })
     }
+}
+
+extension Box {
+    func analyse() -> Box { self.handle({ _ in Analytics.analyse() }) }
+}
+
+extension Box {
+    func logging() -> Box { self.handle({ _ in Logger.log() }) }
+}
+
+extension Box {
+    func checkAuth() -> Box { self.assert(AuthChecker.checkAuth) }
 }
 
 func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {

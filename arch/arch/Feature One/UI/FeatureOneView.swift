@@ -8,6 +8,8 @@
 import UIKit
 
 final class FeatureOneView: UIViewController, ResourceView {
+    var onCancel: (() -> Void)?
+    
     func display(_ viewModel: ViewModelOne) {
         // Show view model
     }

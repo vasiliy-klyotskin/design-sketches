@@ -8,7 +8,8 @@
 import UIKit
 
 enum FeatureTwoUIComposer {
-    typealias Adapter = ViewAdapter<ModelTwo, DispatchDecorator<Container<FeatureTwoView>>, String>
+    typealias View = WeakProxy<DispatchDecorator<Container<FeatureTwoView>>>
+    typealias Adapter = ViewAdapter<ModelTwo, View, String>
     
     static func compose(loader: @escaping (String) -> Loader<ModelTwo>) -> UIViewController {
         let controller = FeatureTwoView()
@@ -18,9 +19,9 @@ enum FeatureTwoUIComposer {
             loadingView: UIViewController()
         )
         let presenter = LoadResourcePresenter(
-            resourceView: DispatchDecorator(container),
-            loadingView: DispatchDecorator(container),
-            errorView: DispatchDecorator(container),
+            resourceView: WeakProxy(DispatchDecorator(container)),
+            loadingView: WeakProxy(DispatchDecorator(container)),
+            errorView: WeakProxy(DispatchDecorator(container)),
             mapper: ViewModelTwoMapper.from
         )
         let adapter = Adapter(

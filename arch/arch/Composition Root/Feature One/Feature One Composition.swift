@@ -8,7 +8,8 @@
 import UIKit
 
 enum FeatureOneUIComposer {
-    typealias Adapter = ViewAdapter<ModelOne, DispatchDecorator<Container<FeatureOneView>>, Void>
+    typealias View = WeakProxy<DispatchDecorator<Container<FeatureOneView>>>
+    typealias Adapter = ViewAdapter<ModelOne, View, Void>
     
     static func compose(loader: @escaping () -> Loader<ModelOne>) -> UIViewController {
         let controller = FeatureOneView()
@@ -18,9 +19,9 @@ enum FeatureOneUIComposer {
             loadingView: UIViewController()
         )
         let presenter = LoadResourcePresenter(
-            resourceView: DispatchDecorator(container),
-            loadingView: DispatchDecorator(container),
-            errorView: DispatchDecorator(container),
+            resourceView: WeakProxy(DispatchDecorator(container)),
+            loadingView: WeakProxy(DispatchDecorator(container)),
+            errorView: WeakProxy(DispatchDecorator(container)),
             mapper: ViewModelOneMapper.from
         )
         let adapter = Adapter(
@@ -28,6 +29,7 @@ enum FeatureOneUIComposer {
             loader: loader
         )
         container.onDisplay = adapter.handle
+        controller.onCancel = adapter.cancelTask
         return container
     }
 }

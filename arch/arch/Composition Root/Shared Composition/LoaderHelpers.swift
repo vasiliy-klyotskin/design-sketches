@@ -44,12 +44,26 @@ extension Box {
         })
     }
     
-    func map<NewOutput>(_ mapping: @escaping (Output) -> NewOutput) -> Box<NewOutput> {
+    func tryMap<NewOutput>(_ mapping: @escaping (Output) throws -> NewOutput) -> Box<NewOutput> {
         Box<NewOutput>({ [load] completion in
             load { result in
-                completion(result.map(mapping))
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let output):
+                    do {
+                        let newOutput = try mapping(output)
+                        completion(.success(newOutput))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
             }
         })
+    }
+    
+    func map<NewOutput>(_ mapping: @escaping (Output) -> NewOutput) -> Box<NewOutput> {
+        tryMap(mapping)
     }
     
     func handle(_ action: @escaping (LoaderResult<Output>) -> Void) -> Box {
