@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60ECF562B037B8E00D9972F /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF552B037B8E00D9972F /* Widget.swift */; };
+		D60ECF5A2B037DBA00D9972F /* WidgetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF592B037DBA00D9972F /* WidgetPresenter.swift */; };
+		D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */; };
+		D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */; };
+		D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */; };
 		D6EC233C2B0376AC0085E147 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC233B2B0376AC0085E147 /* AppDelegate.swift */; };
 		D6EC233E2B0376AC0085E147 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC233D2B0376AC0085E147 /* SceneDelegate.swift */; };
 		D6EC23402B0376AC0085E147 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EC233F2B0376AC0085E147 /* ViewController.swift */; };
@@ -16,6 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D60ECF552B037B8E00D9972F /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
+		D60ECF592B037DBA00D9972F /* WidgetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPresenter.swift; sourceTree = "<group>"; };
+		D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitWidgetCoordinatorRegistry.swift; sourceTree = "<group>"; };
+		D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewUIKitCoordinator.swift; sourceTree = "<group>"; };
+		D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWidgetUIKitCoordinator.swift; sourceTree = "<group>"; };
 		D6EC23382B0376AC0085E147 /* server-driven-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "server-driven-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6EC233B2B0376AC0085E147 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6EC233D2B0376AC0085E147 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +47,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D60ECF532B03788B00D9972F /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */,
+				D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */,
+				D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */,
+			);
+			path = Composition;
+			sourceTree = "<group>";
+		};
+		D60ECF542B03797F00D9972F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D60ECF552B037B8E00D9972F /* Widget.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D60ECF582B037DA600D9972F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D60ECF592B037DBA00D9972F /* WidgetPresenter.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		D6EC232F2B0376AC0085E147 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +92,9 @@
 		D6EC233A2B0376AC0085E147 /* server-driven-ui */ = {
 			isa = PBXGroup;
 			children = (
+				D60ECF532B03788B00D9972F /* Composition */,
+				D60ECF542B03797F00D9972F /* Domain */,
+				D60ECF582B037DA600D9972F /* Presentation */,
 				D6EC233B2B0376AC0085E147 /* AppDelegate.swift */,
 				D6EC233D2B0376AC0085E147 /* SceneDelegate.swift */,
 				D6EC233F2B0376AC0085E147 /* ViewController.swift */,
@@ -138,9 +177,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */,
+				D60ECF5A2B037DBA00D9972F /* WidgetPresenter.swift in Sources */,
+				D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */,
 				D6EC23402B0376AC0085E147 /* ViewController.swift in Sources */,
 				D6EC233C2B0376AC0085E147 /* AppDelegate.swift in Sources */,
+				D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */,
 				D6EC233E2B0376AC0085E147 /* SceneDelegate.swift in Sources */,
+				D60ECF562B037B8E00D9972F /* Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
