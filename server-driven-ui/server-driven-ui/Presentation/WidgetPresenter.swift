@@ -5,44 +5,29 @@
 //  Created by Василий Клецкин on 11/14/23.
 //
 
-
-
-// Presentation
-
 import Foundation
 
-struct WidgetDifferenceViewModel {
-    let deletions: [(childId: WidgetId, parentId: WidgetId, index: Int)]
-    let insertions: [(childId: WidgetId, parentId: WidgetId, index: Int)]
-    let updates: [WidgetId]
-}
-
-protocol WidgetDifferencePresenterDelegate {
-    func coordinate(viewModel: WidgetDifferenceViewModel)
-}
-
 final class WidgetDifferencePresenter {
-    let delegate: WidgetDifferencePresenterDelegate
-    
-    init(delegate: WidgetDifferencePresenterDelegate) {
-        self.delegate = delegate
+    static func present(widgetDifference diff: WidgetDifference) -> WidgetDifferenceViewModel {
+        let (deletions, insertions) = deletionsAndInsertions(from: diff)
+        let updates = updates(from: diff)
+        return .init(deletions: deletions, insertions: insertions, updates: updates)
+    }
+
+    private static func deletionsAndInsertions(from diff: WidgetDifference) -> (WidgetDeletionsViewModel, WidgetInsertionsViewModel) {
+        let oldPairs = diff.old.allPairsBreadthFirst
+        let newPairs = diff.new.allPairsBreadthFirst
+        let difference = newPairs.difference(from: oldPairs)
+        let deletionsViewModel = diff.deletionsViewModel(from: difference.removals)
+        let insertionsViewModel = diff.insertionsViewModel(from: difference.insertions)
+        return (deletionsViewModel, insertionsViewModel)
     }
     
-    func present(widgetDifference diff: WidgetDifference) {
-        // Рекурсивно посчитать вьюмодель дифф и вызвать метод делегата c расчитанной вьюмоделью
-        calculate(diff: diff)
-        delegate.coordinate(viewModel: <#T##WidgetDifferenceViewModel#>)
-    }
-    
-    func calculate(diff: WidgetDifference) {
-        if diff.widgetsHaveTheSameIdentity {
-            
-        } else if diff.widgetsAreWithDifferentState {
-            
-        } else if diff.widgetsAreWithDifferentInstance {
-
-        } else if diff.widgetsAreWithDifferentType {
-
+    private static func updates(from diff: WidgetDifference) -> WidgetUpdatesViewModel {
+        diff.old.widgets.compactMap { (instanceId, oldWidget) in
+            diff.new.widgets[instanceId].flatMap { newWidget in
+                newWidget.isDifferentState(from: oldWidget) ? newWidget.id : nil
+            }
         }
     }
 }

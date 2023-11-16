@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UIKitWidgetCoordinatorRegistry: WidgetDifferencePresenterDelegate {
+final class UIKitWidgetCoordinatorRegistry {
     var coordinatorFactory: (WidgetTypeId) -> UIKitWidgetCoordinator
     var widgetCoordinators: [WidgetInstanceId: UIKitWidgetCoordinator] = [:]
     
@@ -19,9 +19,9 @@ final class UIKitWidgetCoordinatorRegistry: WidgetDifferencePresenterDelegate {
         viewModel.deletions.forEach(delete)
         viewModel.insertions.forEach(insert)
         viewModel.updates.forEach(update)
+        viewModel.deletedAndNotInsertedChildrenInstanceIds.forEach(release)
     }
     
-    // instanceId нужны для выбора нужного координатора.
     private func insert(child childId: WidgetId, toParent parentId: WidgetId, at index: Int) {
         let parentCoordinator = widgetCoordinators[parentId.instance] ?? coordinatorFactory(parentId.type)
         let childCoordinator = widgetCoordinators[childId.instance] ?? coordinatorFactory(childId.type)
@@ -35,7 +35,11 @@ final class UIKitWidgetCoordinatorRegistry: WidgetDifferencePresenterDelegate {
     
     private func delete(child childId: WidgetId, fromParent parentId: WidgetId, at index: Int) {
         widgetCoordinators[parentId.instance]?.deleteChild(at: index)
-        widgetCoordinators[childId.instance] = nil
+        
+    }
+    
+    private func release(for id: WidgetInstanceId) {
+        widgetCoordinators[id] = nil
     }
     
     private func update(id: WidgetId) {
@@ -44,7 +48,6 @@ final class UIKitWidgetCoordinatorRegistry: WidgetDifferencePresenterDelegate {
 }
 
 protocol UIKitWidgetCoordinator {
-    // Тут также можно добавить работу с UIViewController если хотим
     func getView(id: WidgetId) -> UIView
     func update(id: WidgetId)
     func insertChild(view: UIView, at index: Int)

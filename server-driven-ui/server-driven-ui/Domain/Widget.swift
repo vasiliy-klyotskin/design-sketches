@@ -11,40 +11,68 @@ typealias WidgetTypeId = AnyHashable
 typealias WidgetInstanceId = AnyHashable
 typealias WidgetStateId = AnyHashable
 
-struct Widget {
-    let id: WidgetId
-    let children: [Widget]
-}
-
 struct WidgetId {
     let type: WidgetTypeId
-    // беку достаточно присылать разные instanceId для разных виджетов с точки зрения бизнеса. Например, если в стеке два лейбла, то бек точно знает как сгенерить айдишники так, чтоб при повторном запросе instanceId остались теми же для тех же лейблов
     let instance: WidgetInstanceId
     let state: WidgetStateId
 }
 
+struct Widget {
+    let id: WidgetId
+    let parent: WidgetInstanceId
+    let children: [WidgetInstanceId]
+    
+    func isDifferentType(from other: Widget) -> Bool {
+        id.type != other.id.type
+    }
+    
+    func isDifferentInstance(from other: Widget) -> Bool {
+        id.type == other.id.type &&
+        id.instance != other.id.instance
+    }
+    
+    func isDifferentState(from other: Widget) -> Bool {
+        id.type == other.id.type &&
+        id.instance == other.id.instance &&
+        id.state != other.id.state
+    }
+    
+    func hasTheSameIdentity(as other: Widget) -> Bool {
+        id.type == other.id.type &&
+        id.instance == other.id.instance &&
+        id.state == other.id.state
+    }
+}
+
+struct WidgetHeirarchy {
+    let widgets: [WidgetInstanceId: Widget]
+    let root: Widget
+    let allWidgets: [Widget]
+    
+    var allPairsBreadthFirst: [WidgetPair] {
+        var result: [WidgetPair] = []
+        var queue: [(offset: Int, element: Widget)] = [(0, root)]
+        
+        while let (index, widget) = queue.first {
+            queue.removeFirst()
+            result.append(.withParent(widget, indexInParent: index))
+            queue.append(contentsOf: widget.children.compactMap { widgets[$0] }.enumerated())
+        }
+        return result
+    }
+}
+
 struct WidgetDifference {
-    let new: Widget
-    let old: Widget
+    let new: WidgetHeirarchy
+    let old: WidgetHeirarchy
+}
+
+struct WidgetPair: Equatable {
+    let parent: WidgetInstanceId
+    let child: WidgetInstanceId
+    let childIndexInParent: Int
     
-    var widgetsAreWithDifferentType: Bool {
-        new.id.type != old.id.type
-    }
-    
-    var widgetsAreWithDifferentInstance: Bool {
-        new.id.type == old.id.type &&
-        new.id.instance != old.id.instance
-    }
-    
-    var widgetsAreWithDifferentState: Bool {
-        new.id.type == old.id.type &&
-        new.id.instance == old.id.instance &&
-        new.id.state != old.id.state
-    }
-    
-    var widgetsHaveTheSameIdentity: Bool {
-        new.id.type == old.id.type &&
-        new.id.instance == old.id.instance &&
-        new.id.state == old.id.state
+    static func withParent(_ widget: Widget, indexInParent: Int) -> WidgetPair {
+        .init(parent: widget.parent, child: widget.id.instance, childIndexInParent: indexInParent)
     }
 }
