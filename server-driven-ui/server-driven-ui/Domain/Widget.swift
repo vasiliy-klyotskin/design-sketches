@@ -46,8 +46,23 @@ struct Widget {
 
 struct WidgetHeirarchy {
     let widgets: [WidgetInstanceId: Widget]
+    
     let root: Widget
-    let allWidgets: [Widget]
+    
+    var allWidgets: [Widget] {
+        Array(widgets.values)
+    }
+    
+    init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
+        var widgets = widgets
+        root = .init(id: .init(type: "root", instance: "root", state: "root"), parent: "root", children: [rootId].compactMap {$0})
+        widgets["root"] = root
+        self.widgets = widgets
+    }
+    
+    static var empty: WidgetHeirarchy {
+        .init(widgets: [:], rootId: nil)
+    }
     
     var allPairsBreadthFirst: [WidgetPair] {
         var result: [WidgetPair] = []

@@ -25,17 +25,14 @@ final class UIKitWidgetCoordinatorRegistry {
     private func insert(child childId: WidgetId, toParent parentId: WidgetId, at index: Int) {
         let parentCoordinator = widgetCoordinators[parentId.instance] ?? coordinatorFactory(parentId.type)
         let childCoordinator = widgetCoordinators[childId.instance] ?? coordinatorFactory(childId.type)
-        
         let child = childCoordinator.getView(id: childId)
         parentCoordinator.insertChild(view: child, at: index)
-        
         widgetCoordinators[childId.instance] = childCoordinator
         widgetCoordinators[parentId.instance] = parentCoordinator
     }
     
     private func delete(child childId: WidgetId, fromParent parentId: WidgetId, at index: Int) {
         widgetCoordinators[parentId.instance]?.deleteChild(at: index)
-        
     }
     
     private func release(for id: WidgetInstanceId) {
