@@ -8,11 +8,11 @@
 import UIKit
 
 final class StackViewUIKitCoordinator: UIKitWidgetCoordinator {
-    private let factory: (WidgetStackModel) -> WidgetStackView
+    private let factory: (WidgetStackModel, WidgetId) -> WidgetStackView
     private let getModel: (WidgetId) -> WidgetStackModel
     
     init(
-        factory: @escaping (WidgetStackModel) -> WidgetStackView,
+        factory: @escaping (WidgetStackModel, WidgetId) -> WidgetStackView,
         getModel: @escaping (WidgetId) -> WidgetStackModel
     ) {
         self.factory = factory
@@ -25,7 +25,7 @@ final class StackViewUIKitCoordinator: UIKitWidgetCoordinator {
         if let stackView {
             return stackView
         } else {
-            let stackView = factory(getModel(id))
+            let stackView = factory(getModel(id), id)
             self.stackView = stackView
             return stackView
         }
@@ -42,13 +42,4 @@ final class StackViewUIKitCoordinator: UIKitWidgetCoordinator {
     func deleteChild(at index: Int) {
         stackView?.delete(at: index)
     }
-}
-
-// виджет и модель
-
-struct WidgetStackModel {}
-final class WidgetStackView: UIView {
-    func update(model: WidgetStackModel) {}
-    func insert(view: UIView, at index: Int) {}
-    func delete(at index: Int) {}
 }

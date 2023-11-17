@@ -55,8 +55,8 @@ struct WidgetHeirarchy {
     
     init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
         var widgets = widgets
-        root = .init(id: .init(type: "root", instance: "root", state: "root"), parent: "root", children: [rootId].compactMap {$0})
-        widgets["root"] = root
+        root = .init(id: .init(type: "ROOT", instance: "ROOT", state: "ROOT"), parent: "ROOT", children: [rootId].compactMap {$0})
+        widgets["ROOT"] = root
         self.widgets = widgets
     }
     

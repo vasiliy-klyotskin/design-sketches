@@ -8,11 +8,11 @@
 import UIKit
 
 final class LabelUIKitCoordinator: UIKitWidgetCoordinator {
-    private let factory: (LabelModel) -> LabelWidget
+    private let factory: (LabelModel, WidgetId) -> LabelWidget
     private let getModel: (WidgetId) -> LabelModel
     
     init(
-        factory: @escaping (LabelModel) -> LabelWidget,
+        factory: @escaping (LabelModel, WidgetId) -> LabelWidget,
         getModel: @escaping (WidgetId) -> LabelModel
     ) {
         self.factory = factory
@@ -25,7 +25,7 @@ final class LabelUIKitCoordinator: UIKitWidgetCoordinator {
         if let label {
             return label
         } else {
-            let label = factory(getModel(id))
+            let label = factory(getModel(id), id)
             self.label = label
             return label
         }
@@ -34,11 +34,4 @@ final class LabelUIKitCoordinator: UIKitWidgetCoordinator {
     func update(id: WidgetId) {
         label?.update(with: getModel(id))
     }
-}
-
-// Виджет и модель
-
-struct LabelModel {}
-final class LabelWidget: UIView {
-    func update(with model: LabelModel) {}
 }

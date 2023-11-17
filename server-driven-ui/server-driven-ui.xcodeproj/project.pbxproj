@@ -12,6 +12,13 @@
 		D61B18D42B06A2710012F694 /* WidgetPresentationViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18D32B06A2710012F694 /* WidgetPresentationViewModels.swift */; };
 		D61B18DC2B06A8430012F694 /* PresentationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18DB2B06A8430012F694 /* PresentationUITests.swift */; };
 		D61B18E42B06B1020012F694 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18E32B06B1020012F694 /* Root.swift */; };
+		D66739C52B072F5B00CE0259 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739C42B072F5B00CE0259 /* Helpers.swift */; };
+		D66739C82B0738A900CE0259 /* WidgetsModelStoreFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739C72B0738A900CE0259 /* WidgetsModelStoreFake.swift */; };
+		D66739CA2B0738BB00CE0259 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739C92B0738BB00CE0259 /* DSL.swift */; };
+		D66739D32B0739B100CE0259 /* LabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739D22B0739B100CE0259 /* LabelModel.swift */; };
+		D66739D52B0739C500CE0259 /* StackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739D42B0739C500CE0259 /* StackModel.swift */; };
+		D66739D72B0739D400CE0259 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739D62B0739D400CE0259 /* StackView.swift */; };
+		D66739D92B0739DF00CE0259 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739D82B0739DF00CE0259 /* LabelView.swift */; };
 		D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */; };
 		D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */; };
 		D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */; };
@@ -40,6 +47,13 @@
 		D61B18D92B06A8430012F694 /* server-driven-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "server-driven-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D61B18DB2B06A8430012F694 /* PresentationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationUITests.swift; sourceTree = "<group>"; };
 		D61B18E32B06B1020012F694 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		D66739C42B072F5B00CE0259 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		D66739C72B0738A900CE0259 /* WidgetsModelStoreFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsModelStoreFake.swift; sourceTree = "<group>"; };
+		D66739C92B0738BB00CE0259 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
+		D66739D22B0739B100CE0259 /* LabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModel.swift; sourceTree = "<group>"; };
+		D66739D42B0739C500CE0259 /* StackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackModel.swift; sourceTree = "<group>"; };
+		D66739D62B0739D400CE0259 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		D66739D82B0739DF00CE0259 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitWidgetCoordinatorRegistry.swift; sourceTree = "<group>"; };
 		D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewUIKitCoordinator.swift; sourceTree = "<group>"; };
 		D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWidgetUIKitCoordinator.swift; sourceTree = "<group>"; };
@@ -111,8 +125,70 @@
 			isa = PBXGroup;
 			children = (
 				D61B18E32B06B1020012F694 /* Root.swift */,
+				D66739C92B0738BB00CE0259 /* DSL.swift */,
+				D66739C72B0738A900CE0259 /* WidgetsModelStoreFake.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D66739CB2B07395400CE0259 /* SDUI */ = {
+			isa = PBXGroup;
+			children = (
+				D60ECF532B03788B00D9972F /* Composition */,
+				D60ECF542B03797F00D9972F /* Domain */,
+				D60ECF582B037DA600D9972F /* Presentation */,
+			);
+			path = SDUI;
+			sourceTree = "<group>";
+		};
+		D66739CC2B07397500CE0259 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				D66739CF2B07398A00CE0259 /* Domain */,
+				D66739D12B07399800CE0259 /* UI */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		D66739CD2B07397F00CE0259 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				D66739CE2B07398600CE0259 /* Domain */,
+				D66739D02B07399400CE0259 /* UI */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		D66739CE2B07398600CE0259 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D66739D22B0739B100CE0259 /* LabelModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D66739CF2B07398A00CE0259 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D66739D42B0739C500CE0259 /* StackModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D66739D02B07399400CE0259 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D66739D82B0739DF00CE0259 /* LabelView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D66739D12B07399800CE0259 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D66739D62B0739D400CE0259 /* StackView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		D6EC232F2B0376AC0085E147 = {
@@ -136,12 +212,13 @@
 		D6EC233A2B0376AC0085E147 /* server-driven-ui */ = {
 			isa = PBXGroup;
 			children = (
-				D60ECF532B03788B00D9972F /* Composition */,
-				D60ECF542B03797F00D9972F /* Domain */,
-				D60ECF582B037DA600D9972F /* Presentation */,
+				D66739CB2B07395400CE0259 /* SDUI */,
+				D66739CD2B07397F00CE0259 /* Label */,
+				D66739CC2B07397500CE0259 /* Stack */,
 				D6EC233B2B0376AC0085E147 /* AppDelegate.swift */,
 				D6EC233D2B0376AC0085E147 /* SceneDelegate.swift */,
 				D6EC233F2B0376AC0085E147 /* ViewController.swift */,
+				D66739C42B072F5B00CE0259 /* Helpers.swift */,
 				D6EC23412B0376AC0085E147 /* Main.storyboard */,
 				D6EC23442B0376AD0085E147 /* Assets.xcassets */,
 				D6EC23462B0376AD0085E147 /* LaunchScreen.storyboard */,
@@ -251,8 +328,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D66739CA2B0738BB00CE0259 /* DSL.swift in Sources */,
 				D61B18DC2B06A8430012F694 /* PresentationUITests.swift in Sources */,
 				D61B18E42B06B1020012F694 /* Root.swift in Sources */,
+				D66739C82B0738A900CE0259 /* WidgetsModelStoreFake.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,11 +342,16 @@
 				D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */,
 				D60ECF5A2B037DBA00D9972F /* WidgetPresenter.swift in Sources */,
 				D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */,
+				D66739C52B072F5B00CE0259 /* Helpers.swift in Sources */,
 				D6EC23402B0376AC0085E147 /* ViewController.swift in Sources */,
 				D6EC233C2B0376AC0085E147 /* AppDelegate.swift in Sources */,
+				D66739D52B0739C500CE0259 /* StackModel.swift in Sources */,
 				D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */,
 				D61B18D42B06A2710012F694 /* WidgetPresentationViewModels.swift in Sources */,
+				D66739D92B0739DF00CE0259 /* LabelView.swift in Sources */,
+				D66739D72B0739D400CE0259 /* StackView.swift in Sources */,
 				D6EC233E2B0376AC0085E147 /* SceneDelegate.swift in Sources */,
+				D66739D32B0739B100CE0259 /* LabelModel.swift in Sources */,
 				D60ECF562B037B8E00D9972F /* Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
