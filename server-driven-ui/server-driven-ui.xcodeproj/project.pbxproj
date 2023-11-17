@@ -20,6 +20,9 @@
 		D66739D92B0739DF00CE0259 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739D82B0739DF00CE0259 /* LabelView.swift */; };
 		D66739DB2B073C1700CE0259 /* RootWidgetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739DA2B073C1600CE0259 /* RootWidgetCoordinator.swift */; };
 		D66739DF2B073C4400CE0259 /* RootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739DE2B073C4400CE0259 /* RootWidget.swift */; };
+		D66739E12B073DCD00CE0259 /* WidgetId.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739E02B073DCD00CE0259 /* WidgetId.swift */; };
+		D66739E42B073E0200CE0259 /* WidgetDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739E32B073E0200CE0259 /* WidgetDifference.swift */; };
+		D66739E62B073E4300CE0259 /* WidgetPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66739E52B073E4300CE0259 /* WidgetPair.swift */; };
 		D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */; };
 		D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */; };
 		D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */; };
@@ -56,6 +59,9 @@
 		D66739D82B0739DF00CE0259 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		D66739DA2B073C1600CE0259 /* RootWidgetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWidgetCoordinator.swift; sourceTree = "<group>"; };
 		D66739DE2B073C4400CE0259 /* RootWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWidget.swift; sourceTree = "<group>"; };
+		D66739E02B073DCD00CE0259 /* WidgetId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetId.swift; sourceTree = "<group>"; };
+		D66739E32B073E0200CE0259 /* WidgetDifference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDifference.swift; sourceTree = "<group>"; };
+		D66739E52B073E4300CE0259 /* WidgetPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPair.swift; sourceTree = "<group>"; };
 		D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitWidgetCoordinatorRegistry.swift; sourceTree = "<group>"; };
 		D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewUIKitCoordinator.swift; sourceTree = "<group>"; };
 		D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWidgetUIKitCoordinator.swift; sourceTree = "<group>"; };
@@ -102,6 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				D60ECF552B037B8E00D9972F /* Widget.swift */,
+				D66739E02B073DCD00CE0259 /* WidgetId.swift */,
+				D66739E32B073E0200CE0259 /* WidgetDifference.swift */,
+				D66739E52B073E4300CE0259 /* WidgetPair.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -353,6 +362,8 @@
 				D60ECF5A2B037DBA00D9972F /* WidgetPresenter.swift in Sources */,
 				D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */,
 				D66739DF2B073C4400CE0259 /* RootWidget.swift in Sources */,
+				D66739E12B073DCD00CE0259 /* WidgetId.swift in Sources */,
+				D66739E62B073E4300CE0259 /* WidgetPair.swift in Sources */,
 				D66739C52B072F5B00CE0259 /* Helpers.swift in Sources */,
 				D6EC23402B0376AC0085E147 /* ViewController.swift in Sources */,
 				D6EC233C2B0376AC0085E147 /* AppDelegate.swift in Sources */,
@@ -360,6 +371,7 @@
 				D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */,
 				D61B18D42B06A2710012F694 /* WidgetPresentationViewModels.swift in Sources */,
 				D66739D92B0739DF00CE0259 /* LabelView.swift in Sources */,
+				D66739E42B073E0200CE0259 /* WidgetDifference.swift in Sources */,
 				D66739D72B0739D400CE0259 /* StackView.swift in Sources */,
 				D6EC233E2B0376AC0085E147 /* SceneDelegate.swift in Sources */,
 				D66739D32B0739B100CE0259 /* LabelModel.swift in Sources */,
