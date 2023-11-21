@@ -22,8 +22,8 @@ struct WidgetDifferenceViewModel {
 }
 
 typealias WidgetDeletionsViewModel = [(childId: WidgetId, parentId: WidgetId, index: Int)]
-typealias WidgetInsertionsViewModel = [(childId: WidgetId, parentId: WidgetId, index: Int)]
-typealias WidgetUpdatesViewModel = [WidgetId]
+typealias WidgetInsertionsViewModel = [(childId: WidgetId, parentId: WidgetId, index: Int, data: WidgetData)]
+typealias WidgetUpdatesViewModel = [(id: WidgetId, data: WidgetData)]
 
 extension WidgetDifference {
     func deletionsViewModel(from removals: [CollectionDifference<WidgetPair>.Change]) -> WidgetDeletionsViewModel {
@@ -38,13 +38,22 @@ extension WidgetDifference {
         }
     }
     
-    func insertionsViewModel(from insertions: [CollectionDifference<WidgetPair>.Change]) -> WidgetInsertionsViewModel {
+    func insertionsViewModel(
+        from insertions: [CollectionDifference<WidgetPair>.Change],
+        heirarchy: WidgetHeirarchy
+    ) -> WidgetInsertionsViewModel {
         insertions.compactMap {
             switch $0 {
             case .insert(_, let element, _):
                 guard let child = new.widgets[element.child] else { return nil }
                 guard let parent = new.widgets[element.parent] else { return nil }
-                return (childId: child.id, parentId: parent.id, index: element.childIndexInParent)
+                guard let data = heirarchy.widgets[element.child]?.data else { return nil }
+                return (
+                    childId: child.id,
+                    parentId: parent.id,
+                    index: element.childIndexInParent,
+                    data: data
+                )
             default: return nil
             }
         }

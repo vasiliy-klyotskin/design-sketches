@@ -20,5 +20,11 @@ extension UIView {
             self.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
     }
+    
+    public func removeChildren() {
+        for child in subviews {
+            child.removeFromSuperview()
+        }
+    }
 }
 

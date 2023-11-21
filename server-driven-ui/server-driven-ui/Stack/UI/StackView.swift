@@ -7,27 +7,19 @@
 
 import UIKit
 
-final class WidgetStackView: UIView {
-    private lazy var stackView = {
-        let stack = UIStackView()
-        stack.fitIntoView(self)
-        return stack
-    }()
-    
-    func update(model: WidgetStackModel) {
-        
-    }
+final class WidgetStackView: UIStackView {
+    func update(model: StackModel) {}
     
     func insert(view: UIView, at index: Int) {
-        stackView.insertArrangedSubview(view, at: index)
+        insertArrangedSubview(view, at: index)
     }
     
     func delete(at index: Int) {
-        guard index >= 0 && index < stackView.arrangedSubviews.count else {
+        guard index >= 0 && index < arrangedSubviews.count else {
             return
         }
 
-        let viewToRemove = stackView.arrangedSubviews[index]
+        let viewToRemove = arrangedSubviews[index]
         viewToRemove.removeFromSuperview()
     }
 }

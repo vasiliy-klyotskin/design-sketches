@@ -7,27 +7,8 @@
 
 import UIKit
 
-final class LabelWidget: UIView {
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.fitIntoView(self)
-        return label
-    }()
-    
-    init(model: LabelModel) {
-        super.init(frame: .zero)
-        label.text = model.text
-    }
-    
-    var text: String? {
-        label.text
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+final class LabelWidget: UILabel {
     func update(with model: LabelModel) {
-        label.text = model.text
+        self.text = model.text
     }
 }
