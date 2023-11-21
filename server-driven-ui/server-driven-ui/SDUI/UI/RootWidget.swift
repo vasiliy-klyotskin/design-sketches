@@ -8,7 +8,14 @@
 import UIKit
 
 final class RootWidget: UIViewController {
-    var child: UIView?
+    var onDidLoad: () -> Void = {}
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        onDidLoad()
+    }
+    
+    private var child: UIView?
     
     func insert(view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false

@@ -12,13 +12,14 @@ typealias PerformAction = (ActionModel) -> Void
 enum ActionPerformerFactory {
     static func makePerformer(
         storage: InMemoryWidgetDataStorage,
-        renderer: @escaping UpdateContentRenderer
+        renderer: @escaping UpdateContentRenderer,
+        refresher: @escaping RefreshHandler
     ) -> ActionPerformer {{ (actionType, actionData) in
         let performers: [AnyHashable: PerformAction] = [
-//            "SUBMIT_FORM": submitPerformerFactory(
-//                storage: storage,
-//                submit: <#T##SubmitHandler##SubmitHandler##(URL, [WidgetInstanceId : Data]) -> Void#>
-//            ),
+            "REFRESH": refreshPerformerFactory(
+                storage: storage,
+                refresher: refresher
+            ),
             "UPDATE_CONTENT": updatePerformerFactory(
                 storage: storage,
                 renderer: renderer
@@ -28,21 +29,21 @@ enum ActionPerformerFactory {
     }}
 }
 
-// MARK: SUBMIT_FORM Action
+// MARK: REFRESH Performer
 
-func submitPerformerFactory(
+func refreshPerformerFactory(
     storage: InMemoryWidgetDataStorage,
-    submit: @escaping SubmitHandler
+    refresher: @escaping RefreshHandler
 ) -> PerformAction {{ actionData in
-    guard let action = SubmitFormActionDTO.from(actionData) else { return }
-    SubmitFormActionPerformer(
+    guard let action = RefreshActionDTO.from(actionData) else { return }
+    RefreshActionPerformer(
         action: action.model,
         storage: storage,
-        submit: submit
+        refreshHandler: refresher
     ).perform()
 }}
 
-// MARK: UPDATE_CONTENT Action
+// MARK: UPDATE_CONTENT Performer
 
 func updatePerformerFactory(
     storage: InMemoryWidgetDataStorage,
@@ -53,5 +54,19 @@ func updatePerformerFactory(
         action: action.model,
         storage: storage,
         rerender: renderer
+    ).perform()
+}}
+
+// MARK: SUBMIT_FORM Performer
+
+func submitPerformerFactory(
+    storage: InMemoryWidgetDataStorage,
+    submit: @escaping SubmitHandler
+) -> PerformAction {{ actionData in
+    guard let action = SubmitFormActionDTO.from(actionData) else { return }
+    SubmitFormActionPerformer(
+        action: action.model,
+        storage: storage,
+        submit: submit
     ).perform()
 }}

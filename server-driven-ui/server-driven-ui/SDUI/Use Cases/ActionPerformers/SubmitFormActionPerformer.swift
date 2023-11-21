@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias SubmitHandler = (URL, [WidgetInstanceId: Data]) -> Void
+typealias SubmitHandler = (URL, [WidgetInstanceId: WidgetData]) -> Void
 
 class SubmitFormActionPerformer {
     let action: SubmitFormAction

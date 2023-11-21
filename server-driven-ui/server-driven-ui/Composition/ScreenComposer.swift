@@ -11,14 +11,17 @@ enum ScreenComposer {
     static func compose(loader: WidgetLoader) -> UIViewController {
         let root = RootWidget()
         let storage = InMemoryWidgetDataStorage()
+        let view = WidgetDifferenceViewProxy()
+        let presenter = WidgetDifferencePresenter(view: view)
         let interactor = WidgetsInteractor(
             loader: loader,
-            presenter: <#T##WidgetDifferencePresenter#>,
+            presenter: presenter,
             storage: storage
         )
         let actionPerformer = ActionPerformerFactory.makePerformer(
             storage: storage,
-            renderer: interactor.rerenderContent
+            renderer: interactor.rerenderContent,
+            refresher: interactor.beginLoadingNewWidget
         )
         let intentHandler = PerformActionIntentHandler(
             storage: storage,
@@ -29,8 +32,8 @@ enum ScreenComposer {
             intentHandler: intentHandler,
             root: root
         )
-        let registry = UIKitWidgetCoordinatorRegistry(coordinatorFactory)
-        let presenter = WidgetDifferencePresenter(view: registry)
+        view.view = UIKitWidgetCoordinatorRegistry(coordinatorFactory)
+        root.onDidLoad = interactor.beginLoadingNewWidgetInitialy
         return root
     }
 }

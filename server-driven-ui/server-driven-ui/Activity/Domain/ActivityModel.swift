@@ -1,5 +1,5 @@
 //
-//  RefreshAction.swift
+//  ActivityModel.swift
 //  server-driven-ui
 //
 //  Created by Василий Клецкин on 11/21/23.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RefreshAction {
-    let idsForDataToProvide: [WidgetInstanceId]
+struct ActivityModel {
+    let isActive: Bool
 }

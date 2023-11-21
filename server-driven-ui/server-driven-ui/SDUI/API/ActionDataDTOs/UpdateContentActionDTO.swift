@@ -7,19 +7,26 @@
 
 import Foundation
 
+// TODO: Не готово, доделать
+
 struct UpdateContentActionDTO: Decodable {
-    let deletionIds: [String]
-    let updationIds: [String]
-    let updationData: [AnyCodable]
+    let insertions: [Insertion]
+    let updations: [Insertion]
+    let removals: [String]
     
+
     var model: UpdateContentAction {
-        let encoder = JSONEncoder()
-        let deletions = deletionIds.map { AnyHashable($0) }
-        let updationIds = updationIds.map { AnyHashable($0) }
-        let updationData = updationData.compactMap { try? encoder.encode($0) }
-        return .init(
-            updations: zip(updationIds, updationData).map {$0},
-            deletions: deletions
-        )
+        
+    }
+    
+    struct Insertion: Decodable {
+        let widget: WidgetDTO
+        let parentInstanceId: String
+        let index: Int
+    }
+    
+    struct Update: Decodable {
+        let data: AnyCodable
+        let instanceId: String
     }
 }

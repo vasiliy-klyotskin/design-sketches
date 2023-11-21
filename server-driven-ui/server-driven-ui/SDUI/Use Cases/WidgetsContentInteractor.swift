@@ -11,8 +11,6 @@ protocol WidgetLoader {
     func loadWidget(completion: (WidgetHeirarchy) -> Void)
 }
 
-// TODO: Возможно стоит разделить юз кейсы в этом классе
-
 class WidgetsInteractor {
     private let loader: WidgetLoader
     private let presenter: WidgetDifferencePresenter
@@ -31,7 +29,11 @@ class WidgetsInteractor {
         self.lastHeirarchy = .empty
     }
     
-    func beginLoadingNewWidget() {
+    func beginLoadingNewWidgetInitialy() {
+        beginLoadingNewWidget(with: [:])
+    }
+    
+    func beginLoadingNewWidget(with data: [WidgetInstanceId: WidgetData]) {
         loader.loadWidget { newHeirarchy in
             rerenderFor(heirarchy: newHeirarchy)
         }

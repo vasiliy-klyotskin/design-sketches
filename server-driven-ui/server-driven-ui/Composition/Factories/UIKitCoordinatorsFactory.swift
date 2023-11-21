@@ -26,7 +26,8 @@ final class UIKitWidgetCoordinatorFactory {
                     storage: storage
                 )
             )},
-            "TOP_LEFT_BOTTOM": { TopLeftBottomUIKitCoordinator(factory: topLeftBottomWidgetFactory) }
+            "TOP_LEFT_BOTTOM": { TopLeftBottomUIKitCoordinator(factory: topLeftBottomWidgetFactory) },
+            "ACTIVITY": { ActivityUIKitCoordinator(factory: activityWidgetFactory) }
         ]
     }
     
@@ -123,4 +124,15 @@ func topLeftBottomWidgetFactory(id: WidgetId, data: WidgetData) -> (
     }
     update(data)
     return (widget, update, presenter.present)
+}
+
+// MARK: - ACTIVITY
+
+func activityWidgetFactory(id: WidgetId, data: WidgetData) -> (ActivityWidget, ActivityWidgetUpdate) {
+    let activity = ActivityWidget()
+    let update: ActivityWidgetUpdate = { [weak activity] in
+        if let model = ActivityDTO.from($0)?.model { activity?.update(with: model) }
+    }
+    update(data)
+    return (activity, update)
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 
+// TODO: Не готово, доделать
+
 struct UpdateContentAction {
-    let updations: [(WidgetInstanceId, WidgetData)]
-    let deletions: [WidgetInstanceId]
+    let updations: WidgetHeirarchy
 }

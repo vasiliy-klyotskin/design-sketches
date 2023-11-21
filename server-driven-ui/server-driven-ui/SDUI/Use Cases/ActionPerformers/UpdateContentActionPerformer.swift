@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TODO: Не готово, доделать
+
 typealias UpdateContentRenderer = () -> Void
 
 final class UpdateContentActionPerformer {
@@ -25,11 +27,8 @@ final class UpdateContentActionPerformer {
     }
     
     func perform() {
-        action.deletions.forEach { instanceId in
-            storage.delete(for: instanceId)
-        }
-        action.updations.forEach { (instanceId, model) in
-            storage.update(model, for: instanceId)
+        action.updations.widgets.values.forEach { widget in
+            storage.update(widget, for: widget.id.instance)
         }
         rerender()
     }

@@ -59,6 +59,13 @@
 		D6A2B2F02B0D14DD00F23C69 /* RefreshActionPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2EF2B0D14DD00F23C69 /* RefreshActionPerformer.swift */; };
 		D6A2B2F32B0D257D00F23C69 /* WidgetsContentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2F22B0D257D00F23C69 /* WidgetsContentInteractor.swift */; };
 		D6A2B2F72B0D2C2800F23C69 /* RefreshAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2F62B0D2C2800F23C69 /* RefreshAction.swift */; };
+		D6A2B2F92B0D2E9E00F23C69 /* RefreshActionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2F82B0D2E9E00F23C69 /* RefreshActionDTO.swift */; };
+		D6A2B2FB2B0D304700F23C69 /* CompositionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2FA2B0D304700F23C69 /* CompositionHelpers.swift */; };
+		D6A2B2FD2B0D322600F23C69 /* Dummies.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2FC2B0D322600F23C69 /* Dummies.swift */; };
+		D6A2B3032B0D328B00F23C69 /* ActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B3022B0D328B00F23C69 /* ActivityWidget.swift */; };
+		D6A2B3052B0D329500F23C69 /* ActivityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B3042B0D329500F23C69 /* ActivityDTO.swift */; };
+		D6A2B3072B0D329D00F23C69 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B3062B0D329D00F23C69 /* ActivityModel.swift */; };
+		D6A2B3092B0D342B00F23C69 /* ActivityUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B3082B0D342B00F23C69 /* ActivityUIKitCoordinator.swift */; };
 		D6B5F1982B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */; };
 		D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */; };
 		D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */; };
@@ -136,6 +143,13 @@
 		D6A2B2EF2B0D14DD00F23C69 /* RefreshActionPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshActionPerformer.swift; sourceTree = "<group>"; };
 		D6A2B2F22B0D257D00F23C69 /* WidgetsContentInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsContentInteractor.swift; sourceTree = "<group>"; };
 		D6A2B2F62B0D2C2800F23C69 /* RefreshAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAction.swift; sourceTree = "<group>"; };
+		D6A2B2F82B0D2E9E00F23C69 /* RefreshActionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshActionDTO.swift; sourceTree = "<group>"; };
+		D6A2B2FA2B0D304700F23C69 /* CompositionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionHelpers.swift; sourceTree = "<group>"; };
+		D6A2B2FC2B0D322600F23C69 /* Dummies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummies.swift; sourceTree = "<group>"; };
+		D6A2B3022B0D328B00F23C69 /* ActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWidget.swift; sourceTree = "<group>"; };
+		D6A2B3042B0D329500F23C69 /* ActivityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDTO.swift; sourceTree = "<group>"; };
+		D6A2B3062B0D329D00F23C69 /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		D6A2B3082B0D342B00F23C69 /* ActivityUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityUIKitCoordinator.swift; sourceTree = "<group>"; };
 		D6B5F1972B04FBCE007D24C6 /* UIKitWidgetCoordinatorRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitWidgetCoordinatorRegistry.swift; sourceTree = "<group>"; };
 		D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewUIKitCoordinator.swift; sourceTree = "<group>"; };
 		D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWidgetUIKitCoordinator.swift; sourceTree = "<group>"; };
@@ -173,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				D6A2B2E82B0CF4D700F23C69 /* ScreenComposer.swift */,
+				D6A2B2FC2B0D322600F23C69 /* Dummies.swift */,
+				D6A2B2FA2B0D304700F23C69 /* CompositionHelpers.swift */,
 				D6A2B2AD2B0CCE0700F23C69 /* Factories */,
 				D6A2B2982B0CA1C900F23C69 /* Coordinators */,
 			);
@@ -321,6 +337,7 @@
 				D6A2B2D32B0CE2C200F23C69 /* ButtonUIKitCoordinator.swift */,
 				D6A2B2D52B0CE2D600F23C69 /* SwitchUIKitCoordinator.swift */,
 				D6A2B2E12B0CEA3E00F23C69 /* TopLeftBottomUIKitCoordinator.swift */,
+				D6A2B3082B0D342B00F23C69 /* ActivityUIKitCoordinator.swift */,
 				D66739DA2B073C1600CE0259 /* RootWidgetCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -329,6 +346,7 @@
 		D6A2B29E2B0CA80600F23C69 /* ActionDataDTOs */ = {
 			isa = PBXGroup;
 			children = (
+				D6A2B2F82B0D2E9E00F23C69 /* RefreshActionDTO.swift */,
 				D6A2B29F2B0CA81600F23C69 /* UpdateContentActionDTO.swift */,
 				D6A2B2A12B0CA82B00F23C69 /* SubmitFormActionDTO.swift */,
 			);
@@ -509,6 +527,40 @@
 			path = ActionPerformers;
 			sourceTree = "<group>";
 		};
+		D6A2B2FE2B0D326200F23C69 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				D6A2B2FF2B0D327000F23C69 /* Domain */,
+				D6A2B3002B0D327400F23C69 /* API */,
+				D6A2B3012B0D327900F23C69 /* UI */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		D6A2B2FF2B0D327000F23C69 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D6A2B3062B0D329D00F23C69 /* ActivityModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D6A2B3002B0D327400F23C69 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D6A2B3042B0D329500F23C69 /* ActivityDTO.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D6A2B3012B0D327900F23C69 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D6A2B3022B0D328B00F23C69 /* ActivityWidget.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		D6BF80642B0B85E500857EDA /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,6 +607,7 @@
 				D66739CD2B07397F00CE0259 /* Label */,
 				D6A2B2B72B0CDAF000F23C69 /* Button */,
 				D6A2B2B92B0CDB1500F23C69 /* Switch */,
+				D6A2B2FE2B0D326200F23C69 /* Activity */,
 				D6A2B2D72B0CE4D200F23C69 /* TopLeftBottom */,
 				D66454FA2B0BC719006BC425 /* Helpers */,
 				D6EC233B2B0376AC0085E147 /* AppDelegate.swift */,
@@ -684,6 +737,7 @@
 				D60ECF5A2B037DBA00D9972F /* WidgetDifferencePresenter.swift in Sources */,
 				D6A2B2AF2B0CCE7900F23C69 /* UIKitCoordinatorsFactory.swift in Sources */,
 				D6A2B2952B0C9ED000F23C69 /* UpdateContentActionPerformer.swift in Sources */,
+				D6A2B2FD2B0D322600F23C69 /* Dummies.swift in Sources */,
 				D6A2B2EB2B0CFAE400F23C69 /* IntentHandler.swift in Sources */,
 				D6A2B2C82B0CDBB200F23C69 /* SwitchDTO.swift in Sources */,
 				D6A2B2E52B0CEF5E00F23C69 /* TopLeftBottomPresenter.swift in Sources */,
@@ -695,6 +749,7 @@
 				D6A2B2DE2B0CE50400F23C69 /* TopLeftBottomDTO.swift in Sources */,
 				D66739DF2B073C4400CE0259 /* RootWidget.swift in Sources */,
 				D6A2B2A52B0CA87700F23C69 /* SubmitFormAction.swift in Sources */,
+				D6A2B3092B0D342B00F23C69 /* ActivityUIKitCoordinator.swift in Sources */,
 				D6A2B2A22B0CA82B00F23C69 /* SubmitFormActionDTO.swift in Sources */,
 				D6A2B2C02B0CDB7100F23C69 /* ButtonModel.swift in Sources */,
 				D66454FC2B0BC72B006BC425 /* AnyDecodable.swift in Sources */,
@@ -726,15 +781,20 @@
 				D6BF80702B0B8EF100857EDA /* InMemoryWidgetStorage.swift in Sources */,
 				D6A2B2972B0CA19F00F23C69 /* ActionPerformersFactory.swift in Sources */,
 				D6A2B2932B0C9DC700F23C69 /* SubmitFormActionPerformer.swift in Sources */,
+				D6A2B3072B0D329D00F23C69 /* ActivityModel.swift in Sources */,
 				D6A2B2DC2B0CE4FB00F23C69 /* TopLeftBottom.swift in Sources */,
 				D6A2B2D22B0CDFCE00F23C69 /* SwitchIntents.swift in Sources */,
+				D6A2B3032B0D328B00F23C69 /* ActivityWidget.swift in Sources */,
 				D6A2B2AA2B0CAA3F00F23C69 /* SerializationHelpers.swift in Sources */,
 				D6A2B2C22B0CDB8800F23C69 /* ButtonDTO.swift in Sources */,
 				D66739D32B0739B100CE0259 /* LabelModel.swift in Sources */,
 				D6A2B2E92B0CF4D700F23C69 /* ScreenComposer.swift in Sources */,
+				D6A2B3052B0D329500F23C69 /* ActivityDTO.swift in Sources */,
 				D6A2B2D42B0CE2C200F23C69 /* ButtonUIKitCoordinator.swift in Sources */,
+				D6A2B2FB2B0D304700F23C69 /* CompositionHelpers.swift in Sources */,
 				D66739DB2B073C1700CE0259 /* RootWidgetCoordinator.swift in Sources */,
 				D6A2B2F02B0D14DD00F23C69 /* RefreshActionPerformer.swift in Sources */,
+				D6A2B2F92B0D2E9E00F23C69 /* RefreshActionDTO.swift in Sources */,
 				D6A2B28D2B0C84A200F23C69 /* ActionDTO.swift in Sources */,
 				D6A2B2B32B0CD7B600F23C69 /* LabelDTO.swift in Sources */,
 			);
