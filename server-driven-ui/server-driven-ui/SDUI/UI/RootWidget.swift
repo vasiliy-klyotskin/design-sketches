@@ -13,6 +13,7 @@ final class RootWidget: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         onDidLoad()
+        view.backgroundColor = .white
     }
     
     private var child: UIView?
@@ -22,8 +23,8 @@ final class RootWidget: UIViewController {
         self.view.addSubview(view)
         let leadingConstraint = view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let trailingConstraint = view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let topConstraint = view.topAnchor.constraint(equalTo: self.view.topAnchor)
-        let bottomConstraint = view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        let topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        let bottomConstraint = view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ButtonIntents: String {
-    case tap = "BUTTON_TAP"
-    case longTap = "BUTTON_LONG_TAP"
+enum ButtonIntents {
+    static let tap = "BUTTON_TAP"
+    static let longTap = "BUTTON_LONG_TAP"
 }

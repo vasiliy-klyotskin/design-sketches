@@ -9,9 +9,8 @@ import Foundation
 
 struct ButtonDTO: Decodable {
     let title: String
-    let isDisabled: Bool
     
     var model: ButtonModel {
-        .init(title: title, isDisabled: isDisabled)
+        .init(title: title, isDisabled: false)
     }
 }

@@ -8,7 +8,9 @@
 import Foundation
 
 struct StackDTO: Decodable {
+    let spacing: Double
+    
     var model: StackModel {
-        .init()
+        .init(spacing: spacing)
     }
 }

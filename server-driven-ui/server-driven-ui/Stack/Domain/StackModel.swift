@@ -7,4 +7,6 @@
 
 import Foundation
 
-struct StackModel {}
+struct StackModel {
+    let spacing: Double
+}

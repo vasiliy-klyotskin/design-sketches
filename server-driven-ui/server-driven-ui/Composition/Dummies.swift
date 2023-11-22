@@ -16,49 +16,40 @@ struct ExampleLoader: WidgetLoader {
         completion(heirarchy)
     }
     
-    let json = """
-                {
-                    "type": "LABEL",
-                    "instance": "1",
-                    "data": {
-                        "text": "Some title"
-                    }
+    let json =
+    """
+    {
+        "type": "STACK",
+        "instance": "0",
+        "data": {
+            "spacing": 10
+        },
+        "children": [
+            {
+                "type": "LABEL",
+                "instance": "1",
+                "data": {
+                    "text": "Some title"
                 }
-                """
-    
-//    let json =
-//    {
-//        "type": "STACK",
-//        "instance": "0",
-//        "data": {
-//            ""
-//        }
-//        "children": [
-//            {
-//                "type": "LABEL",
-//                "instance": "1",
-//                "data": {
-//                    "text": "Some title"
-//                }
-//            },
-//            {
-//                "type": "BUTTON",
-//                "instance": "2",
-//                "data": {
-//                    "title": "Press me"
-//                },
-//                "actions": [
-//                    {
-//                        "type": "PRINT_HELLO",
-//                        "intent": "BUTTON_TAP",
-//                        "data": {
-//                            "helloText": "Hello World!!!"
-//                        }
-//                    }
-//                ]
-//            }
-//        ]
-//    }
-//    """
+            },
+            {
+                "type": "BUTTON",
+                "instance": "2",
+                "data": {
+                    "title": "Press me"
+                },
+                "actions": [
+                    {
+                        "type": "PRINT_CONSOLE",
+                        "intent": "BUTTON_TAP",
+                        "data": {
+                            "text": "Hello World!!!"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    """
 
 }

@@ -23,7 +23,8 @@ enum ActionPerformerFactory {
             "LOCAL_UPDATE": localUpdatePerformerFactory(
                 storage: storage,
                 renderer: renderer
-            )
+            ),
+            "PRINT_CONSOLE": printConsole
         ]
         performers[actionType]?(actionData)
     }}
@@ -70,3 +71,10 @@ func submitPerformerFactory(
         submit: submit
     ).perform()
 }}
+
+// MARK: PRINT_CONSOLE Performer
+
+func printConsole(data: ActionModel) {
+    guard let action = PrintConsoleActionDTO.from(data) else { return }
+    print(action.text)
+}

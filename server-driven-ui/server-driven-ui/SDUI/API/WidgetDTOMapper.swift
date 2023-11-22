@@ -17,10 +17,10 @@ enum WidgetDTOMapper {
         
         func buildWidget(from dto: WidgetDTO, parent: WidgetInstanceId?) {
             let childrenIds = dto.children?.map { $0.instance } ?? []
-            let parent = parent ?? AnyHashable("ROOT")
+            let parent = parent ?? AnyHashable(dto.instance)
             let data = try! encoder.encode(dto.data)
             let actions: [Action] = dto.actions?.map {
-                let actionData = try! encoder.encode(dto.type)
+                let actionData = try! encoder.encode($0.data)
                 return Action(intent: $0.intent, type: $0.type, data: actionData)
             } ?? []
             let widgetId = WidgetId(

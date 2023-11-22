@@ -22,6 +22,7 @@ final class ButtonWidget: UIButton {
     
     func update(with model: ButtonModel) {
         setTitle(model.title, for: .normal)
+        setTitleColor(.systemBlue, for: .normal)
     }
     
     required init?(coder: NSCoder) {
