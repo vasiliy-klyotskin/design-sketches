@@ -69,4 +69,5 @@ extension UIKitWidgetCoordinator {
     func deleteChild(at index: Int) {}
     func loadView(for data: WidgetData, with id: WidgetId) {}
     func update(with data: WidgetData) {}
+    func useView(usage: (UIView) -> Void) {}
 }

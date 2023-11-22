@@ -35,12 +35,14 @@ class WidgetsInteractor {
     
     func beginLoadingNewWidget(with data: [WidgetInstanceId: WidgetData]) {
         loader.loadWidget { newHeirarchy in
-            rerenderFor(heirarchy: newHeirarchy)
+            let heirarchyWithContainer = newHeirarchy.wrappedIntoRootContainer
+            storage.update(with: heirarchyWithContainer)
+            rerenderFor(heirarchy: heirarchyWithContainer)
         }
     }
     
     func rerenderContent() {
-        let newestHeirarchy = WidgetHeirarchy.init(rootedWidgets: storage.getWidgets()) ?? .empty
+        let newestHeirarchy = storage.getHeirarchy()
         rerenderFor(heirarchy: newestHeirarchy)
     }
     

@@ -8,7 +8,12 @@
 import Foundation
 
 final class InMemoryWidgetDataStorage {
+    private var rootId: WidgetInstanceId?
     private var widgets: [WidgetInstanceId: Widget] = [:]
+    
+    func getHeirarchy() -> WidgetHeirarchy {
+        WidgetHeirarchy(widgets: widgets, rootId: rootId)
+    }
     
     func getWidgets() -> [WidgetInstanceId: Widget] {
         widgets
@@ -30,9 +35,14 @@ final class InMemoryWidgetDataStorage {
         widgets[id] = widget
     }
     
+    func update(with heirarchy: WidgetHeirarchy) {
+        widgets = heirarchy.widgets
+        rootId = heirarchy.rootId
+    }
+    
     func update(_ data: WidgetData, for id: WidgetInstanceId) {
         guard let oldWidget = widgets[id] else { return }
-        widgets[id] = oldWidget.with(new: data)
+        widgets[id] = oldWidget.copyWith(data: data)
     }
     
     func delete(for id: WidgetInstanceId) {

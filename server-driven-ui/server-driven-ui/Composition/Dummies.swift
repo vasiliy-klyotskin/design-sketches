@@ -23,7 +23,7 @@ struct ExampleLoader: WidgetLoader {
                     "data": {
                         "text": "Some title"
                     }
-                },
+                }
                 """
     
 //    let json =

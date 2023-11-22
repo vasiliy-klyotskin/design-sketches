@@ -14,10 +14,6 @@ final class RootWidgetCoordinator: UIKitWidgetCoordinator {
         self.root = root
     }
     
-    func useView(usage: (UIView) -> Void) {
-        usage(root.view)
-    }
-    
     func insertChild(view: UIView, at index: Int) {
         root.insert(view: view)
     }

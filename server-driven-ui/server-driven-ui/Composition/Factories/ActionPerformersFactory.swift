@@ -12,7 +12,7 @@ typealias PerformAction = (ActionModel) -> Void
 enum ActionPerformerFactory {
     static func makePerformer(
         storage: InMemoryWidgetDataStorage,
-        renderer: @escaping UpdateContentRenderer,
+        renderer: @escaping LocalUpdateContentRenderer,
         refresher: @escaping RefreshHandler
     ) -> ActionPerformer {{ (actionType, actionData) in
         let performers: [AnyHashable: PerformAction] = [
@@ -20,7 +20,7 @@ enum ActionPerformerFactory {
                 storage: storage,
                 refresher: refresher
             ),
-            "UPDATE_CONTENT": updatePerformerFactory(
+            "LOCAL_UPDATE": localUpdatePerformerFactory(
                 storage: storage,
                 renderer: renderer
             )
@@ -45,12 +45,12 @@ func refreshPerformerFactory(
 
 // MARK: UPDATE_CONTENT Performer
 
-func updatePerformerFactory(
+func localUpdatePerformerFactory(
     storage: InMemoryWidgetDataStorage,
-    renderer: @escaping UpdateContentRenderer
+    renderer: @escaping LocalUpdateContentRenderer
 ) -> PerformAction {{ actionData in
-    guard let action = UpdateContentActionDTO.from(actionData) else { return }
-    UpdateContentActionPerformer(
+    guard let action = LocalUpdateContentActionDTO.from(actionData) else { return }
+    LocalUpdateContentActionPerformer(
         action: action.model,
         storage: storage,
         rerender: renderer

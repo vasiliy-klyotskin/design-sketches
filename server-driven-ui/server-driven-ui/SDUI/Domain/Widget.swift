@@ -25,8 +25,18 @@ struct Widget {
         id.state != other.id.state
     }
     
-    func with(new data: WidgetData) -> Widget {
-        .init(id: id, parent: parent, children: children, data: data, actions: actions)
+    func copyWith(
+        parent: WidgetInstanceId? = nil,
+        data: WidgetData? = nil,
+        children: [WidgetInstanceId]? = nil
+    ) -> Widget {
+        .init(
+            id: id,
+            parent: parent ?? self.parent,
+            children: children ?? self.children,
+            data: data ?? self.data,
+            actions: actions
+        )
     }
 }
 
@@ -43,43 +53,19 @@ struct WidgetDifference {
 
 struct WidgetHeirarchy {
     let widgets: [WidgetInstanceId: Widget]
-    let root: Widget
+    let rootId: WidgetInstanceId?
     
     var allWidgets: [Widget] {
         Array(widgets.values)
     }
     
-    init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
-        var widgets = widgets
-        root = .init(
-            id: .init(
-                type: Self.rootKey,
-                instance: Self.rootKey,
-                state: Self.rootKey
-            ),
-            parent: Self.rootKey,
-            children: [rootId].compactMap {$0},
-            data: Data(),
-            actions: []
-        )
-        widgets[Self.rootKey] = root
-        self.widgets = widgets
-    }
-    
-    init?(rootedWidgets: [WidgetInstanceId: Widget]) {
-        self.widgets = rootedWidgets
-        self.root = rootedWidgets[Self.rootKey]!
-    }
-    
-    private static var rootKey = "ROOT"
-    
-    static var empty: WidgetHeirarchy {
-        .init(widgets: [:], rootId: nil)
+    var root: Widget? {
+        rootId.flatMap { widgets[$0] }
     }
     
     var allPairsBreadthFirst: [WidgetPair] {
         var result: [WidgetPair] = []
-        var queue: [(offset: Int, element: Widget)] = [(0, root)]
+        var queue: [(offset: Int, element: Widget)] = root.map { [(0, $0)] } ?? []
         
         while let (index, widget) = queue.first {
             queue.removeFirst()
@@ -87,6 +73,31 @@ struct WidgetHeirarchy {
             queue.append(contentsOf: widget.children.compactMap { widgets[$0] }.enumerated())
         }
         return result
+    }
+    
+    var wrappedIntoRootContainer: WidgetHeirarchy {
+        let idKey = "ROOT_CONTAINER"
+        let rootContainer = Widget(
+            id: .init(type: idKey, instance: idKey, state: idKey),
+            parent: idKey,
+            children: [rootId].compactMap { $0 },
+            data: .init(),
+            actions: []
+        )
+        var newWidgets = widgets
+        newWidgets.updateValue(rootContainer, forKey: idKey)
+        guard let root, let rootId else { return .init(widgets: newWidgets, rootId: idKey)}
+        newWidgets.updateValue(root.copyWith(parent: idKey), forKey: rootId)
+        return .init(widgets: newWidgets, rootId: idKey)
+    }
+    
+    static var empty: WidgetHeirarchy {
+        .init(widgets: [:], rootId: nil)
+    }
+    
+    init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
+        self.widgets = widgets
+        self.rootId = rootId
     }
 }
 

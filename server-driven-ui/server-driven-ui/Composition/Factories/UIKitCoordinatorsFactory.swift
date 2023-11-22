@@ -14,7 +14,7 @@ final class UIKitWidgetCoordinatorFactory {
         root: RootWidget
     ) -> [WidgetTypeId: () -> UIKitWidgetCoordinator] {
         [
-            "ROOT": { RootWidgetCoordinator(root: root) },
+            "ROOT_CONTAINER": { RootWidgetCoordinator(root: root) },
             "STACK": { StackViewUIKitCoordinator(factory: stackWidgetFactory) },
             "LABEL": { LabelUIKitCoordinator(factory: labelWidgetFactory) },
             "BUTTON": { ButtonUIKitCoordinator(
