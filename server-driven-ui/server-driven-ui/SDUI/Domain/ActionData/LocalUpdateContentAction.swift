@@ -13,9 +13,9 @@ struct LocalUpdateContentAction {
     let removals: [WidgetInstanceId]
     
     struct Insertion {
-        let parentInstanceId: WidgetInstanceId
         let heirarchy: WidgetHeirarchy
         let index: Int
+        let parentInstanceId: WidgetInstanceId
     }
     
     struct Update {

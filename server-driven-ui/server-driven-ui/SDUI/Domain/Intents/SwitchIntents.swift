@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwitchIntents: String {
-    case off = "SWITCH_OFF"
-    case on = "SWITCH_ON"
+enum SwitchIntents {
+    static let off = "SWITCH_OFF"
+    static let on = "SWITCH_ON"
 }

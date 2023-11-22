@@ -9,6 +9,6 @@ import Foundation
 
 extension Decodable {
     static func from(_ actionData: ActionModel) -> Self? {
-        try? JSONDecoder().decode(Self.self, from: actionData)
+        try! JSONDecoder().decode(Self.self, from: actionData)
     }
 }

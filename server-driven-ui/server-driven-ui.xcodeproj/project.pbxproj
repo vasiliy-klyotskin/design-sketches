@@ -32,7 +32,7 @@
 		D6A2B2932B0C9DC700F23C69 /* SubmitFormActionPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2922B0C9DC700F23C69 /* SubmitFormActionPerformer.swift */; };
 		D6A2B2952B0C9ED000F23C69 /* LocalUpdateContentActionPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2942B0C9ED000F23C69 /* LocalUpdateContentActionPerformer.swift */; };
 		D6A2B2972B0CA19F00F23C69 /* ActionPerformersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2962B0CA19F00F23C69 /* ActionPerformersFactory.swift */; };
-		D6A2B2A02B0CA81600F23C69 /* UpdateContentActionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B29F2B0CA81600F23C69 /* UpdateContentActionDTO.swift */; };
+		D6A2B2A02B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B29F2B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift */; };
 		D6A2B2A22B0CA82B00F23C69 /* SubmitFormActionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2A12B0CA82B00F23C69 /* SubmitFormActionDTO.swift */; };
 		D6A2B2A52B0CA87700F23C69 /* SubmitFormAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2A42B0CA87700F23C69 /* SubmitFormAction.swift */; };
 		D6A2B2A82B0CA8AC00F23C69 /* LocalUpdateContentAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2B2A72B0CA8AC00F23C69 /* LocalUpdateContentAction.swift */; };
@@ -118,7 +118,7 @@
 		D6A2B2922B0C9DC700F23C69 /* SubmitFormActionPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFormActionPerformer.swift; sourceTree = "<group>"; };
 		D6A2B2942B0C9ED000F23C69 /* LocalUpdateContentActionPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUpdateContentActionPerformer.swift; sourceTree = "<group>"; };
 		D6A2B2962B0CA19F00F23C69 /* ActionPerformersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPerformersFactory.swift; sourceTree = "<group>"; };
-		D6A2B29F2B0CA81600F23C69 /* UpdateContentActionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateContentActionDTO.swift; sourceTree = "<group>"; };
+		D6A2B29F2B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUpdateContentActionDTO.swift; sourceTree = "<group>"; };
 		D6A2B2A12B0CA82B00F23C69 /* SubmitFormActionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFormActionDTO.swift; sourceTree = "<group>"; };
 		D6A2B2A42B0CA87700F23C69 /* SubmitFormAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFormAction.swift; sourceTree = "<group>"; };
 		D6A2B2A72B0CA8AC00F23C69 /* LocalUpdateContentAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUpdateContentAction.swift; sourceTree = "<group>"; };
@@ -351,7 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				D6A2B2F82B0D2E9E00F23C69 /* RefreshActionDTO.swift */,
-				D6A2B29F2B0CA81600F23C69 /* UpdateContentActionDTO.swift */,
+				D6A2B29F2B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift */,
 				D6A2B2A12B0CA82B00F23C69 /* SubmitFormActionDTO.swift */,
 				D6447DEC2B0DD75C0021BEBA /* PrintConsoleActionDTO.swift */,
 			);
@@ -749,7 +749,7 @@
 				D6A2B2E52B0CEF5E00F23C69 /* TopLeftBottomPresenter.swift in Sources */,
 				D6B5F19C2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift in Sources */,
 				D6447DEB2B0DD7440021BEBA /* PrintConsoleAction.swift in Sources */,
-				D6A2B2A02B0CA81600F23C69 /* UpdateContentActionDTO.swift in Sources */,
+				D6A2B2A02B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift in Sources */,
 				D6A2B2E02B0CE50D00F23C69 /* TopLeftBottomWidget.swift in Sources */,
 				D6A2B2D62B0CE2D600F23C69 /* SwitchUIKitCoordinator.swift in Sources */,
 				D6A2B28F2B0C84E000F23C69 /* WidgetDTOMapper.swift in Sources */,

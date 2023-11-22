@@ -8,15 +8,15 @@
 import Foundation
 
 struct LocalUpdateContentActionDTO: Decodable {
-    let insertions: [Insertion]
-    let updates: [Update]
-    let removals: [String]
+    let insertions: [Insertion]?
+    let updates: [Update]?
+    let removals: [String]?
     
     var model: LocalUpdateContentAction {
         .init(
-            insertions: insertions.map { $0.model },
-            updates: updates.compactMap { $0.model },
-            removals: removals.map { AnyHashable($0) }
+            insertions: insertions?.map { $0.model } ?? [],
+            updates: updates?.compactMap { $0.model } ?? [],
+            removals: removals?.map { AnyHashable($0) } ?? []
         )
     }
     
