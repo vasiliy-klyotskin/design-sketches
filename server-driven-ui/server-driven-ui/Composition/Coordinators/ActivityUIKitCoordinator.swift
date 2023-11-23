@@ -21,18 +21,17 @@ final class ActivityUIKitCoordinator: UIKitWidgetCoordinator {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (activity, performUpdate) = factory(id, data)
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (activity, performUpdate) = factory(viewModel.id, viewModel.data)
         self.activity = activity
         self.performUpdate = performUpdate
     }
     
-    func update(with data: WidgetData) {
-        performUpdate?(data)
+    func getView() -> UIView? {
+        activity
     }
     
-    func useView(usage: (UIView) -> Void) {
-        guard let activity else { return }
-        usage(activity)
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
     }
 }

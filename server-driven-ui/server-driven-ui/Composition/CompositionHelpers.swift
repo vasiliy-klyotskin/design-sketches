@@ -7,10 +7,10 @@
 
 import Foundation
 
-class WidgetDifferenceViewProxy: WidgetDifferenceView {
-    var view: WidgetDifferenceView?
+class WidgetDifferenceViewProxy: WidgetRenderingView {
+    var view: WidgetRenderingView?
     
-    func display(viewModel: WidgetDifferenceViewModel) {
+    func display(viewModel: WidgetRenderingViewModel) {
         view?.display(viewModel: viewModel)
     }
 }

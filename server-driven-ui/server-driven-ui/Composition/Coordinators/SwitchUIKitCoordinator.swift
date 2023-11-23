@@ -21,18 +21,17 @@ final class SwitchUIKitCoordinator: UIKitWidgetCoordinator {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (switchWidget, performUpdate) = factory(id, data)
+    func getView() -> UIView? {
+        switchWidget
+    }
+    
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
+    }
+    
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (switchWidget, performUpdate) = factory(viewModel.id, viewModel.data)
         self.switchWidget = switchWidget
         self.performUpdate = performUpdate
-    }
-    
-    func update(with data: WidgetData) {
-        performUpdate?(data)
-    }
-    
-    func useView(usage: (UIView) -> Void) {
-        guard let switchWidget else { return }
-        usage(switchWidget)
     }
 }

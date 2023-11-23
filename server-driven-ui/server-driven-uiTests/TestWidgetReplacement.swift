@@ -73,6 +73,11 @@ extension TestWidgetReplacement {
     "data": {
         "spacing": 10
     },
+    "positioning": [
+        "empty1",
+        "empty3",
+        "empty4"
+    ],
     "children": [
         {
             "type": "EMPTY",
@@ -108,6 +113,11 @@ extension TestWidgetReplacement {
     "data": {
         "spacing": 10
     },
+    "positioning": [
+        "empty1",
+        "empty2",
+        "empty4"
+    ],
     "children": [
         {
             "type": "EMPTY",

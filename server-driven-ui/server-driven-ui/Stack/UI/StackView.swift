@@ -7,21 +7,13 @@
 
 import UIKit
 
-final class WidgetStackView: UIStackView {
-    init() {
-        super.init(frame: .zero)
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+final class WidgetStackView: UIStackView, StackView {
     func update(model: StackModel) {
         spacing = CGFloat(model.spacing)
         axis = .vertical
     }
     
-    func insert(view: UIView, at index: Int) {
+    func insert(child view: UIView, at index: Int) {
         insertArrangedSubview(view, at: index)
     }
     

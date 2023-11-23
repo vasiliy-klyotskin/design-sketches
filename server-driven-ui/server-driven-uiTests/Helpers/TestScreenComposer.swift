@@ -13,7 +13,7 @@ enum TestScreenComposer {
         let root = RootWidget()
         let storage = InMemoryWidgetDataStorage()
         let view = WidgetDifferenceViewProxy()
-        let presenter = WidgetDifferencePresenter(view: view)
+        let presenter = WidgetRenderingPresenter(view: view)
         let interactor = WidgetsInteractor(
             loader: loader,
             presenter: presenter,

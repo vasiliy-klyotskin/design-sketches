@@ -15,101 +15,54 @@ struct ExampleLoader: WidgetLoader {
         let heirarchy = WidgetDTOMapper.heirarchy(from: dto)
         completion(heirarchy)
     }
+}
     
     let json =
-    """
+"""
     {
         "type": "STACK",
         "instance": "0",
         "data": {
             "spacing": 10
         },
+        "positioning": {
+            "1": 0,
+            "2": 1,
+            "7": 2,
+            "5": 3
+        },
         "children": [
             {
-                "type": "TEXTFIELD",
-                "instance": "0",
+                "type": "LABEL",
+                "instance": "2",
                 "data": {
-                    "text": "default text"
+                    "text": "Don't you mind to add a widget?"
                 }
             },
             {
-                "type": "TEXTFIELD",
+                "type": "LABEL",
                 "instance": "1",
                 "data": {
-                    "text": "default"
+                    "text": "How's it going buddy?"
                 }
             },
             {
-                "type": "BUTTON",
-                "instance": "4",
+                "type": "LABEL",
+                "instance": "5",
                 "data": {
-                    "title": "Press me to log something to your console"
-                },
-                "actions": [
-                    {
-                        "type": "SUBMIT_FORM",
-                        "intent": "BUTTON_TAP",
-                        "data": {
-                            "url"
-                            "formId": "0"
-                            "instanceIdsOfWidgets": ["0", "1"]
-                        }
-                    },
-                    {
-                        "type": "LOCAL_UPDATE",
-                        "intent": "BUTTON_TAP",
-                        "data": {
-                            "url"
-                            "formId": "0"
-                            "instanceIdsOfWidgets": ["0", "1"]
-                        }
-                    },
-                ]
+                    "text": "Hey!!!"
+                }
+            },
+            {
+                "type": "LABEL",
+                "instance": "7",
+                "data": {
+                    "text": "What's up?"
+                }
             }
         ]
     }
-    """
-
-}
-//
-//"""
-//struct LocalUpdateContentActionDTO: Decodable {
-//    let insertions: [Insertion]?
-//    let updates: [Update]?
-//    let removals: [String]?
-//    
-//    var model: LocalUpdateContentAction {
-//        .init(
-//            insertions: insertions?.map { $0.model } ?? [],
-//            updates: updates?.compactMap { $0.model } ?? [],
-//            removals: removals?.map { AnyHashable($0) } ?? []
-//        )
-//    }
-//    
-//    struct Insertion: Decodable {
-//        let widget: WidgetDTO
-//        let parentInstanceId: String
-//        let index: Int
-//        
-//        var model: LocalUpdateContentAction.Insertion {
-//            .init(
-//                parentInstanceId: AnyHashable(parentInstanceId),
-//                heirarchy: WidgetDTOMapper.heirarchy(from: widget),
-//                index: index
-//            )
-//        }
-//    }
-//    
-//    struct Update: Decodable {
-//        let data: AnyCodable
-//        let instanceId: String
-//        
-//        var model: LocalUpdateContentAction.Update? {
-//            guard let widgetData = try? JSONEncoder().encode(data) else { return nil }
-//            return .init(instanceId: AnyHashable(instanceId), data: widgetData)
-//        }
-//    }
-//}
+"""
 
 
 //let json =
@@ -173,17 +126,6 @@ struct ExampleLoader: WidgetLoader {
 //                }
 //            ]
 //        },
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //        {
 //            "type": "BUTTON",
 //            "instance": "4",
@@ -207,15 +149,6 @@ struct ExampleLoader: WidgetLoader {
 //                        "instanceIds"
 //                    }
 //                },
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //                {
 //                    "type": "AUTH",
 //                    "intent": "BUTTON_TAP",
@@ -226,12 +159,6 @@ struct ExampleLoader: WidgetLoader {
 //                }
 //            ]
 //        }
-//
-//
-//
-//
-//
-//
 //    ]
 //}
 //"""

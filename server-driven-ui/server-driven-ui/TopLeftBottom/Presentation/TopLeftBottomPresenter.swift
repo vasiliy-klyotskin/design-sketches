@@ -21,13 +21,15 @@ final class TopLeftBottomPresenter<View: TopLeftBottomView> {
         self.view = view
     }
     
-    func present(child: View.Child?, index: Int) {
-        if index == 0 {
-            view.set(top: child)
-        } else if index == 1 {
-            view.set(left: child)
-        } else if index == 2 {
-            view.set(bottom: child)
+    func present(with positioning: TopLeftBottomPositioning, children: [TopLeftBottomPositioning.ChildId: View.Child]) {
+        if let top = positioning.top {
+            view.set(top: children[top])
+        }
+        if let left = positioning.left {
+            view.set(left: children[left])
+        }
+        if let bottom = positioning.bottom {
+            view.set(bottom: children[bottom])
         }
     }
 }

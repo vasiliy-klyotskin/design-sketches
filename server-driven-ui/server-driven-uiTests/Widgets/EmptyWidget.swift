@@ -38,19 +38,18 @@ final class EmptyWidgetUIKitCoordinator: UIKitWidgetCoordinator {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (label, performUpdate) = factory(id, data)
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (label, performUpdate) = factory(viewModel.id, viewModel.data)
         self.label = label
         self.performUpdate = performUpdate
     }
     
-    func update(with data: WidgetData) {
-        performUpdate?(data)
+    func getView() -> UIView? {
+        label
     }
     
-    func useView(usage: (UIView) -> Void) {
-        guard let label else { return }
-        usage(label)
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
     }
 }
 

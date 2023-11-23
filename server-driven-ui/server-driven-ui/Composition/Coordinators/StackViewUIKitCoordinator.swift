@@ -9,38 +9,40 @@ import UIKit
 
 // Можно сделать дженерик координатор, но пока не выношу, чтобы не усложнять
 
+typealias StackViewWidgetPositioning = (UIKitWidgetPositioningViewModel) -> Void
 typealias StackViewWidgetUpdate = (WidgetData) -> Void
-typealias StackViewWidgetFactory = (WidgetId, WidgetData) -> (WidgetStackView, StackViewWidgetUpdate)
+typealias StackViewWidgetFactory = (WidgetId, WidgetData) -> (
+    WidgetStackView,
+    StackViewWidgetUpdate,
+    StackViewWidgetPositioning
+)
 
 final class StackViewUIKitCoordinator: UIKitWidgetCoordinator {
     private let factory: StackViewWidgetFactory
     private var stackView: WidgetStackView?
     private var performUpdate: StackViewWidgetUpdate?
+    private var performPositioning: StackViewWidgetPositioning?
     
     init(factory: @escaping StackViewWidgetFactory) {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (stackView, update) = factory(id, data)
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (stackView, update, positioning) = factory(viewModel.id, viewModel.data)
         self.stackView = stackView
         self.performUpdate = update
+        self.performPositioning = positioning
     }
     
-    func update(with data: WidgetData) {
-        performUpdate?(data)
+    func getView() -> UIView? {
+        stackView
     }
     
-    func useView(usage: (UIView) -> Void) {
-        guard let stackView else { return }
-        usage(stackView)
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
     }
     
-    func insertChild(view: UIView, at index: Int) {
-        stackView?.insert(view: view, at: index)
-    }
-    
-    func deleteChild(at index: Int) {
-        stackView?.delete(at: index)
+    func position(with viewModel: UIKitWidgetPositioningViewModel) {
+        performPositioning?(viewModel)
     }
 }

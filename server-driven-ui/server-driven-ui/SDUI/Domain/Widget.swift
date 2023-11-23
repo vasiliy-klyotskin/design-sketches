@@ -10,7 +10,9 @@ import Foundation
 typealias WidgetTypeId = AnyHashable
 typealias WidgetInstanceId = AnyHashable
 typealias WidgetStateId = AnyHashable
+typealias WidgetPositioningId = AnyHashable
 typealias WidgetData = Data
+typealias WidgetPositioning = Data
 
 /// Унифицированная структура, представляющая виджет
 ///
@@ -35,18 +37,31 @@ struct Widget {
     ///
     /// Десериализация данных происходит на этапе конфигурирования конкретного виджета, который знает в какой конкретный тип нужно их десериализовать.
     let data: WidgetData
-    
+
+    // TODO: Documentation
+    let positioning: WidgetPositioning
+        
     /// Действия, выполняемые при генерации виджетов событий
     ///
     /// Действие  - это некоторое заранее запрограммирование поведение. Действия прикрепляются к событиям виджетов и запускаются при наступлении этих событий.
     let actions: [Action]
     
+    // TODO: Documentation
+    var isContainer: Bool {
+        id.positioning != WidgetId.positioningIdForNotContainers
+    }
+    
     /// Возвращает **true** если виджет, у которого вызывается этот метод и ``other`` отличаются только состоянием, имея при этом одинаковыц тип и идентификатор.
     /// - Parameter from: Виджет, с которым нужно провести сравнение.
-    func isDifferentState(from other: Widget) -> Bool {
-        id.type == other.id.type &&
-        id.instance == other.id.instance &&
-        id.state != other.id.state
+    func hasDifferentState(from other: Widget) -> Bool? {
+        guard id.instance == other.id.instance else { return nil }
+        return id.state != other.id.state
+    }
+    
+    // TODO: Documentation
+    func hasDifferentPositioning(from other: Widget) -> Bool? {
+        guard id.instance == other.id.instance else { return nil }
+        return id.positioning != other.id.positioning
     }
     
     /// Возвращает копию виджета, заменяя некоторые его данные
@@ -66,10 +81,12 @@ struct Widget {
             parent: parent ?? self.parent,
             children: children ?? self.children,
             data: data ?? self.data,
+            positioning: positioning,
             actions: actions
         )
     }
 }
+
 
 /// Идентификатор виджета
 ///
@@ -84,13 +101,58 @@ struct WidgetId {
     // TODO: Marina А это свойство используется?
     /// Идентификатор состояния виджета
     let state: WidgetStateId
+    
+    // TODO: Documentation
+    let positioning: WidgetPositioningId
+    
+    // TODO: Documentation
+    static var positioningIdForNotContainers: WidgetPositioningId {
+        "NO_POSITIONING"
+    }
+    
+    // TODO: Documentation
+    static var rootContainerKeyForIds: String {
+        "ROOT_CONTAINER"
+    }
 }
 
 // TODO: Marina Кажется, слово Difference тут не очень подходит, поскольку здесь не содержится самой разницы, может, заменить на  Pair? WidgetDifference -> WidgetHierarchyPair
-/// Структура, хранящая две иерархии виджетов - "старую" и "новую"
+/// Структура, хранящая две иерархии виджетов - "предыдущую" и "текущую"
 struct WidgetDifference {
+    // TODO: Rename: Previous, current
     let new: WidgetHeirarchy
     let old: WidgetHeirarchy
+    
+    /// Виджеты, которые не содержатся в предыдущей иерархии, но содержаться в текущей
+    var newWidgets: [Widget] {
+        new.allInstanceIds.subtracting(old.allInstanceIds).compactMap { new.widgets[$0] }
+    }
+    
+    /// Виджеты, которые не содержатся в текущей иерархии, но содержаться в предыдущей
+    var removedWidgets: [Widget] {
+        old.allInstanceIds.subtracting(new.allInstanceIds).compactMap { old.widgets[$0] }
+    }
+    
+    /// Виджеты, идентификаторы которых содержатся в текущей и предыдущей иерархиях
+    var remainedWithTheSameInstanceIdWidgets: [(previous: Widget, current: Widget)] {
+        new.allInstanceIds
+            .intersection(old.allInstanceIds)
+            .compactMap {
+                guard let previous = old.widgets[$0] else { return nil }
+                guard let current = new.widgets[$0] else { return nil }
+                return (previous, current)
+            }
+    }
+    
+    /// Все виджеты, которые являются контейнерам
+    var newContainers: [Widget] {
+        newWidgets.filter { $0.isContainer }
+    }
+    
+    /// Все виджеты, являющиеся контейнерами, которые содержатся в текущей и предыдущей иерархиях
+    var remainedWithTheSameInstanceIdContainers: [(previous: Widget, current: Widget)] {
+        remainedWithTheSameInstanceIdWidgets.filter { $0.current.isContainer }
+    }
 }
 
 /// Иерархия виджетов
@@ -103,6 +165,11 @@ struct WidgetHeirarchy {
     /// Идентификатор корневого виджета дерева
     let rootId: WidgetInstanceId?
     
+    /// Множество идентификаторов всех виджетов в дереве
+    var allInstanceIds: Set<WidgetInstanceId> {
+        Set(widgets.keys)
+    }
+    
     /// Возвращает список виджетов из ``widgets`` в виде несортированного массива
     var allWidgets: [Widget] {
         Array(widgets.values)
@@ -113,33 +180,15 @@ struct WidgetHeirarchy {
         rootId.flatMap { widgets[$0] }
     }
     
-    /// Проецирует ``widgets`` в массив ``WidgetPair`` выполняя послойный обход дерева
-    ///
-    /// Послойный обход выполняется так:
-    /// - сначала в массив помещается корень дерева
-    /// - затем в массив помещаются дочерние элементы корня в том порядке, в котором их идентификаторы хранятся в ``Widget/children``
-    /// - выполняется рекурсивно до тех пор пока не будут пройдены все слои дерева
-    var allPairsBreadthFirst: [WidgetPair] {
-        var result: [WidgetPair] = []
-        var queue: [(offset: Int, element: Widget)] = root.map { [(0, $0)] } ?? []
-        
-        while let (index, widget) = queue.first {
-            queue.removeFirst()
-            result.append(.withParent(widget, indexInParent: index))
-            queue.append(contentsOf: widget.children.compactMap { widgets[$0] }.enumerated())
-        }
-        return result
-    }
-    
-    
-    /// Возвращает новое дерево виджетов, в котором текущее дерево помещается под новый корневой элемент с идентификатором "ROOT_CONTAINER"
+    /// Возвращает дерево, корень которого обернут в дополнительную корневую ноду
     var wrappedIntoRootContainer: WidgetHeirarchy {
-        let idKey = "ROOT_CONTAINER"
+        let idKey = WidgetId.rootContainerKeyForIds
         let rootContainer = Widget(
-            id: .init(type: idKey, instance: idKey, state: idKey),
+            id: .init(type: idKey, instance: idKey, state: idKey, positioning: AnyHashable(rootId)),
             parent: idKey,
             children: [rootId].compactMap { $0 },
             data: .init(),
+            positioning: .init(),
             actions: []
         )
         var newWidgets = widgets
@@ -158,20 +207,5 @@ struct WidgetHeirarchy {
     init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
         self.widgets = widgets
         self.rootId = rootId
-    }
-}
-
-/// Структура, содержащая информацию о местоположении виджета в дереве
-struct WidgetPair: Equatable {
-    /// Идентификатор родителя
-    let parent: WidgetInstanceId
-    /// Идентификатор виджета
-    let child: WidgetInstanceId
-    /// Порядковый номер виджета в списке детей у ``parent``
-    let childIndexInParent: Int
-    
-    /// Возвращает ``WidgetPair`` в которой идентификаторы родительского и дочернего элементов берутся из **widget**, а порядковый номер из **indexInParent**
-    static func withParent(_ widget: Widget, indexInParent: Int) -> WidgetPair {
-        .init(parent: widget.parent, child: widget.id.instance, childIndexInParent: indexInParent)
     }
 }

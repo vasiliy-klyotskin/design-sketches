@@ -13,14 +13,14 @@ protocol WidgetLoader {
 
 class WidgetsInteractor {
     private let loader: WidgetLoader
-    private let presenter: WidgetDifferencePresenter
+    private let presenter: WidgetRenderingPresenter
     private let storage: InMemoryWidgetDataStorage
     
     private var lastHeirarchy: WidgetHeirarchy
     
     init(
         loader: WidgetLoader,
-        presenter: WidgetDifferencePresenter,
+        presenter: WidgetRenderingPresenter,
         storage: InMemoryWidgetDataStorage
     ) {
         self.presenter = presenter
