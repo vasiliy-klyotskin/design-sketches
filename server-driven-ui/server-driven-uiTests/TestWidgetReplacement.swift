@@ -14,7 +14,7 @@ final class TestWidgetReplacement: XCTestCase {
     /// 1. Выводим три виджета: 1, 3, 4
     /// 2. Выводим три виджета: 1, 2, 4
     /// Проверяем что средний виджет заменился, а первый и последний остались теми же самыми
-    func test_display_replacesChangedWidgetleavingOtherIntact() throws {
+    func test_sdui_replacesChangedWidgetleavingOtherIntact() throws {
         let (sut, loader) = makeSut()
         
         // Загружаем три виджета: 1, 3, 4
@@ -33,7 +33,7 @@ final class TestWidgetReplacement: XCTestCase {
         XCTAssertEqual(widgets1[1].backgroundColor?.toHexString(), "#00ff00")
         XCTAssertEqual(widgets1[2].backgroundColor?.toHexString(), "#0000ff")
 
-        // Загружаем три виджета: 1, 3, 4
+        // Загружаем три виджета: 1, 2, 4
         loader.json = json2
         sut.viewDidLoad()
         
