@@ -86,6 +86,7 @@ struct WidgetId {
     let state: WidgetStateId
 }
 
+// TODO: Marina Кажется, слово Difference тут не очень подходит, поскольку здесь не содержится самой разницы, может, заменить на  Pair? WidgetDifference -> WidgetHierarchyPair
 /// Структура, хранящая две иерархии виджетов - "старую" и "новую"
 struct WidgetDifference {
     let new: WidgetHeirarchy

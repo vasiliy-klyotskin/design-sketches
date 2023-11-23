@@ -7,11 +7,18 @@
 
 import Foundation
 
+/// Содержит рассчитанную разницу двух иерархий виджетов
 struct WidgetDifferenceViewModel {
+    /// Список элементов дерева, подлежащих удалению из старой версии дерева
     let deletions: WidgetDeletionsViewModel
+    /// Список элементов, которые нужно вставить в старую версию дерева
     let insertions: WidgetInsertionsViewModel
+    /// Список элементов, которые нужно обновить данными из новой версии дерева
     let updates: WidgetUpdatesViewModel
     
+    /// Список элементов дерева, которые нужно удалить из дерева и не вставлять обратно.
+    ///
+    /// Используется для уничтожения экземпляров виджетов, которые перестали использоваться
     var deletedAndNotInsertedChildrenInstanceIds: [WidgetInstanceId] {
         let deletedChildren = Set(deletions.map { $0.childId.instance })
         let insertedChildren = Set(insertions.map { $0.childId.instance })
@@ -26,6 +33,7 @@ typealias WidgetInsertionsViewModel = [(childId: WidgetId, parentId: WidgetId, i
 typealias WidgetUpdatesViewModel = [(id: WidgetId, data: WidgetData)]
 
 extension WidgetDifference {
+    /// Конвертирует массив CollectionDifference в ``WidgetDeletionsViewModel``
     func deletionsViewModel(from removals: [CollectionDifference<WidgetPair>.Change]) -> WidgetDeletionsViewModel {
         removals.compactMap {
             switch $0 {
@@ -38,6 +46,7 @@ extension WidgetDifference {
         }
     }
     
+    /// Конвертирует массив CollectionDifference в ``WidgetInsertionsViewModel``
     func insertionsViewModel(
         from insertions: [CollectionDifference<WidgetPair>.Change],
         heirarchy: WidgetHeirarchy
