@@ -77,7 +77,8 @@ class WidgetLoaderStub: WidgetLoader {
     }
 }
 
-let json1 =
+extension TestWidgetReplacement {
+    var json1: String {
 """
 {
     "type": "STACK",
@@ -110,8 +111,9 @@ let json1 =
     ]
 }
 """
-
-let json2 =
+    }
+    
+    var json2: String {
 """
 {
     "type": "STACK",
@@ -144,3 +146,5 @@ let json2 =
     ]
 }
 """
+    }
+}
