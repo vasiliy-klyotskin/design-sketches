@@ -8,7 +8,7 @@
 import Foundation
 
 extension Decodable {
-    static func from(_ data: Data) -> Self? {
-        try! JSONDecoder().decode(Self.self, from: data)
+    static func from(_ data: Data?) -> Self? {
+        data.map { try! JSONDecoder().decode(Self.self, from: $0) }
     }
 }

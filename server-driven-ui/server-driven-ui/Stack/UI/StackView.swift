@@ -7,21 +7,22 @@
 
 import UIKit
 
-final class WidgetStackView: UIStackView {
+final class WidgetStackView: UIStackView, StackView {
     func update(model: StackModel) {
         spacing = CGFloat(model.spacing)
         axis = .vertical
     }
     
-    func insert(view: UIView, at index: Int) {
+    func insert(child view: UIView, at index: Int) {
         insertArrangedSubview(view, at: index)
     }
     
-    func deleteAll() {
-        arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    func display(views: [UIView]) {
-        views.forEach(addArrangedSubview)
+    func delete(at index: Int) {
+        guard index >= 0 && index < arrangedSubviews.count else {
+            return
+        }
+
+        let viewToRemove = arrangedSubviews[index]
+        viewToRemove.removeFromSuperview()
     }
 }

@@ -9,6 +9,11 @@ import UIKit
 
 typealias UIKitCoordinatorFactory = (WidgetTypeId) -> UIKitWidgetCoordinator
 
+/// UIKit реализация механизма изменения иерархии виджетов на экране
+///
+/// UIKitWidgetCoordinatorRegistry выполняет две функции:
+/// - хранит хэш таблицу, связывающую идентификатор виджета и соответствующий ему координатор виджета (``UIKitWidgetCoordinator``)
+/// - выполняет удаление, вставку и обновление вьюх на экране через координаторы
 final class UIKitWidgetCoordinatorRegistry: WidgetRenderingView {
     private let factory: UIKitCoordinatorFactory
     private var widgetCoordinators: [WidgetInstanceId: UIKitWidgetCoordinator] = [:]
@@ -39,12 +44,12 @@ final class UIKitWidgetCoordinatorRegistry: WidgetRenderingView {
         node.update(with: .init(data: viewModel.data))
     }
     
-    private func position(for viewModel: WidgetRenderingViewModel.Positioning) {
-        guard let node = widgetCoordinators[viewModel.id.instance] else { return }
-        let childrenIds = viewModel.positioningChanges.new.children
+    private func position(for vm: WidgetRenderingViewModel.Positioning) {
+        guard let node = widgetCoordinators[vm.id.instance] else { return }
+        let childrenIds = vm.current.children
         let childrenViews = childrenIds.compactMap { widgetCoordinators[$0]?.getView() }
         let zippedChildren = zip(childrenIds, childrenViews)
         let children = Dictionary(uniqueKeysWithValues: zippedChildren)
-        node.position(with: .init(positioningChanges: viewModel.positioningChanges, children: children))
+        node.position(with: .init(previous: vm.previous, current: vm.current, children: children))
     }
 }

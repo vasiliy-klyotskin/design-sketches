@@ -14,28 +14,63 @@ typealias WidgetPositioningId = AnyHashable
 typealias WidgetData = Data
 typealias WidgetPositioning = Data
 
+/// Унифицированная структура, представляющая виджет
+///
+/// Widget это унифицированная структура, содержащая информацию о виджете. Из экземпляров Widget состоит дерево виджетов, которое является основой для управления структурой всех составляющих SDUI экрана.
 struct Widget {
+    /// Идентификатор виджета
+    ///
+    /// Идентификатор содержит в себе информацию о типе виджета, его уникальный идентификатор и состояние. Подробнее см. в ``WidgetId``
     let id: WidgetId
+    
+    /// Идентификатор родительского виджета
     let parent: WidgetInstanceId
+    
+    /// Идентификаторы дочерних виджетов.
+    ///
+    /// Здесь хранятся не сами дочерние виджеты, а их идентификаторы. Это позволяет отделить структуру дерева виджетов от самих виджетов и хранить их отдельно, что дает гибкость модификации дерева.
     let children: [WidgetInstanceId]
+    
+    /// Данные виджета
+    ///
+    /// Данные представлены в виде **Swift.Data**. Это решает проблему динамической типизации. Для модификации дерева нам достаточно лишь сравнивать данные виджетов на равенство, не обращая внимание на тип, в котором хранятся эти данные.
+    ///
+    /// Десериализация данных происходит на этапе конфигурирования конкретного виджета, который знает в какой конкретный тип нужно их десериализовать.
     let data: WidgetData
+
+    // TODO: Documentation
     let positioning: WidgetPositioning
+        
+    /// Действия, выполняемые при генерации виджетов событий
+    ///
+    /// Действие  - это некоторое заранее запрограммирование поведение. Действия прикрепляются к событиям виджетов и запускаются при наступлении этих событий.
     let actions: [Action]
     
+    // TODO: Documentation
     var isContainer: Bool {
         id.positioning != WidgetId.positioningIdForNotContainers
     }
     
+    /// Возвращает **true** если виджет, у которого вызывается этот метод и ``other`` отличаются только состоянием, имея при этом одинаковый идентификатор.
+    /// - Parameter from: Виджет, с которым нужно провести сравнение.
     func hasDifferentState(from other: Widget) -> Bool? {
         guard id.instance == other.id.instance else { return nil }
         return id.state != other.id.state
     }
     
+    // TODO: Documentation
     func hasDifferentPositioning(from other: Widget) -> Bool? {
         guard id.instance == other.id.instance else { return nil }
         return id.positioning != other.id.positioning
     }
     
+    /// Возвращает копию виджета, заменяя некоторые его данные
+    ///
+    /// Используется для создания копии виджета с опциональной заменой parent, data или children
+    /// - Parameters:
+    ///   - parent: Если передается значение не nil, то в копии свойству parent будет присвоено переданное значение
+    ///   - data: Если передается значение не nil, то в копии свойству data будет присвоено переданное значение
+    ///   - children: Если передается значение не nil, то в копии свойству children будет присвоено переданное значение
     func copyWith(
         parent: WidgetInstanceId? = nil,
         data: WidgetData? = nil,
@@ -49,95 +84,5 @@ struct Widget {
             positioning: positioning,
             actions: actions
         )
-    }
-}
-
-struct WidgetId: Hashable {
-    let type: WidgetTypeId
-    let instance: WidgetInstanceId
-    let state: WidgetStateId
-    let positioning: WidgetPositioningId
-    
-    static var positioningIdForNotContainers: WidgetPositioningId {
-        "NO_POSITIONING"
-    }
-    
-    static var rootContainerKeyForIds: String {
-        "ROOT_CONTAINER"
-    }
-}
-
-struct WidgetDifference {
-    // TODO: Rename: Previous, current
-    let new: WidgetHeirarchy
-    let old: WidgetHeirarchy
-    
-    var newWidgets: [Widget] {
-        new.allInstanceIds.subtracting(old.allInstanceIds).compactMap { new.widgets[$0] }
-    }
-    
-    var removedWidgets: [Widget] {
-        old.allInstanceIds.subtracting(new.allInstanceIds).compactMap { old.widgets[$0] }
-    }
-    
-    var remainedWithTheSameInstanceIdWidgets: [(previous: Widget, current: Widget)] {
-        new.allInstanceIds
-            .intersection(old.allInstanceIds)
-            .compactMap {
-                guard let previous = old.widgets[$0] else { return nil }
-                guard let current = new.widgets[$0] else { return nil }
-                return (previous, current)
-            }
-    }
-    
-    var newContainers: [Widget] {
-        newWidgets.filter { $0.isContainer }
-    }
-    
-    var remainedWithTheSameInstanceIdContainers: [(previous: Widget, current: Widget)] {
-        remainedWithTheSameInstanceIdWidgets.filter { $0.current.isContainer }
-    }
-}
-
-struct WidgetHeirarchy {
-    let widgets: [WidgetInstanceId: Widget]
-    let rootId: WidgetInstanceId?
-    
-    var allInstanceIds: Set<WidgetInstanceId> {
-        Set(widgets.keys)
-    }
-    
-    var allWidgets: [Widget] {
-        Array(widgets.values)
-    }
-    
-    var root: Widget? {
-        rootId.flatMap { widgets[$0] }
-    }
-    
-    var wrappedIntoRootContainer: WidgetHeirarchy {
-        let idKey = WidgetId.rootContainerKeyForIds
-        let rootContainer = Widget(
-            id: .init(type: idKey, instance: idKey, state: idKey, positioning: AnyHashable(rootId)),
-            parent: idKey,
-            children: [rootId].compactMap { $0 },
-            data: .init(),
-            positioning: .init(),
-            actions: []
-        )
-        var newWidgets = widgets
-        newWidgets.updateValue(rootContainer, forKey: idKey)
-        guard let root, let rootId else { return .init(widgets: newWidgets, rootId: idKey)}
-        newWidgets.updateValue(root.copyWith(parent: idKey), forKey: rootId)
-        return .init(widgets: newWidgets, rootId: idKey)
-    }
-    
-    static var empty: WidgetHeirarchy {
-        .init(widgets: [:], rootId: nil)
-    }
-    
-    init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
-        self.widgets = widgets
-        self.rootId = rootId
     }
 }

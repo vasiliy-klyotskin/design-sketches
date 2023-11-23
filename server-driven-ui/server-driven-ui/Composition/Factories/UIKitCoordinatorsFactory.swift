@@ -53,17 +53,14 @@ func stackWidgetFactory(id: WidgetId, data: WidgetData) -> (
     StackViewWidgetPositioning
 ) {
     let stack = WidgetStackView()
+    let presenter = StackPresenter(view: stack)
     let update: StackViewWidgetUpdate = { [weak stack] in
         if let dto = StackDTO.from($0) { stack?.update(model: dto.model) }
     }
-    let positioning: StackViewWidgetPositioning = { [weak stack] vm in
-        guard let positioningModel = StackPositioning.from(vm.newPositioningData) else { return }
-        // Для упрощения просто удаляю все сабвью и инсерчу детей.
-        // Как видим здесь можно посчитать диф и сделать красивые анимации.
-        // Также, чтоб не раздувать фактори, мы можем вынести код позиционирования (диф и тд) в слой презентации/UI отельным компонентом и даже переиспользовать его в других виджетах!
-        let children = positioningModel.sorted { $0.value < $1.value }.compactMap { vm.children[$0.key] }
-        stack?.deleteAll()
-        stack?.display(views: children)
+    let positioning: StackViewWidgetPositioning = { vm in
+        let prevLinOrdering = LinearPositioningDTO.from(vm.previous?.data)?.model
+        guard let curLinOrdering = LinearPositioningDTO.from(vm.current.data)?.model else { return }
+        presenter.present(previous: prevLinOrdering, current: curLinOrdering, children: vm.children)
     }
     update(data)
     return (stack, update, positioning)
@@ -136,7 +133,7 @@ func topLeftBottomWidgetFactory(id: WidgetId, data: WidgetData) -> (
         if let dto = TopLeftBottomDTO.from($0) { widget?.update(with: dto.model) }
     }
     let positioning: TopLeftBottomWidgetPositioning = {
-        guard let positioningModel = TopLeftBottomPositioningDTO.from($0.newPositioningData)?.model else { return }
+        guard let positioningModel = TopLeftBottomPositioningDTO.from($0.current.data)?.model else { return }
         presenter.present(with: positioningModel, children: $0.children)
     }
     update(data)

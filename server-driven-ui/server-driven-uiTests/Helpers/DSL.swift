@@ -17,6 +17,16 @@ extension RootWidget {
         findViewWithTag(id, in: view) as? LabelWidget
     }
     
+    func findView<T: UIView>(in view: UIView) -> T? {
+        if let view = view as? T { return view }
+        for subview in view.subviews {
+            if let foundView: T = findView(in: subview) {
+                return foundView
+            }
+        }
+        return nil
+    }
+    
     private func findViewWithTag(_ tag: Int, in view: UIView) -> UIView? {
         if view.tag == tag {
             return view
