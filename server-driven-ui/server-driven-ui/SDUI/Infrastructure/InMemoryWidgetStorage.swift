@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TODO: Вынести абстракцию стореджа
+
 final class InMemoryWidgetDataStorage {
     private var rootId: WidgetInstanceId?
     private var widgets: [WidgetInstanceId: Widget] = [:]
