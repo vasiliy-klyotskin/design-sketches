@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeController() -> UIViewController {
-        let loader = ExampleLoader()
-        return ScreenComposer.compose(loader: loader)
+        UIViewController()
+//        let loader = ExampleLoader()
+//        return ScreenComposer.compose(loader: loader)
     }
 }

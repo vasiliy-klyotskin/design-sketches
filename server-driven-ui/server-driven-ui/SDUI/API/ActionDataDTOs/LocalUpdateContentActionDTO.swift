@@ -27,9 +27,9 @@ struct LocalUpdateContentActionDTO: Decodable {
         
         var model: LocalUpdateContentAction.Insertion {
             .init(
-                parentInstanceId: AnyHashable(parentInstanceId),
                 heirarchy: WidgetDTOMapper.heirarchy(from: widget),
-                index: index
+                index: index,
+                parentInstanceId: AnyHashable(parentInstanceId)
             )
         }
     }

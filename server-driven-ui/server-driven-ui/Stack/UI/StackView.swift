@@ -10,7 +10,6 @@ import UIKit
 final class WidgetStackView: UIStackView {
     init() {
         super.init(frame: .zero)
-        insertArrangedSubview(UIView(), at: 0)
     }
     
     required init(coder: NSCoder) {
