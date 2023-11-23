@@ -41,11 +41,3 @@ struct LinearPositioning {
         }
     }
 }
-
-typealias LinearPositioningDTO = [String]
-
-extension LinearPositioningDTO {
-    var model: LinearPositioning {
-        .init(items: self)
-    }
-}

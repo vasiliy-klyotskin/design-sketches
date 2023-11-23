@@ -18,7 +18,7 @@ final class WidgetRenderingPresenter {
         self.view = view
     }
     
-    func present(widgetDifference diff: WidgetDifference) {
+    func present(widgetDifference diff: WidgetHeirarchyChange) {
         let viewModel = WidgetRenderingViewModel(
             creations: creations(for: diff),
             deletions: deletions(for: diff),
@@ -28,21 +28,21 @@ final class WidgetRenderingPresenter {
         view.display(viewModel: viewModel)
     }
     
-    private func creations(for diff: WidgetDifference) -> [WidgetRenderingViewModel.Creation] {
+    private func creations(for diff: WidgetHeirarchyChange) -> [WidgetRenderingViewModel.Creation] {
         diff.newWidgets.map { .init(id: $0.id, data: $0.data) }
     }
     
-    private func deletions(for diff: WidgetDifference) -> [WidgetRenderingViewModel.Deletion] {
+    private func deletions(for diff: WidgetHeirarchyChange) -> [WidgetRenderingViewModel.Deletion] {
         diff.removedWidgets.map { .init(id: $0.id) }
     }
     
-    private func updates(for diff: WidgetDifference) -> [WidgetRenderingViewModel.Update] {
+    private func updates(for diff: WidgetHeirarchyChange) -> [WidgetRenderingViewModel.Update] {
         diff.remainedWithTheSameInstanceIdWidgets
             .filter { $0.current.hasDifferentState(from: $0.previous) ?? false }
             .map { .init(id: $0.current.id, data: $0.current.data) }
     }
     
-    private func positioning(for diff: WidgetDifference) -> [WidgetRenderingViewModel.Positioning] {
+    private func positioning(for diff: WidgetHeirarchyChange) -> [WidgetRenderingViewModel.Positioning] {
         let positioningForNewContainers = diff.newContainers
             .map {
                 WidgetRenderingViewModel.Positioning.init(

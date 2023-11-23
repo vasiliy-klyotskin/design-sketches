@@ -47,7 +47,7 @@ class WidgetsInteractor {
     }
     
     private func rerenderFor(heirarchy: WidgetHeirarchy) {
-        let difference = WidgetDifference(new: heirarchy, old: lastHeirarchy)
+        let difference = WidgetHeirarchyChange(current: heirarchy, previous: lastHeirarchy)
         presenter.present(widgetDifference: difference)
         lastHeirarchy = heirarchy
     }
