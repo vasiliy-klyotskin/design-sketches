@@ -11,6 +11,7 @@ struct WidgetDTO: Decodable {
     let type: String
     let instance: String
     let data: AnyCodable
+    let positioning: AnyCodable?
     let children: [WidgetDTO]?
     let actions: [ActionDTO]?
 }

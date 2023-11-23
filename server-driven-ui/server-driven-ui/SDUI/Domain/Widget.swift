@@ -10,19 +10,30 @@ import Foundation
 typealias WidgetTypeId = AnyHashable
 typealias WidgetInstanceId = AnyHashable
 typealias WidgetStateId = AnyHashable
+typealias WidgetPositioningId = AnyHashable
 typealias WidgetData = Data
+typealias WidgetPositioning = Data
 
 struct Widget {
     let id: WidgetId
     let parent: WidgetInstanceId
     let children: [WidgetInstanceId]
     let data: WidgetData
+    let positioning: WidgetPositioning
     let actions: [Action]
     
-    func isDifferentState(from other: Widget) -> Bool {
-        id.type == other.id.type &&
-        id.instance == other.id.instance &&
-        id.state != other.id.state
+    var isContainer: Bool {
+        id.positioning != WidgetId.positioningIdForNotContainers
+    }
+    
+    func hasDifferentState(from other: Widget) -> Bool? {
+        guard id.instance == other.id.instance else { return nil }
+        return id.state != other.id.state
+    }
+    
+    func hasDifferentPositioning(from other: Widget) -> Bool? {
+        guard id.instance == other.id.instance else { return nil }
+        return id.positioning != other.id.positioning
     }
     
     func copyWith(
@@ -35,25 +46,66 @@ struct Widget {
             parent: parent ?? self.parent,
             children: children ?? self.children,
             data: data ?? self.data,
+            positioning: positioning,
             actions: actions
         )
     }
 }
 
-struct WidgetId {
+struct WidgetId: Hashable {
     let type: WidgetTypeId
     let instance: WidgetInstanceId
     let state: WidgetStateId
+    let positioning: WidgetPositioningId
+    
+    static var positioningIdForNotContainers: WidgetPositioningId {
+        "NO_POSITIONING"
+    }
+    
+    static var rootContainerKeyForIds: String {
+        "ROOT_CONTAINER"
+    }
 }
 
 struct WidgetDifference {
+    // TODO: Rename: Previous, current
     let new: WidgetHeirarchy
     let old: WidgetHeirarchy
+    
+    var newWidgets: [Widget] {
+        new.allInstanceIds.subtracting(old.allInstanceIds).compactMap { new.widgets[$0] }
+    }
+    
+    var removedWidgets: [Widget] {
+        old.allInstanceIds.subtracting(new.allInstanceIds).compactMap { old.widgets[$0] }
+    }
+    
+    var remainedWithTheSameInstanceIdWidgets: [(previous: Widget, current: Widget)] {
+        new.allInstanceIds
+            .intersection(old.allInstanceIds)
+            .compactMap {
+                guard let previous = old.widgets[$0] else { return nil }
+                guard let current = new.widgets[$0] else { return nil }
+                return (previous, current)
+            }
+    }
+    
+    var newContainers: [Widget] {
+        newWidgets.filter { $0.isContainer }
+    }
+    
+    var remainedWithTheSameInstanceIdContainers: [(previous: Widget, current: Widget)] {
+        remainedWithTheSameInstanceIdWidgets.filter { $0.current.isContainer }
+    }
 }
 
 struct WidgetHeirarchy {
     let widgets: [WidgetInstanceId: Widget]
     let rootId: WidgetInstanceId?
+    
+    var allInstanceIds: Set<WidgetInstanceId> {
+        Set(widgets.keys)
+    }
     
     var allWidgets: [Widget] {
         Array(widgets.values)
@@ -63,25 +115,14 @@ struct WidgetHeirarchy {
         rootId.flatMap { widgets[$0] }
     }
     
-    var allPairsBreadthFirst: [WidgetPair] {
-        var result: [WidgetPair] = []
-        var queue: [(offset: Int, element: Widget)] = root.map { [(0, $0)] } ?? []
-        
-        while let (index, widget) = queue.first {
-            queue.removeFirst()
-            result.append(.withParent(widget, indexInParent: index))
-            queue.append(contentsOf: widget.children.compactMap { widgets[$0] }.enumerated())
-        }
-        return result
-    }
-    
     var wrappedIntoRootContainer: WidgetHeirarchy {
-        let idKey = "ROOT_CONTAINER"
+        let idKey = WidgetId.rootContainerKeyForIds
         let rootContainer = Widget(
-            id: .init(type: idKey, instance: idKey, state: idKey),
+            id: .init(type: idKey, instance: idKey, state: idKey, positioning: AnyHashable(rootId)),
             parent: idKey,
             children: [rootId].compactMap { $0 },
             data: .init(),
+            positioning: .init(),
             actions: []
         )
         var newWidgets = widgets
@@ -98,15 +139,5 @@ struct WidgetHeirarchy {
     init(widgets: [WidgetInstanceId: Widget], rootId: WidgetInstanceId?) {
         self.widgets = widgets
         self.rootId = rootId
-    }
-}
-
-struct WidgetPair: Equatable {
-    let parent: WidgetInstanceId
-    let child: WidgetInstanceId
-    let childIndexInParent: Int
-    
-    static func withParent(_ widget: Widget, indexInParent: Int) -> WidgetPair {
-        .init(parent: widget.parent, child: widget.id.instance, childIndexInParent: indexInParent)
     }
 }

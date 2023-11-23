@@ -9,7 +9,7 @@ import UIKit
 
 // Можно сделать дженерик координатор, но пока не выношу, чтобы не усложнять
 
-typealias TopLeftBottomWidgetPositioning = (UIView?, Int) -> Void
+typealias TopLeftBottomWidgetPositioning = (UIKitWidgetPositioningViewModel) -> Void
 typealias TopLeftBottomWidgetUpdate = (WidgetData) -> Void
 typealias TopLeftBottomWidgetFactory = (WidgetId, WidgetData) -> (
     TopLeftBottomWidget,
@@ -27,27 +27,22 @@ final class TopLeftBottomUIKitCoordinator: UIKitWidgetCoordinator {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (widget, update, positioning) = factory(id, data)
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (widget, update, positioning) = factory(viewModel.id, viewModel.data)
         self.topLeftBottomWidget = widget
         self.performUpdate = update
         self.performPositioning = positioning
     }
     
-    func update(with data: WidgetData) {
-        performUpdate?(data)
+    func getView() -> UIView? {
+        topLeftBottomWidget
     }
     
-    func insertChild(view: UIView, at index: Int) {
-        performPositioning?(view, index)
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
     }
     
-    func deleteChild(at index: Int) {
-        performPositioning?(nil, index)
-    }
-    
-    func useView(usage: (UIView) -> Void) {
-        guard let topLeftBottomWidget else { return }
-        usage(topLeftBottomWidget)
+    func position(with viewModel: UIKitWidgetPositioningViewModel) {
+        performPositioning?(viewModel)
     }
 }

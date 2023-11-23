@@ -9,65 +9,42 @@ import UIKit
 
 typealias UIKitCoordinatorFactory = (WidgetTypeId) -> UIKitWidgetCoordinator
 
-protocol UIKitWidgetCoordinator {
-    func loadView(for data: WidgetData, with id: WidgetId)
-    func update(with data: WidgetData)
-    func useView(usage: (UIView) -> Void)
-    func insertChild(view: UIView, at index: Int)
-    func deleteChild(at index: Int)
-}
-
-final class UIKitWidgetCoordinatorRegistry: WidgetDifferenceView {
-    private let coordinatorFactory: UIKitCoordinatorFactory
+final class UIKitWidgetCoordinatorRegistry: WidgetRenderingView {
+    private let factory: UIKitCoordinatorFactory
     private var widgetCoordinators: [WidgetInstanceId: UIKitWidgetCoordinator] = [:]
     
     init(_ coordinatorFactory: @escaping UIKitCoordinatorFactory) {
-        self.coordinatorFactory = coordinatorFactory
+        self.factory = coordinatorFactory
     }
     
-    func display(viewModel: WidgetDifferenceViewModel) {
+    func display(viewModel: WidgetRenderingViewModel) {
         viewModel.deletions.forEach(delete)
-        viewModel.insertions.forEach(insert)
+        viewModel.creations.forEach(create)
         viewModel.updates.forEach(update)
-        viewModel.deletedAndNotInsertedChildrenInstanceIds.forEach(release)
+        viewModel.positioning.forEach(position)
     }
     
-    private func insert(
-        child childId: WidgetId,
-        toParent parentId: WidgetId,
-        at index: Int,
-        data: WidgetData
-    ) {
-        let needToLoad = widgetCoordinators[childId.instance] == nil
-        let parentCoordinator = widgetCoordinators[parentId.instance] ?? coordinatorFactory(parentId.type)
-        let childCoordinator = widgetCoordinators[childId.instance] ?? coordinatorFactory(childId.type)
-        if needToLoad {
-            childCoordinator.loadView(for: data, with: childId)
-        }
-        childCoordinator.useView {
-            parentCoordinator.insertChild(view: $0, at: index)
-        }
-        widgetCoordinators[childId.instance] = childCoordinator
-        widgetCoordinators[parentId.instance] = parentCoordinator
+    private func delete(for viewModel: WidgetRenderingViewModel.Deletion) {
+        widgetCoordinators[viewModel.id.instance] = nil
     }
     
-    private func delete(child childId: WidgetId, fromParent parentId: WidgetId, at index: Int) {
-        widgetCoordinators[parentId.instance]?.deleteChild(at: index)
+    private func create(for viewModel: WidgetRenderingViewModel.Creation) {
+        let coordinator = factory(viewModel.id.type)
+        coordinator.loadView(for: .init(id: viewModel.id, data: viewModel.data))
+        widgetCoordinators[viewModel.id.instance] = coordinator
     }
     
-    private func release(for id: WidgetInstanceId) {
-        widgetCoordinators[id] = nil
+    private func update(for viewModel: WidgetRenderingViewModel.Update) {
+        guard let node = widgetCoordinators[viewModel.id.instance] else { return }
+        node.update(with: .init(data: viewModel.data))
     }
     
-    private func update(id: WidgetId, data: WidgetData) {
-        widgetCoordinators[id.instance]?.update(with: data)
+    private func position(for viewModel: WidgetRenderingViewModel.Positioning) {
+        guard let node = widgetCoordinators[viewModel.id.instance] else { return }
+        let childrenIds = viewModel.positioningChanges.new.children
+        let childrenViews = childrenIds.compactMap { widgetCoordinators[$0]?.getView() }
+        let zippedChildren = zip(childrenIds, childrenViews)
+        let children = Dictionary(uniqueKeysWithValues: zippedChildren)
+        node.position(with: .init(positioningChanges: viewModel.positioningChanges, children: children))
     }
-}
-
-extension UIKitWidgetCoordinator {
-    func insertChild(view: UIView, at index: Int) {}
-    func deleteChild(at index: Int) {}
-    func loadView(for data: WidgetData, with id: WidgetId) {}
-    func update(with data: WidgetData) {}
-    func useView(usage: (UIView) -> Void) {}
 }

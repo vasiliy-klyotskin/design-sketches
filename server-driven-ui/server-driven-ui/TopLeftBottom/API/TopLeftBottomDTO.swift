@@ -12,3 +12,13 @@ struct TopLeftBottomDTO: Decodable {
         .init()
     }
 }
+
+struct TopLeftBottomPositioningDTO: Decodable {
+    let top: String?
+    let left: String?
+    let bottom: String?
+    
+    var model: TopLeftBottomPositioning {
+        .init(top: top, left: left, bottom: bottom)
+    }
+}

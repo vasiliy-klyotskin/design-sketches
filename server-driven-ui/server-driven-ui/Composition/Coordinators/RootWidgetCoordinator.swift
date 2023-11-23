@@ -14,11 +14,14 @@ final class RootWidgetCoordinator: UIKitWidgetCoordinator {
         self.root = root
     }
     
-    func insertChild(view: UIView, at index: Int) {
-        root.insert(view: view)
+    func getView() -> UIView? {
+        root.view
     }
     
-    func deleteChild(at index: Int) {
-        root.deleteChild()
+    func position(with viewModel: UIKitWidgetPositioningViewModel) {
+        if let child = viewModel.children.first?.value {
+            root.deleteChild()
+            root.insert(view: child)
+        }
     }
 }

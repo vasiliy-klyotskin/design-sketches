@@ -39,49 +39,144 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "61AF4639-EDC9-45E3-BEE3-079DA5B0F96D"
+            uuid = "55C69DBC-A9D7-4E7D-B9F8-3A451598597B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "display(viewModel:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "61AF4639-EDC9-45E3-BEE3-079DA5B0F96D - 5520cdc1b6c056c8"
+                  uuid = "55C69DBC-A9D7-4E7D-B9F8-3A451598597B - 57212aaeaa33e6c8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "server_driven_ui.UIKitWidgetCoordinatorRegistry.display(viewModel: server_driven_ui.WidgetDifferenceViewModel) -&gt; ()"
+                  symbolName = "server_driven_ui.UIKitWidgetCoordinatorRegistry.display(viewModel: server_driven_ui.WidgetRenderingViewModel) -&gt; ()"
                   moduleName = "server-driven-ui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/klyotskin/Desktop/design-sketches/server-driven-ui/server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "92">
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "104">
                </Location>
                <Location
-                  uuid = "61AF4639-EDC9-45E3-BEE3-079DA5B0F96D - 731edef0a84266bc"
+                  uuid = "55C69DBC-A9D7-4E7D-B9F8-3A451598597B - 18e5eab08d4fbc36"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 (server_driven_ui.WidgetId, server_driven_ui.WidgetId, Swift.Int) -&gt; () in implicit closure #1 (server_driven_ui.UIKitWidgetCoordinatorRegistry) -&gt; (server_driven_ui.WidgetId, server_driven_ui.WidgetId, Swift.Int) -&gt; () in server_driven_ui.UIKitWidgetCoordinatorRegistry.display(viewModel: server_driven_ui.WidgetDifferenceViewModel) -&gt; ()"
+                  symbolName = "implicit closure #2 (server_driven_ui.WidgetRenderingViewModel.Deletion) -&gt; () in implicit closure #1 (server_driven_ui.UIKitWidgetCoordinatorRegistry) -&gt; (server_driven_ui.WidgetRenderingViewModel.Deletion) -&gt; () in server_driven_ui.UIKitWidgetCoordinatorRegistry.display(viewModel: server_driven_ui.WidgetRenderingViewModel) -&gt; ()"
                   moduleName = "server-driven-ui"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/klyotskin/Desktop/design-sketches/server-driven-ui/server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "55C69DBC-A9D7-4E7D-B9F8-3A451598597B - 57212aaeaa33e6c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "server_driven_ui.UIKitWidgetCoordinatorRegistry.display(viewModel: server_driven_ui.WidgetRenderingViewModel) -&gt; ()"
+                  moduleName = "server-driven-ui"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/klyotskin/Desktop/design-sketches/server-driven-ui/server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "108">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54018513-47C7-434D-9199-C9AB4CD13D96"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "position(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6078C40A-252E-455C-9C0F-4CFEDA45000E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "position(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6078C40A-252E-455C-9C0F-4CFEDA45000E - bc8ab40439617dce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "server_driven_ui.UIKitWidgetCoordinatorRegistry.position(for: server_driven_ui.WidgetRenderingViewModel.Positioning) -&gt; ()"
+                  moduleName = "server-driven-ui"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/klyotskin/Desktop/design-sketches/server-driven-ui/server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "368">
+               </Location>
+               <Location
+                  uuid = "6078C40A-252E-455C-9C0F-4CFEDA45000E - a2501af7384a1428"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.AnyHashable) -&gt; Swift.Optional&lt;__C.UIView&gt; in server_driven_ui.UIKitWidgetCoordinatorRegistry.position(for: server_driven_ui.WidgetRenderingViewModel.Positioning) -&gt; ()"
+                  moduleName = "server-driven-ui"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/klyotskin/Desktop/design-sketches/server-driven-ui/server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7D318A93-58E7-48B1-B6EC-D2FC877591CD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "server-driven-ui/SDUI/Infrastructure/UIKitWidgetCoordinatorRegistry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "position(for:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

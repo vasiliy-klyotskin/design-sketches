@@ -21,18 +21,17 @@ final class ButtonUIKitCoordinator: UIKitWidgetCoordinator {
         self.factory = factory
     }
     
-    func loadView(for data: WidgetData, with id: WidgetId) {
-        let (button, performUpdate) = factory(id, data)
+    func getView() -> UIView? {
+        button
+    }
+    
+    func loadView(for viewModel: UIKitWidgetCreationViewModel) {
+        let (button, performUpdate) = factory(viewModel.id, viewModel.data)
         self.button = button
         self.performUpdate = performUpdate
     }
     
-    func update(with data: WidgetData) {
-        performUpdate?(data)
-    }
-    
-    func useView(usage: (UIView) -> Void) {
-        guard let button else { return }
-        usage(button)
+    func update(with viewModel: UIKitWidgetUpdateViewModel) {
+        performUpdate?(viewModel.data)
     }
 }
