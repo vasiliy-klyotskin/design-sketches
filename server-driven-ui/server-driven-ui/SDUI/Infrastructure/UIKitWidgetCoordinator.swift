@@ -20,16 +20,9 @@ struct UIKitWidgetCreationViewModel {
 }
 
 struct UIKitWidgetPositioningViewModel {
-    let positioningChanges: WidgetRenderingViewModel.PositioningChanges
+    let previous: WidgetRenderingViewModel.PositioningItem?
+    let current: WidgetRenderingViewModel.PositioningItem
     let children: [WidgetInstanceId: UIView]
-    
-    var newPositioningData: WidgetPositioning {
-        positioningChanges.new.positioning
-    }
-    
-    var oldPositioningData: WidgetPositioning? {
-        positioningChanges.old?.positioning
-    }
 }
 
 struct UIKitWidgetUpdateViewModel {

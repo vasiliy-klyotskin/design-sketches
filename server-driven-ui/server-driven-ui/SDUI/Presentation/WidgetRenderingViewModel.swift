@@ -29,16 +29,12 @@ struct WidgetRenderingViewModel {
     
     struct Positioning {
         let id: WidgetId
-        let positioningChanges: PositioningChanges
+        let previous: PositioningItem?
+        let current: PositioningItem
     }
     
-    struct PositioningChanges {
-        let old: PositioningChange?
-        let new: PositioningChange
-    }
-    
-    struct PositioningChange {
-        let positioning: WidgetPositioning
+    struct PositioningItem {
+        let data: WidgetPositioning
         let children: [WidgetInstanceId]
     }
 }

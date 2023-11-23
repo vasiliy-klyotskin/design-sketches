@@ -44,12 +44,12 @@ final class UIKitWidgetCoordinatorRegistry: WidgetRenderingView {
         node.update(with: .init(data: viewModel.data))
     }
     
-    private func position(for viewModel: WidgetRenderingViewModel.Positioning) {
-        guard let node = widgetCoordinators[viewModel.id.instance] else { return }
-        let childrenIds = viewModel.positioningChanges.new.children
+    private func position(for vm: WidgetRenderingViewModel.Positioning) {
+        guard let node = widgetCoordinators[vm.id.instance] else { return }
+        let childrenIds = vm.current.children
         let childrenViews = childrenIds.compactMap { widgetCoordinators[$0]?.getView() }
         let zippedChildren = zip(childrenIds, childrenViews)
         let children = Dictionary(uniqueKeysWithValues: zippedChildren)
-        node.position(with: .init(positioningChanges: viewModel.positioningChanges, children: children))
+        node.position(with: .init(previous: vm.previous, current: vm.current, children: children))
     }
 }

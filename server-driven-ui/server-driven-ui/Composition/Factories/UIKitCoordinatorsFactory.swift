@@ -58,8 +58,8 @@ func stackWidgetFactory(id: WidgetId, data: WidgetData) -> (
         if let dto = StackDTO.from($0) { stack?.update(model: dto.model) }
     }
     let positioning: StackViewWidgetPositioning = { vm in
-        let prevLinOrdering = LinearPositioningDTO.from(vm.oldPositioningData)?.model
-        guard let curLinOrdering = LinearPositioningDTO.from(vm.newPositioningData)?.model else { return }
+        let prevLinOrdering = LinearPositioningDTO.from(vm.previous?.data)?.model
+        guard let curLinOrdering = LinearPositioningDTO.from(vm.current.data)?.model else { return }
         presenter.present(previous: prevLinOrdering, current: curLinOrdering, children: vm.children)
     }
     update(data)
@@ -133,7 +133,7 @@ func topLeftBottomWidgetFactory(id: WidgetId, data: WidgetData) -> (
         if let dto = TopLeftBottomDTO.from($0) { widget?.update(with: dto.model) }
     }
     let positioning: TopLeftBottomWidgetPositioning = {
-        guard let positioningModel = TopLeftBottomPositioningDTO.from($0.newPositioningData)?.model else { return }
+        guard let positioningModel = TopLeftBottomPositioningDTO.from($0.current.data)?.model else { return }
         presenter.present(with: positioningModel, children: $0.children)
     }
     update(data)
