@@ -64,19 +64,6 @@ final class TestWidgetReplacement: XCTestCase {
     }
 }
 
-class WidgetLoaderStub: WidgetLoader {
-    var json: String?
-    
-    func loadWidget(completion: (WidgetHeirarchy) -> Void) {
-        if let data = json?.data(using: .utf8),
-            let dto = try? JSONDecoder().decode(WidgetDTO.self, from: data) {
-            completion(WidgetDTOMapper.heirarchy(from: dto))
-        } else {
-            completion(.empty)
-        }
-    }
-}
-
 extension TestWidgetReplacement {
     var json1: String {
 """

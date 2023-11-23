@@ -21,6 +21,7 @@
 		CCD626882B0F5B4A0053705B /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6267E2B0F5B4A0053705B /* UIViewController+Snapshot.swift */; };
 		CCD626892B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6267F2B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift */; };
 		CCD6268B2B0F6B740053705B /* TestWidgetDeletionInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */; };
+		CCD626972B0F6D210053705B /* WidgetLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */; };
 		D60ECF5A2B037DBA00D9972F /* WidgetDifferencePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF592B037DBA00D9972F /* WidgetDifferencePresenter.swift */; };
 		D61B18D42B06A2710012F694 /* WidgetPresentationViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18D32B06A2710012F694 /* WidgetPresentationViewModels.swift */; };
 		D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */; };
@@ -120,6 +121,7 @@
 		CCD6267E2B0F5B4A0053705B /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
 		CCD6267F2B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeaks.swift"; sourceTree = "<group>"; };
 		CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWidgetDeletionInsertion.swift; sourceTree = "<group>"; };
+		CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLoaderStub.swift; sourceTree = "<group>"; };
 		D60ECF592B037DBA00D9972F /* WidgetDifferencePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDifferencePresenter.swift; sourceTree = "<group>"; };
 		D61B18D32B06A2710012F694 /* WidgetPresentationViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPresentationViewModels.swift; sourceTree = "<group>"; };
 		D61B18D92B06A8430012F694 /* server-driven-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "server-driven-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 				D66739C92B0738BB00CE0259 /* DSL.swift */,
 				D66739C72B0738A900CE0259 /* WidgetsModelStoreFake.swift */,
 				CCD626652B0F39D70053705B /* TestScreenComposer.swift */,
+				CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				CCD6268B2B0F6B740053705B /* TestWidgetDeletionInsertion.swift in Sources */,
 				CCD626822B0F5B4A0053705B /* UIViewController+Lifecycle.swift in Sources */,
 				D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */,
+				CCD626972B0F6D210053705B /* WidgetLoaderStub.swift in Sources */,
 				D66739C82B0738A900CE0259 /* WidgetsModelStoreFake.swift in Sources */,
 				CCD626872B0F5B4A0053705B /* SnapshotConfiguration.swift in Sources */,
 				CCD626842B0F5B4A0053705B /* XCTestCase+Snapshot.swift in Sources */,
