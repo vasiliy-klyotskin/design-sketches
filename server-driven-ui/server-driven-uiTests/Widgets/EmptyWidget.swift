@@ -21,8 +21,20 @@ struct EmptyWidgetDTO: Decodable {
 }
 
 final class EmptyWidget: UIView {
+    var heightConstraint: NSLayoutConstraint!
+    
     func update(with model: EmptyWidgetModel) {
         self.backgroundColor = UIColor.hexStringToUIColor(hex: model.color)
+        setHeight(150)
+    }
+    
+    private func setHeight(_ height: CGFloat) {
+        if heightConstraint == nil {
+            heightConstraint = self.heightAnchor.constraint(equalToConstant: height)
+            heightConstraint.isActive = true
+        } else {
+            heightConstraint.constant = height
+        }
     }
 }
 

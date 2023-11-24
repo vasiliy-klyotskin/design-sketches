@@ -22,6 +22,14 @@
 		CCD626892B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6267F2B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift */; };
 		CCD6268B2B0F6B740053705B /* TestWidgetDeletionInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */; };
 		CCD626972B0F6D210053705B /* WidgetLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */; };
+		CCD626992B0F70000053705B /* TestVerticalScrollPreservance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626982B0F70000053705B /* TestVerticalScrollPreservance.swift */; };
+		CCD6269C2B0F709E0053705B /* ScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6269B2B0F709E0053705B /* ScrollModel.swift */; };
+		CCD626A02B0F712B0053705B /* Inset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6269F2B0F712B0053705B /* Inset.swift */; };
+		CCD626A32B0F71C80053705B /* ScrollDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A22B0F71C80053705B /* ScrollDTO.swift */; };
+		CCD626A62B0F72540053705B /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A52B0F72540053705B /* ScrollView.swift */; };
+		CCD626A82B0F72F20053705B /* Inset+UIEdgeInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A72B0F72F20053705B /* Inset+UIEdgeInset.swift */; };
+		CCD626AA2B0F75800053705B /* ScrollViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */; };
+		CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */; };
 		D60ECF5A2B037DBA00D9972F /* WidgetRenderingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */; };
 		D61B18D42B06A2710012F694 /* WidgetRenderingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */; };
 		D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */; };
@@ -129,6 +137,14 @@
 		CCD6267F2B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeaks.swift"; sourceTree = "<group>"; };
 		CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWidgetDeletionInsertion.swift; sourceTree = "<group>"; };
 		CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLoaderStub.swift; sourceTree = "<group>"; };
+		CCD626982B0F70000053705B /* TestVerticalScrollPreservance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestVerticalScrollPreservance.swift; sourceTree = "<group>"; };
+		CCD6269B2B0F709E0053705B /* ScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollModel.swift; sourceTree = "<group>"; };
+		CCD6269F2B0F712B0053705B /* Inset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inset.swift; sourceTree = "<group>"; };
+		CCD626A22B0F71C80053705B /* ScrollDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDTO.swift; sourceTree = "<group>"; };
+		CCD626A52B0F72540053705B /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		CCD626A72B0F72F20053705B /* Inset+UIEdgeInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inset+UIEdgeInset.swift"; sourceTree = "<group>"; };
+		CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewUIKitCoordinator.swift; sourceTree = "<group>"; };
+		CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+WindowScene.swift"; sourceTree = "<group>"; };
 		D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingPresenter.swift; sourceTree = "<group>"; };
 		D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingViewModel.swift; sourceTree = "<group>"; };
 		D61B18D92B06A8430012F694 /* server-driven-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "server-driven-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +280,48 @@
 			path = UISnapshots;
 			sourceTree = "<group>";
 		};
+		CCD6269A2B0F70900053705B /* Scroll */ = {
+			isa = PBXGroup;
+			children = (
+				CCD6269D2B0F70A30053705B /* Domain */,
+				CCD626A12B0F71B90053705B /* API */,
+				CCD626A42B0F72420053705B /* UI */,
+			);
+			path = Scroll;
+			sourceTree = "<group>";
+		};
+		CCD6269D2B0F70A30053705B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CCD6269B2B0F709E0053705B /* ScrollModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CCD6269E2B0F711A0053705B /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				CCD6269F2B0F712B0053705B /* Inset.swift */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		CCD626A12B0F71B90053705B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CCD626A22B0F71C80053705B /* ScrollDTO.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		CCD626A42B0F72420053705B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CCD626A52B0F72540053705B /* ScrollView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		D60ECF532B03788B00D9972F /* Composition */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +351,7 @@
 				D61B18E22B06B0F70012F694 /* Helpers */,
 				D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */,
 				CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */,
+				CCD626982B0F70000053705B /* TestVerticalScrollPreservance.swift */,
 			);
 			path = "server-driven-uiTests";
 			sourceTree = "<group>";
@@ -304,6 +363,7 @@
 				D66739C92B0738BB00CE0259 /* DSL.swift */,
 				CCD626652B0F39D70053705B /* TestScreenComposer.swift */,
 				CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */,
+				CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -327,6 +387,7 @@
 				D6A2B2EA2B0CFAE400F23C69 /* IntentHandler.swift */,
 				D6A2B2CE2B0CDFB000F23C69 /* Intents */,
 				D6A2B2A32B0CA86100F23C69 /* ActionData */,
+				CCD6269E2B0F711A0053705B /* Geometry */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -338,6 +399,7 @@
 				D66455002B0BDD42006BC425 /* AnyEncodable.swift */,
 				D6A2B2902B0C890400F23C69 /* AnyCodable.swift */,
 				D6A2B2A92B0CAA3F00F23C69 /* SerializationHelpers.swift */,
+				CCD626A72B0F72F20053705B /* Inset+UIEdgeInset.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -432,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				D6B5F1992B04FD34007D24C6 /* StackViewUIKitCoordinator.swift */,
+				CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */,
 				D6B5F19B2B04FD60007D24C6 /* LabelWidgetUIKitCoordinator.swift */,
 				D6A2B2D32B0CE2C200F23C69 /* ButtonUIKitCoordinator.swift */,
 				D6A2B2D52B0CE2D600F23C69 /* SwitchUIKitCoordinator.swift */,
@@ -707,6 +770,7 @@
 			children = (
 				D60ECF532B03788B00D9972F /* Composition */,
 				D66739CB2B07395400CE0259 /* SDUI */,
+				CCD6269A2B0F70900053705B /* Scroll */,
 				D66739CC2B07397500CE0259 /* Stack */,
 				D66739CD2B07397F00CE0259 /* Label */,
 				D6A2B2B72B0CDAF000F23C69 /* Button */,
@@ -840,7 +904,9 @@
 				CCD626832B0F5B4A0053705B /* UIImage+Creation.swift in Sources */,
 				CCD6268B2B0F6B740053705B /* TestWidgetDeletionInsertion.swift in Sources */,
 				CCD626822B0F5B4A0053705B /* UIViewController+Lifecycle.swift in Sources */,
+				CCD626992B0F70000053705B /* TestVerticalScrollPreservance.swift in Sources */,
 				D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */,
+				CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */,
 				CCD626972B0F6D210053705B /* WidgetLoaderStub.swift in Sources */,
 				CCD626872B0F5B4A0053705B /* SnapshotConfiguration.swift in Sources */,
 				CCD626842B0F5B4A0053705B /* XCTestCase+Snapshot.swift in Sources */,
@@ -883,6 +949,7 @@
 				D66454F72B0BC6F0006BC425 /* Widget.swift in Sources */,
 				D6A2B2A82B0CA8AC00F23C69 /* LocalUpdateContentAction.swift in Sources */,
 				D6A2B2912B0C890400F23C69 /* AnyCodable.swift in Sources */,
+				CCD626AA2B0F75800053705B /* ScrollViewUIKitCoordinator.swift in Sources */,
 				D6A2B2F32B0D257D00F23C69 /* WidgetsContentInteractor.swift in Sources */,
 				D6EC23402B0376AC0085E147 /* ViewController.swift in Sources */,
 				D6EC233C2B0376AC0085E147 /* AppDelegate.swift in Sources */,
@@ -891,11 +958,13 @@
 				D6A2B2D02B0CDFC500F23C69 /* ButtonIntents.swift in Sources */,
 				D6A2B2E22B0CEA3E00F23C69 /* TopLeftBottomUIKitCoordinator.swift in Sources */,
 				D6A2B2F72B0D2C2800F23C69 /* RefreshAction.swift in Sources */,
+				CCD626A32B0F71C80053705B /* ScrollDTO.swift in Sources */,
 				D6A2B2B52B0CD7E800F23C69 /* StackDTO.swift in Sources */,
 				D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */,
 				D61B18D42B06A2710012F694 /* WidgetRenderingViewModel.swift in Sources */,
 				D6A2B2C42B0CDB9800F23C69 /* ButtonWidget.swift in Sources */,
 				D66739D92B0739DF00CE0259 /* LabelView.swift in Sources */,
+				CCD626A62B0F72540053705B /* ScrollView.swift in Sources */,
 				D66739D72B0739D400CE0259 /* StackView.swift in Sources */,
 				D6A2B2CA2B0CDBB900F23C69 /* SwitchWidget.swift in Sources */,
 				D6A4AACE2B0F281B00F28DFB /* LinearPositioning.swift in Sources */,
@@ -906,12 +975,15 @@
 				D6BF80702B0B8EF100857EDA /* InMemoryWidgetStorage.swift in Sources */,
 				D62DF7DB2B0FC073008ED9DB /* LinearPositioningDTO.swift in Sources */,
 				D6A2B2972B0CA19F00F23C69 /* ActionPerformersFactory.swift in Sources */,
+				CCD626A02B0F712B0053705B /* Inset.swift in Sources */,
 				D6A2B2932B0C9DC700F23C69 /* SubmitFormActionPerformer.swift in Sources */,
 				D6A2B3072B0D329D00F23C69 /* ActivityModel.swift in Sources */,
 				D6A2B2DC2B0CE4FB00F23C69 /* TopLeftBottom.swift in Sources */,
 				D6A2B2D22B0CDFCE00F23C69 /* SwitchIntents.swift in Sources */,
 				D6A2B3032B0D328B00F23C69 /* ActivityWidget.swift in Sources */,
 				D6A2B2AA2B0CAA3F00F23C69 /* SerializationHelpers.swift in Sources */,
+				CCD6269C2B0F709E0053705B /* ScrollModel.swift in Sources */,
+				CCD626A82B0F72F20053705B /* Inset+UIEdgeInset.swift in Sources */,
 				D6A2B2C22B0CDB8800F23C69 /* ButtonDTO.swift in Sources */,
 				D66739D32B0739B100CE0259 /* LabelModel.swift in Sources */,
 				D6A4AAE12B0F7EEC00F28DFB /* UIKitWidgetCoordinator.swift in Sources */,

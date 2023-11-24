@@ -27,7 +27,8 @@ final class UIKitWidgetCoordinatorFactory {
                 )
             )},
             "TOP_LEFT_BOTTOM": { TopLeftBottomUIKitCoordinator(factory: topLeftBottomWidgetFactory) },
-            "ACTIVITY": { ActivityUIKitCoordinator(factory: activityWidgetFactory) }
+            "ACTIVITY": { ActivityUIKitCoordinator(factory: activityWidgetFactory) },
+            "SCROLL": { ScrollViewUIKitCoordinator(factory: scrollWidgetFactory) }
         ]
     }
     
@@ -149,4 +150,25 @@ func activityWidgetFactory(id: WidgetId, data: WidgetData) -> (ActivityWidget, A
     }
     update(data)
     return (activity, update)
+}
+
+// MARK: - SCROLL
+
+func scrollWidgetFactory(id: WidgetId, data: WidgetData) -> (WidgetScrollView, ScrollViewWidgetUpdate, ScrollViewWidgetPositioning) {
+    let view = WidgetScrollView()
+    let update: ScrollViewWidgetUpdate = { [weak view] in
+        if let dto = ScrollDTO.from($0) { view?.update(model: dto.model) }
+    }
+    let positioning: ScrollViewWidgetPositioning = { vm in
+        let prevContentId = ScrollPositioningDTO.from(vm.previous?.data)?.model
+        let curContentId: WidgetInstanceId? = ScrollPositioningDTO.from(vm.current.data)?.model ?? vm.children.first?.key
+        if prevContentId != curContentId {
+            view.deleteContent()
+            if let curContentId, let child = vm.children[curContentId] {
+                view.setContent(child)
+            }
+        }
+    }
+    update(data)
+    return (view, update, positioning)
 }

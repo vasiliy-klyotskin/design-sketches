@@ -60,7 +60,8 @@ final class UIKitTestWidgetCoordinatorFactory {
             )},
             "TOP_LEFT_BOTTOM": { TopLeftBottomUIKitCoordinator(factory: topLeftBottomWidgetFactory) },
             "ACTIVITY": { ActivityUIKitCoordinator(factory: activityWidgetFactory) },
-            "EMPTY": { EmptyWidgetUIKitCoordinator(factory: emptyWidgetFactory) }
+            "EMPTY": { EmptyWidgetUIKitCoordinator(factory: emptyWidgetFactory) },
+            "SCROLL": { ScrollViewUIKitCoordinator(factory: scrollWidgetFactory) }
         ]
     }
     
