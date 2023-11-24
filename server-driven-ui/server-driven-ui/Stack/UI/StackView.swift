@@ -10,7 +10,10 @@ import UIKit
 final class WidgetStackView: UIStackView, StackView {
     func update(model: StackModel) {
         spacing = CGFloat(model.spacing)
-        axis = .vertical
+        switch model.axis {
+        case .vertical: axis = .vertical
+        case .horizontal: axis = .horizontal
+        }
     }
     
     func insert(child view: UIView, at index: Int) {

@@ -16,7 +16,7 @@ final class TestVerticalScrollPreservance: XCTestCase {
     /// 3. В исходный список виджетов вставляем между третьим и четвертым еще один виджет (другого типа)
     /// 4. Выводим измененный список не экран
     /// 5. Проверяем, что позиция скроллинга не изменилась
-    func test_sdui_keepsVerticalScrollingPositionWhenUpdatingContents() throws {
+    func test_sdui_replacesChangedWidgetleavingOtherIntact() throws {
         let (sut, loader) = makeSut()
         
         // Выводим 10 виджетов с высотой 150 поинтов каждый

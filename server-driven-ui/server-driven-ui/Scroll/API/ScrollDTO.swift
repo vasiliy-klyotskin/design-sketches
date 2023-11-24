@@ -22,8 +22,8 @@ enum ScrollingDirectionDTO: String, Decodable {
 }
 
 struct ScrollDTO: Decodable {
-    let direction: ScrollingDirectionDTO
-    let contentInsets: Inset
+    let direction: ScrollingDirectionDTO?
+    let contentInsets: Inset?
 }
 
 extension ScrollingDirectionDTO {
@@ -38,6 +38,9 @@ extension ScrollingDirectionDTO {
 
 extension ScrollDTO {
     var model: ScrollModel {
-        .init(direction: direction.model, contentInsets: contentInsets)
+        .init(
+            direction: direction?.model ?? .vertical,
+            contentInsets: contentInsets ?? .zero
+        )
     }
 }

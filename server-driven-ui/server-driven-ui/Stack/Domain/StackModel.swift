@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum StackAxis {
+    case vertical
+    case horizontal
+}
+
 struct StackModel {
+    let axis: StackAxis
     let spacing: Double
 }
