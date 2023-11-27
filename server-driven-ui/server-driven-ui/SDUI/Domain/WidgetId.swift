@@ -18,18 +18,18 @@ struct WidgetId {
     /// Идентификатор экземпляра виджета. Чаще всего это просто строка
     let instance: WidgetInstanceId
     
-    /// Идентификатор состояния виджета
+    /// Идентификатор состояния виджета. По нему мы поимаем, когда мы хотим обновить данные для определенного виджета
     let state: WidgetStateId
     
-    // TODO: Documentation
+    /// Идентификатор позиционирования виджета. Если у виджетов с одним и тем же инстансом отличаются positioning, то мы хотим перепозиционировать детей в последнем
     let positioning: WidgetPositioningId
     
-    // TODO: Documentation
+    /// Идентификатор дляпозиционирования для тех виджетов, которые не являются контейнерами
     static var positioningIdForNotContainers: WidgetPositioningId {
         "NO_POSITIONING"
     }
     
-    // TODO: Documentation
+    /// Идентификатор для искусственно добавляемого корневого контейнера.
     static var rootContainerKeyForIds: String {
         "ROOT_CONTAINER"
     }
