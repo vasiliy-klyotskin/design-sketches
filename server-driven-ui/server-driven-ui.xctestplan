@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "06FFF35F-1580-4890-89D6-45413EC63251",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:server-driven-ui.xcodeproj",
+      "identifier" : "D6EC23372B0376AC0085E147",
+      "name" : "server-driven-ui"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:server-driven-ui.xcodeproj",
+        "identifier" : "D61B18D82B06A8430012F694",
+        "name" : "server-driven-uiTests"
+      }
+    }
+  ],
+  "version" : 1
+}

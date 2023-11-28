@@ -51,7 +51,7 @@ final class TestWidgetDeletionInsertion: XCTestCase {
     
     private func makeSut() -> (RootWidget, WidgetLoaderStub) {
         let loader = WidgetLoaderStub()
-        let root = TestScreenComposer.compose(loader: loader) as! RootWidget
+        let root = TestScreenComposer.compose(loader: loader, testAction: { _ in }) as! RootWidget
         return (root, loader)
     }
     

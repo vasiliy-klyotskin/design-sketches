@@ -31,6 +31,8 @@
 		CCD626AA2B0F75800053705B /* ScrollViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */; };
 		CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */; };
 		CCF047902B14BEF10066A004 /* TestEventAndAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF0478F2B14BEF10066A004 /* TestEventAndAction.swift */; };
+		CCF047922B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF047912B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift */; };
+		CCF047942B158DE80066A004 /* TestActionPerformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF047932B158DE80066A004 /* TestActionPerformerFactory.swift */; };
 		D60ECF5A2B037DBA00D9972F /* WidgetRenderingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */; };
 		D61B18D42B06A2710012F694 /* WidgetRenderingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */; };
 		D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */; };
@@ -147,6 +149,9 @@
 		CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewUIKitCoordinator.swift; sourceTree = "<group>"; };
 		CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+WindowScene.swift"; sourceTree = "<group>"; };
 		CCF0478F2B14BEF10066A004 /* TestEventAndAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEventAndAction.swift; sourceTree = "<group>"; };
+		CCF047912B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTestWidgetCoordinatorFactory.swift; sourceTree = "<group>"; };
+		CCF047932B158DE80066A004 /* TestActionPerformerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestActionPerformerFactory.swift; sourceTree = "<group>"; };
+		CCF047952B1594540066A004 /* server-driven-ui.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "server-driven-ui.xctestplan"; sourceTree = "<group>"; };
 		D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingPresenter.swift; sourceTree = "<group>"; };
 		D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingViewModel.swift; sourceTree = "<group>"; };
 		D61B18D92B06A8430012F694 /* server-driven-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "server-driven-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -364,6 +369,8 @@
 			children = (
 				CCD6266A2B0F3A9C0053705B /* UIColor.swift */,
 				D66739C92B0738BB00CE0259 /* DSL.swift */,
+				CCF047912B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift */,
+				CCF047932B158DE80066A004 /* TestActionPerformerFactory.swift */,
 				CCD626652B0F39D70053705B /* TestScreenComposer.swift */,
 				CCD626962B0F6D210053705B /* WidgetLoaderStub.swift */,
 				CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */,
@@ -753,6 +760,7 @@
 		D6EC232F2B0376AC0085E147 = {
 			isa = PBXGroup;
 			children = (
+				CCF047952B1594540066A004 /* server-driven-ui.xctestplan */,
 				D6EC233A2B0376AC0085E147 /* server-driven-ui */,
 				D61B18DA2B06A8430012F694 /* server-driven-uiTests */,
 				D6EC23392B0376AC0085E147 /* Products */,
@@ -904,9 +912,11 @@
 				CCD626852B0F5B4A0053705B /* UIView+Containers.swift in Sources */,
 				D66739CA2B0738BB00CE0259 /* DSL.swift in Sources */,
 				CCD626662B0F39D70053705B /* TestScreenComposer.swift in Sources */,
+				CCF047922B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift in Sources */,
 				CCD626832B0F5B4A0053705B /* UIImage+Creation.swift in Sources */,
 				CCD6268B2B0F6B740053705B /* TestWidgetDeletionInsertion.swift in Sources */,
 				CCD626822B0F5B4A0053705B /* UIViewController+Lifecycle.swift in Sources */,
+				CCF047942B158DE80066A004 /* TestActionPerformerFactory.swift in Sources */,
 				CCD626992B0F70000053705B /* TestVerticalScrollPreservance.swift in Sources */,
 				D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */,
 				CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */,

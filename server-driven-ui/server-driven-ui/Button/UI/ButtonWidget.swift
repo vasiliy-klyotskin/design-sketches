@@ -13,7 +13,7 @@ final class ButtonWidget: UIButton {
     init(onTap: @escaping () -> Void) {
         super.init(frame: .zero)
         self.onTap = onTap
-        addTarget(self, action: #selector(tapped), for: .touchDown)
+        addTarget(self, action: #selector(tapped), for: .touchUpInside)
     }
     
     @objc func tapped() {
