@@ -19,49 +19,57 @@ struct ExampleLoader: WidgetLoader {
     
     let json =
 """
-    {
-        "type": "STACK",
-        "instance": "0",
-        "data": {
-            "spacing": 10
-        },
-        "positioning": {
-            "1": 0,
-            "2": 1,
-            "7": 2,
-            "5": 3
-        },
-        "children": [
-            {
-                "type": "LABEL",
-                "instance": "2",
-                "data": {
-                    "text": "Don't you mind to add a widget?"
-                }
+{
+    "type": "SCROLL",
+    "instance": "scroll",
+    "data": { },
+    "positioning": "stack",
+    "children": [
+        {
+            "type": "STACK",
+            "instance": "stack",
+            "data": {
+                "spacing": 10
             },
-            {
-                "type": "LABEL",
-                "instance": "1",
-                "data": {
-                    "text": "How's it going buddy?"
+            "positioning": [
+                "5",
+                "7",
+                "1",
+                "2"
+            ],
+            "children": [
+                {
+                    "type": "LABEL",
+                    "instance": "2",
+                    "data": {
+                        "text": "Don't you mind to add a widget?"
+                    }
+                },
+                {
+                    "type": "LABEL",
+                    "instance": "1",
+                    "data": {
+                        "text": "How's it going buddy?"
+                    }
+                },
+                {
+                    "type": "LABEL",
+                    "instance": "5",
+                    "data": {
+                        "text": "Hey!!!"
+                    }
+                },
+                {
+                    "type": "LABEL",
+                    "instance": "7",
+                    "data": {
+                        "text": "What's up?"
+                    }
                 }
-            },
-            {
-                "type": "LABEL",
-                "instance": "5",
-                "data": {
-                    "text": "Hey!!!"
-                }
-            },
-            {
-                "type": "LABEL",
-                "instance": "7",
-                "data": {
-                    "text": "What's up?"
-                }
-            }
-        ]
-    }
+            ]
+        }
+    ]
+}
 """
 
 

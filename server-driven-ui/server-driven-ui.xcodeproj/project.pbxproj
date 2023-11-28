@@ -30,6 +30,7 @@
 		CCD626A82B0F72F20053705B /* Inset+UIEdgeInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A72B0F72F20053705B /* Inset+UIEdgeInset.swift */; };
 		CCD626AA2B0F75800053705B /* ScrollViewUIKitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */; };
 		CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */; };
+		CCF047902B14BEF10066A004 /* TestEventAndAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF0478F2B14BEF10066A004 /* TestEventAndAction.swift */; };
 		D60ECF5A2B037DBA00D9972F /* WidgetRenderingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */; };
 		D61B18D42B06A2710012F694 /* WidgetRenderingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */; };
 		D61B18DC2B06A8430012F694 /* TestWidgetReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */; };
@@ -145,6 +146,7 @@
 		CCD626A72B0F72F20053705B /* Inset+UIEdgeInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inset+UIEdgeInset.swift"; sourceTree = "<group>"; };
 		CCD626A92B0F75800053705B /* ScrollViewUIKitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewUIKitCoordinator.swift; sourceTree = "<group>"; };
 		CCD626B82B104F6E0053705B /* UIViewController+WindowScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+WindowScene.swift"; sourceTree = "<group>"; };
+		CCF0478F2B14BEF10066A004 /* TestEventAndAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEventAndAction.swift; sourceTree = "<group>"; };
 		D60ECF592B037DBA00D9972F /* WidgetRenderingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingPresenter.swift; sourceTree = "<group>"; };
 		D61B18D32B06A2710012F694 /* WidgetRenderingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRenderingViewModel.swift; sourceTree = "<group>"; };
 		D61B18D92B06A8430012F694 /* server-driven-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "server-driven-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,6 +354,7 @@
 				D61B18DB2B06A8430012F694 /* TestWidgetReplacement.swift */,
 				CCD6268A2B0F6B740053705B /* TestWidgetDeletionInsertion.swift */,
 				CCD626982B0F70000053705B /* TestVerticalScrollPreservance.swift */,
+				CCF0478F2B14BEF10066A004 /* TestEventAndAction.swift */,
 			);
 			path = "server-driven-uiTests";
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				CCD626B92B104F6E0053705B /* UIViewController+WindowScene.swift in Sources */,
 				CCD626972B0F6D210053705B /* WidgetLoaderStub.swift in Sources */,
 				CCD626872B0F5B4A0053705B /* SnapshotConfiguration.swift in Sources */,
+				CCF047902B14BEF10066A004 /* TestEventAndAction.swift in Sources */,
 				CCD626842B0F5B4A0053705B /* XCTestCase+Snapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

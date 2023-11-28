@@ -39,12 +39,15 @@ final class WidgetScrollView: UIScrollView {
 
     private func loadContentView() {
         contentView = UIView(frame: .zero)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
+        let bottom = contentView.bottomAnchor.constraint(equalTo: self.contentLayoutGuide.bottomAnchor)
+        bottom.priority = .init(990)
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: self.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: self.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: self.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.contentLayoutGuide.bottomAnchor),
+            bottom
         ])
         
         widthConstraint = contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor)
