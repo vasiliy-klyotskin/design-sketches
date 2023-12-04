@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WidgetLoader {
-    func loadWidget(completion: (WidgetHeirarchy) -> Void)
+    func loadWidget(completion: @escaping (WidgetHeirarchy) -> Void)
 }
 
 class WidgetsInteractor {
@@ -34,10 +34,11 @@ class WidgetsInteractor {
     }
     
     func beginLoadingNewWidget(with data: [WidgetInstanceId: WidgetData]) {
-        loader.loadWidget { newHeirarchy in
+        loader.loadWidget { [weak self] newHeirarchy in
+            guard let self else { return }
             let heirarchyWithContainer = newHeirarchy.wrappedIntoRootContainer
-            storage.update(with: heirarchyWithContainer)
-            rerenderFor(heirarchy: heirarchyWithContainer)
+            self.storage.update(with: heirarchyWithContainer)
+            self.rerenderFor(heirarchy: heirarchyWithContainer)
         }
     }
     

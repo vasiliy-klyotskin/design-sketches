@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0C80102B1869B200D5A608 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C800F2B1869B200D5A608 /* Demo.swift */; };
+		CC0C80122B186AC200D5A608 /* EmptyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626682B0F3A4E0053705B /* EmptyWidget.swift */; };
+		CC0C80132B186ACF00D5A608 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6266A2B0F3A9C0053705B /* UIColor.swift */; };
 		CCD626662B0F39D70053705B /* TestScreenComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626652B0F39D70053705B /* TestScreenComposer.swift */; };
-		CCD626692B0F3A4E0053705B /* EmptyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626682B0F3A4E0053705B /* EmptyWidget.swift */; };
-		CCD6266B2B0F3A9C0053705B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6266A2B0F3A9C0053705B /* UIColor.swift */; };
 		CCD626802B0F5B4A0053705B /* UIView+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626752B0F5B4A0053705B /* UIView+Visibility.swift */; };
 		CCD626812B0F5B4A0053705B /* UIControl+EventSimulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626762B0F5B4A0053705B /* UIControl+EventSimulation.swift */; };
 		CCD626822B0F5B4A0053705B /* UIViewController+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD626772B0F5B4A0053705B /* UIViewController+Lifecycle.swift */; };
@@ -125,6 +126,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC0C800F2B1869B200D5A608 /* Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		CCD626652B0F39D70053705B /* TestScreenComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScreenComposer.swift; sourceTree = "<group>"; };
 		CCD626682B0F3A4E0053705B /* EmptyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWidget.swift; sourceTree = "<group>"; };
 		CCD6266A2B0F3A9C0053705B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -254,10 +256,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CCD626672B0F3A430053705B /* Widgets */ = {
+		CC0C80112B186A8900D5A608 /* EmptyWidget */ = {
 			isa = PBXGroup;
 			children = (
 				CCD626682B0F3A4E0053705B /* EmptyWidget.swift */,
+			);
+			path = EmptyWidget;
+			sourceTree = "<group>";
+		};
+		CCD626672B0F3A430053705B /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -334,6 +343,7 @@
 			children = (
 				D6A2B2E82B0CF4D700F23C69 /* ScreenComposer.swift */,
 				D6A2B2FC2B0D322600F23C69 /* Dummies.swift */,
+				CC0C800F2B1869B200D5A608 /* Demo.swift */,
 				D6A2B2FA2B0D304700F23C69 /* CompositionHelpers.swift */,
 				D6A2B2AD2B0CCE0700F23C69 /* Factories */,
 				D6A2B2982B0CA1C900F23C69 /* Coordinators */,
@@ -367,7 +377,6 @@
 		D61B18E22B06B0F70012F694 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				CCD6266A2B0F3A9C0053705B /* UIColor.swift */,
 				D66739C92B0738BB00CE0259 /* DSL.swift */,
 				CCF047912B158DC20066A004 /* UIKitTestWidgetCoordinatorFactory.swift */,
 				CCF047932B158DE80066A004 /* TestActionPerformerFactory.swift */,
@@ -405,6 +414,7 @@
 		D66454FA2B0BC719006BC425 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CCD6266A2B0F3A9C0053705B /* UIColor.swift */,
 				D66454FB2B0BC72B006BC425 /* AnyDecodable.swift */,
 				D66455002B0BDD42006BC425 /* AnyEncodable.swift */,
 				D6A2B2902B0C890400F23C69 /* AnyCodable.swift */,
@@ -779,6 +789,7 @@
 		D6EC233A2B0376AC0085E147 /* server-driven-ui */ = {
 			isa = PBXGroup;
 			children = (
+				CC0C80112B186A8900D5A608 /* EmptyWidget */,
 				D60ECF532B03788B00D9972F /* Composition */,
 				D66739CB2B07395400CE0259 /* SDUI */,
 				CCD6269A2B0F70900053705B /* Scroll */,
@@ -905,9 +916,7 @@
 				CCD626862B0F5B4A0053705B /* SnapshotPlaceholder.swift in Sources */,
 				CCD626882B0F5B4A0053705B /* UIViewController+Snapshot.swift in Sources */,
 				CCD626892B0F5B4A0053705B /* XCTestCase+MemoryLeaks.swift in Sources */,
-				CCD626692B0F3A4E0053705B /* EmptyWidget.swift in Sources */,
 				CCD626802B0F5B4A0053705B /* UIView+Visibility.swift in Sources */,
-				CCD6266B2B0F3A9C0053705B /* UIColor.swift in Sources */,
 				CCD626812B0F5B4A0053705B /* UIControl+EventSimulation.swift in Sources */,
 				CCD626852B0F5B4A0053705B /* UIView+Containers.swift in Sources */,
 				D66739CA2B0738BB00CE0259 /* DSL.swift in Sources */,
@@ -944,6 +953,7 @@
 				D6447DEB2B0DD7440021BEBA /* PrintConsoleAction.swift in Sources */,
 				D6A2B2A02B0CA81600F23C69 /* LocalUpdateContentActionDTO.swift in Sources */,
 				D6A2B2E02B0CE50D00F23C69 /* TopLeftBottomWidget.swift in Sources */,
+				CC0C80122B186AC200D5A608 /* EmptyWidget.swift in Sources */,
 				D6A2B2D62B0CE2D600F23C69 /* SwitchUIKitCoordinator.swift in Sources */,
 				D6A2B28F2B0C84E000F23C69 /* WidgetDTOMapper.swift in Sources */,
 				D62DF7DF2B0FC22B008ED9DB /* WidgetId.swift in Sources */,
@@ -951,6 +961,7 @@
 				D66739DF2B073C4400CE0259 /* RootWidget.swift in Sources */,
 				D6A2B2A52B0CA87700F23C69 /* SubmitFormAction.swift in Sources */,
 				D6A2B3092B0D342B00F23C69 /* ActivityUIKitCoordinator.swift in Sources */,
+				CC0C80102B1869B200D5A608 /* Demo.swift in Sources */,
 				D6A2B2A22B0CA82B00F23C69 /* SubmitFormActionDTO.swift in Sources */,
 				D6A2B2C02B0CDB7100F23C69 /* ButtonModel.swift in Sources */,
 				D66454FC2B0BC72B006BC425 /* AnyDecodable.swift in Sources */,
@@ -973,6 +984,7 @@
 				D6A2B2E22B0CEA3E00F23C69 /* TopLeftBottomUIKitCoordinator.swift in Sources */,
 				D6A2B2F72B0D2C2800F23C69 /* RefreshAction.swift in Sources */,
 				CCD626A32B0F71C80053705B /* ScrollDTO.swift in Sources */,
+				CC0C80132B186ACF00D5A608 /* UIColor.swift in Sources */,
 				D6A2B2B52B0CD7E800F23C69 /* StackDTO.swift in Sources */,
 				D6B5F19A2B04FD34007D24C6 /* StackViewUIKitCoordinator.swift in Sources */,
 				D61B18D42B06A2710012F694 /* WidgetRenderingViewModel.swift in Sources */,

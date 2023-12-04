@@ -6,34 +6,60 @@
 //
 
 import UIKit
-@testable import server_driven_ui
 
 struct EmptyWidgetModel {
     let color: String
+    let width: Float?
+    let height: Float?
 }
 
 struct EmptyWidgetDTO: Decodable {
     let color: String
-    
+    let width: Float?
+    let height: Float?
+
     var model: EmptyWidgetModel {
-        .init(color: color)
+        .init(color: color, width: width, height: height)
     }
 }
 
 final class EmptyWidget: UIView {
-    var heightConstraint: NSLayoutConstraint!
-    
+    var heightConstraint: NSLayoutConstraint?
+    var widthConstraint: NSLayoutConstraint?
+
     func update(with model: EmptyWidgetModel) {
         self.backgroundColor = UIColor.hexStringToUIColor(hex: model.color)
-        setHeight(150)
+        setHeight(model.height)
+        setWidth(model.width)
     }
     
-    private func setHeight(_ height: CGFloat) {
-        if heightConstraint == nil {
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: height)
-            heightConstraint.isActive = true
+    private func setHeight(_ value: Float?) {
+        if let value {
+            if heightConstraint == nil {
+                heightConstraint = self.heightAnchor.constraint(equalToConstant: CGFloat(value))
+                heightConstraint?.isActive = true
+            } else {
+                heightConstraint?.constant = CGFloat(value)
+            }
+            
         } else {
-            heightConstraint.constant = height
+            heightConstraint?.isActive = false
+            heightConstraint = nil
+        }
+    }
+    
+    private func setWidth(_ value: Float?) {
+        if let value {
+            if widthConstraint == nil {
+                widthConstraint = self.widthAnchor.constraint(equalToConstant: CGFloat(value))
+                widthConstraint?.isActive = true
+            } else {
+                widthConstraint?.constant = CGFloat(value)
+            }
+            
+        } else {
+            widthConstraint?.isActive = false
+            widthConstraint = nil
         }
     }
 }

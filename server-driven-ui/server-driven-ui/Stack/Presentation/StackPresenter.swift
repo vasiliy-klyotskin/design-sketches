@@ -28,7 +28,7 @@ final class StackPresenter<View: StackView> {
         children: [ChildId: View.Child]
     ) {
         let diff = current.difference(for: previous)
-        for deletion in diff.deletions {
+        for deletion in diff.deletions.reversed() {
             view.delete(at: deletion.index)
         }
         for insertion in diff.insertions {

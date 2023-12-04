@@ -8,7 +8,7 @@
 import UIKit
 
 enum ScreenComposer {
-    static func compose(loader: WidgetLoader) -> UIViewController {
+    static func compose(loader: WidgetLoader) -> RootWidget {
         let root = RootWidget()
         let storage = InMemoryWidgetDataStorage()
         let view = WidgetDifferenceViewProxy()

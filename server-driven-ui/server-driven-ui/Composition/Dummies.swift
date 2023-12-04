@@ -16,8 +16,10 @@ struct ExampleLoader: WidgetLoader {
         completion(heirarchy)
     }
 }
+
+extension ExampleLoader {
     
-    let json =
+    var json: String {
 """
 {
     "type": "SCROLL",
@@ -71,7 +73,8 @@ struct ExampleLoader: WidgetLoader {
     ]
 }
 """
-
+    }
+}
 
 //let json =
 //"""

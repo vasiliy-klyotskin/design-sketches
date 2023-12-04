@@ -19,14 +19,14 @@ struct UIKitWidgetCreationViewModel {
     let data: WidgetData
 }
 
+struct UIKitWidgetUpdateViewModel {
+    let data: WidgetData
+}
+
 struct UIKitWidgetPositioningViewModel {
     let previous: WidgetRenderingViewModel.PositioningItem?
     let current: WidgetRenderingViewModel.PositioningItem
     let children: [WidgetInstanceId: UIView]
-}
-
-struct UIKitWidgetUpdateViewModel {
-    let data: WidgetData
 }
 
 extension UIKitWidgetCoordinator {

@@ -28,6 +28,7 @@ final class UIKitWidgetCoordinatorFactory {
             )},
             "TOP_LEFT_BOTTOM": { TopLeftBottomUIKitCoordinator(factory: topLeftBottomWidgetFactory) },
             "ACTIVITY": { ActivityUIKitCoordinator(factory: activityWidgetFactory) },
+            "EMPTY": { EmptyWidgetUIKitCoordinator(factory: emptyWidgetFactory) },
             "SCROLL": { ScrollViewUIKitCoordinator(factory: scrollWidgetFactory) }
         ]
     }
